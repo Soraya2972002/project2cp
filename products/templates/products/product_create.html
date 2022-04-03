@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ form.non_field_errors }}
+<form action='.' method='POST'>{% csrf_token %}
+<div class="fieldWrapper">
+    {{ form.title.errors }}
+    <label for="{{ form.title.id_for_label }}">Your message:</label>
+    {{ form.title }}
+</div>
+<div class="fieldWrapper">
+    {{ form.description.errors }}
+    <label for="{{ form.description.id_for_label }}">Your email address:</label>
+    {{ form.description }}
+</div>
+<div class="fieldWrapper">
+    {{ form.price.errors }}
+    <label for="{{ form.price.id_for_label }}">CC yourself?</label>
+    {{ form.price }}
+</div>
+<input type = "submit" value = 'save' />
+</form>
+{% endblock %} 

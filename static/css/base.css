@@ -1,0 +1,22 @@
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    background-color: aqua;
+}
+header {
+    border-bottom: 1px solid #999;
+    margin-bottom: 2rem;
+    display: flex;
+}
+header h1 a {
+    color: red;
+}
+.form-control {
+    border-radius: 20%;
+    border: 3px;
+    padding : 10px;
+    margin-left: auto;
+}
+.form-group{
+    border : 2px solid black;
+}
