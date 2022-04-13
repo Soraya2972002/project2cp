@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'authentication',
     "products",
     "pages",
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,4 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'accounts.CustomUser'

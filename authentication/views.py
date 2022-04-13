@@ -116,7 +116,7 @@ def signin(request):
             elif user.groups.filter(name='admin_wilaya').exists():
                 return render(request, "admin_wilaya.html")
             elif user.is_superuser:
-                return HttpResponseRedirect('/admin/')
+                return render(request, "admin.html")
             else:
                 return render(request, "client.html")
         else:

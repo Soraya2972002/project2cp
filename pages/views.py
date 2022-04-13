@@ -13,3 +13,16 @@ def contact_view(request, *args, **kwargs):
     }
     print(request.user)
     return render(request,'contact.html',my_context)
+
+def user_view(request, *args, **kwargs):
+    return render(request,'client.html',{})
+
+def admin_view(request, *args, **kwargs):
+    return render(request,'admin.html',{})
+
+def admin_view(request, *args, **kwargs):
+    return render(request,'admin_wilaya_view.html',{})
+
+
+def livreur_view(request, *args, **kwargs):
+    return render(request,'livreurs.html',{})

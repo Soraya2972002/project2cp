@@ -11,19 +11,25 @@
     </div>
     {% endfor %}
 
-    <h3>Welcome to GeeksForGeeks!</h3>
+    <h3>Welcome to our website !</h3>
 
 
     {% if user.is_authenticated %}
     <h3>Hello {{fname}}!</h3>
     <h4>You're successfully logged in.</h4>
-    <button type="submit"><a href="users/signout">SignOut</a></button>
+    <form method="post" action='sts'>
+    {% csrf_token %}
+    <button type="submit"><a href = "{% url 'signout' %}">SignOut</a></button>
     <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
+    </form>
     {% else %}
-    <button type="submit"><a href="users/signup">SignUp</a></button>
-    <br/>
-    <br/>
-    <button type="submit"><a href="users/signin">SignIn</a></button>
+    <form method = "post" action='sts'>
+    {% csrf_token %}
+      <button type = "submit"><a href = "{% url 'signup' %}">SignUp</a></button>
+      <br/>
+      <br/>
+      <button type = "submit"><a href = "{% url "signin" %}">SignIn</a></button>
+    </form>
     {% endif %}
 
     {% endblock %}

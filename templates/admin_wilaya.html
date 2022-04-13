@@ -2,5 +2,16 @@
 {% block content%}
 
 <p> Ceci est la page pour les administrateurs dans les wilayas </p>
+{{ products.object_list }}
+
+{% for instance in products.object_list %}
+
+{% if instance.wilaya == user.wilaya %}
+
+    <p>{{ instance.id }} - <a href='{{ instance.get_absolute_url }}'> {{ instance.title }}</p>
+
+{% endif %}
+
+{% endfor %}
 
 {% endblock %}

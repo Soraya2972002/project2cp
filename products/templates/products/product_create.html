@@ -3,19 +3,69 @@
 {{ form.non_field_errors }}
 <form action='.' method='POST'>{% csrf_token %}
 <div class="fieldWrapper">
-    {{ form.title.errors }}
-    <label for="{{ form.title.id_for_label }}">Your message:</label>
-    {{ form.title }}
+    {{ form.nometpren.errors }}
+    <label for="{{ form.nometpren.id_for_label }}">Your nometpren:</label>
+    {{ form.nometpren }}
 </div>
 <div class="fieldWrapper">
-    {{ form.description.errors }}
-    <label for="{{ form.description.id_for_label }}">Your email address:</label>
-    {{ form.description }}
+    {{ form.telephone.errors }}
+    <label for="{{ form.telephone.id_for_label }}">Your phone number:</label>
+    {{ form.telephone }}
 </div>
 <div class="fieldWrapper">
-    {{ form.price.errors }}
-    <label for="{{ form.price.id_for_label }}">CC yourself?</label>
-    {{ form.price }}
+    {{ form.telephone1.errors }}
+    <label for="{{ form.telephone1.id_for_label }}">2nd phone number</label>
+    {{ form.telephone1 }}
+</div>
+<div class="fieldWrapper">
+    {{ form.wilaya.errors }}
+    <label for="{{ form.wilaya.id_for_label }}">Your wilaya</label>
+    {{ form.wilaya }}
+</div>
+<div class="fieldWrapper">
+    {{ form.commune.errors }}
+    <label for="{{ form.commune.id_for_label }}">Your commune</label>
+    {{ form.commune }}
+</div>
+<div class="fieldWrapper">
+    {{ form.adresse.errors }}
+    <label for="{{ form.adresse.id_for_label }}">Your adress</label>
+    {{ form.adresse }}
+</div>
+<div class="fieldWrapper">
+    {{ form.montant.errors }}
+    <label for="{{ form.montant.id_for_label }}">Your montant</label>
+    {{ form.montant }}
+</div>
+<div class="fieldWrapper">
+    {{ form.numerocommande.errors }}
+    <label for="{{ form.numerocommande.id_for_label }}">Your numerocommande</label>
+    {{ form.numerocommande }}
+</div>
+<div class="fieldWrapper">
+    {{ form.poids.errors }}
+    <label for="{{ form.poids.id_for_label }}">Your poids</label>
+    {{ form.poids }}
+</div>
+<div class="fieldWrapper">
+    {{ form.remarque.errors }}
+    <label for="{{ form.remarque.id_for_label }}">Your remarks</label>
+    {{ form.remarque }}
+</div>
+<div class="fieldWrapper">
+    {{ form.produit.errors }}
+    <label for="{{ form.produit.id_for_label }}">Your produit</label>
+    {{ form.produit }}
+</div>
+<div class="fieldWrapper">
+    {{ form.typeenvoi.errors }}
+    <label for="{{ form.typeenvoi.id_for_label }}">Your typeenvoi</label>
+    {{ form.typeenvoi }}
+</div>
+<div class="fieldWrapper">
+    {{ form.typeprestation.errors }}
+    <label for="{{ form.typeprestation.id_for_label }}">Your typeprestation</label>
+    {{ form.typeprestation }}
 </div>
 <input type = "submit" value = 'save' />
 </form>

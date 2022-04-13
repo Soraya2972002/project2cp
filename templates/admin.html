@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content%}
+
+<p> Ceci est la page pour l'administrateur' </p >
+<form method="post" action='sts'>
+    {% csrf_token %}
+<a href="{% url 'products:product-create' %}">add a product ?</a>
+</form>
+{% endblock %}
