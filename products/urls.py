@@ -5,12 +5,15 @@ from .views import (
     product_delete_view,
     product_list_view,
     product_update_view,
-    
+    product_list_view_client,  
+    product_list_view_adminwilaya,
 )
 
 app_name = 'products'
 urlpatterns = [
     path('', product_list_view, name='product-list'),
+    path('client', product_list_view_client, name='product-list-client'),
+    path('adminwilaya', product_list_view_adminwilaya, name='product-list-adminwilaya'),
     path('create/', product_create_view, name='product-create'),
     path('<int:id>/', product_detail_view, name='product-detail'),
     path('<int:id>/update/', product_update_view, name='product-update'),

@@ -2,15 +2,9 @@
 
 {% block content %}
 
-{{ products.object_list }}
+{% for instance in object_list %}
 
-{% for instance in products.object_list %}
-
-{% if instance.wilaya == user.wilaya %}
-
-    <p>{{ instance.id }} - <a href='{{ instance.get_absolute_url }}'> {{ instance.title }}</p>
-
-{% endif %}
+<p>{{ instance.id }} - <a href='{{ instance.get_absolute_url }}'> {{ instance.nometpren }}{{ instance.wilaya }}</p>
 
 {% endfor %}
 

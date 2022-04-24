@@ -17,16 +17,33 @@ class ProductForm(forms.ModelForm):
                 'produit',
                 'typeenvoi',
                 'typeprestation',
+                "pretaexpedier",
+                'enramassage',
+                "entransit",
+                'enhub',
+                "enlivraison",
+                'suspendus',
+                "nonencaissés",
+                'encaissésnonpayes',
+                'paiementsprets',
+                "chezclient",
+                "retoursentraitement",
+                'retoursprets',
+                "email",
         ]
         widgets = {
             'adresse': forms.TextInput(attrs={'placeholder': 'entrez votre adresse'}),
             'remarque': forms.Textarea(
-                attrs={'placeholder': 'ecrivez vos remarque a propos de lenvoi ici',
+                attrs={"placeholder": "ecrivez vos remarque a propos de l'envoi ici",
                 "rows" : 20,
                 "cols" : 50}),
             'produit': forms.Textarea(
                 attrs={'placeholder': 'décrivez le produit ici'}),
         }
+    def __init__(self, *args, **kwargs):
+        super(ProductForm, self).__init__(*args, **kwargs)
+        self.fields['email'].required = False
+
     def clean_number(self, *args, **kwargs):
         x = ['telephone','telephone1']
         for i in x:

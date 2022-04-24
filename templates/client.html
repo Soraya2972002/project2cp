@@ -2,8 +2,21 @@
 {% block content%}
 
 <p> Ceci est la page pour les clients </p >
-<form method="post" action='sts'>
+<form method="post" action=''>
     {% csrf_token %}
-<a href="{% url 'products:product-create' %}">add a product ?</a>
+<a href="{% url 'products:product-create' %}">Ajouter un colis</a>
+<a href="{% url 'products:product-list-client' %}">Historique des importations</a>
+<a href="{% url 'products:product-create' %}">Prêt à expédier</a>
+<a href="{% url 'products:product-create' %}">en ramassage</a>
+<a href="{% url 'products:product-create' %}">En transit</a>
+<a href="{% url 'products:product-create' %}">En hub</a>
+<a href="{% url 'products:product-create' %}">En livraison</a>
+<a href="{% url 'products:product-create' %}">Suspendus</a>
+<a href="{% url 'products:product-create' %}">Non encaissés</a>
+<a href="{% url 'products:product-create' %}">Encaissés non payés</a>
+<a href="{% url 'products:product-create' %}">Paiments prêts</a>
+<a href="{% url 'products:product-create' %}">Chez client</a>
+<a href="{% url 'products:product-create' %}">Retours en traitement</a>
+<a href="{% url 'products:product-create' %}">Retours prêts</a>
 </form>
 {% endblock %}

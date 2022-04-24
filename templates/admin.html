@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% block content%}
 
-<p> Ceci est la page pour l'administrateur' </p >
-<form method="post" action='sts'>
+<p> Ceci est la page pour l'administrateur </p >
+<form method="post" action=''>
     {% csrf_token %}
-<a href="{% url 'products:product-create' %}">add a product ?</a>
+    <a href="/admin/">advanced administration interface</a>
+    <a href="/admin/">create admin wilaya account</a>
+    <a href="/admin/">create livreur account</a>
+    <a href="/admin/">create superuser account</a>
+    <a href="/admin/">see the database</a>
 </form>
 {% endblock %}

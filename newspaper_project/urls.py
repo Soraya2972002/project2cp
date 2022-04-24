@@ -17,6 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView 
 
+admin.site.site_header = 'WorldExpress Administration'
+admin.site.site_title = "Welcome to WorldExpress"
+#admin.site.index_title = 'Log in'
+
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     #path('users/', include('users.urls')), # new

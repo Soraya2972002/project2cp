@@ -8,11 +8,23 @@
 </head>
 <body>
     {% include 'navbar.html' %}
-        {% if user.is_authenticated %}
-        <p>Hi {{ user.username }}!</p>
-        {% else %}
-        <p>You are not logged in.</p>
-        {% endif %}
+    {% if user.is_authenticated %}
+    <h3>Hello {{fname}}!</h3>
+    <h4>You're successfully logged in.</h4>
+    <form method="post" action='sts'>
+    {% csrf_token %}
+    <button type="submit"><a href = "{% url 'signout' %}">SignOut</a></button>
+    <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
+    </form>
+    {% else %}
+    <form method = "post" action='sts'>
+    {% csrf_token %}
+      <button type = "submit"><a href = "{% url 'signup' %}">SignUp</a></button>
+      <br/>
+      <br/>
+      <button type = "submit"><a href = "{% url "signin" %}">SignIn</a></button>
+    </form>
+    {% endif %}
     {% block content %}
     {% endblock %}
 </body>

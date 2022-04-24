@@ -1,7 +1,6 @@
-from ast import Pass
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+User = get_user_model()
 from django.contrib import messages
 from django.core.mail import EmailMessage, send_mail
 from django.urls import reverse, reverse_lazy
@@ -9,7 +8,7 @@ from newspaper_project import settings
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import force_bytes
 from django.contrib.auth import authenticate, login, logout
 from . tokens import account_activation_token
 from django.contrib.messages.views import SuccessMessageMixin
@@ -106,19 +105,18 @@ def signin(request):
         pass1 = request.POST['pass1']
         
         user = authenticate(username=username, password=pass1)
-        print(user)
         
         if user is not None:
             login(request, user)
             # messages.success(request, "Logged In Sucessfully!!")
             if user.groups.filter(name='Livreurs').exists():
-                return render(request, "livreurs.html")
+                return redirect('livreur')
             elif user.groups.filter(name='admin_wilaya').exists():
-                return render(request, "admin_wilaya.html")
+                return redirect('admin_wilaya')
             elif user.is_superuser:
-                return render(request, "admin.html")
+                return redirect('administrateur')
             else:
-                return render(request, "client.html")
+                return redirect('client')
         else:
             messages.error(request, "Bad Credentials!!")
             return render(request, "signin.html")
