@@ -1,7 +1,27 @@
-<nav>
-    <ul>
-        <li>Brand</li>
-        <li>Home</li>
-        <li>Contact</li>
-    </ul>
-</nav>  
+<header>
+    <div class="head_container hidde_nav">
+        <div class="logo_container">
+            <a href="./index.html"><img src="../static/image/world_express_logo.png" alt="logo"></a>
+        </div>
+        <a href="#" class="toggle-button" id="toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </a>
+        <div class="navbar_container">
+            <ul>
+                <li class="nav_items"><a href="#" class="a_hover"><span class="nav_hover"></span>about</a></li>
+                <li class="nav_items"><a href="#" class="a_hover"><span class="nav_hover"></span>Services</a></li>
+                <li class="nav_items"><a href="#" class="a_hover"><span class="nav_hover"></span>Location</a></li>
+                <li class="nav_items"><a href="#" class="a_hover"><span class="nav_hover"></span>contacts</a></li>
+            </ul>
+        </div>
+        <div class="contact_container">
+            <form method = "post" action=''>
+                {% csrf_token %}
+                  <button type = "submit"><a href = "{% url 'signup' %}" id= "text_font_new">Signup</a></button>
+                  <button type = "submit"><a href = "{% url "signin" %}" id= "text_font_new">SignIn</a></button>
+            </form>
+        </div>
+    </div>
+</header>

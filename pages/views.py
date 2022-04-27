@@ -6,7 +6,6 @@ from newspaper_project.decorators import is_admin, is_adminwilaya, is_client, is
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
-    #return HttpResponse("<h1>This is the home page</h1>")
     return render(request,'index.html',{})
 def contact_view(request, *args, **kwargs):
     my_context = {
