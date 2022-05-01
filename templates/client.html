@@ -18,5 +18,52 @@
 <a href="{% url 'products:product-create' %}">Chez client</a>
 <a href="{% url 'products:product-create' %}">Retours en traitement</a>
 <a href="{% url 'products:product-create' %}">Retours prêts</a>
-</form>
-{% endblock %}
+</form>   
+        
+    <div class="pret_container">
+        <div class="liste">
+            <select >
+                <option >type</option>
+                <option >livraison</option>
+                <option >Echange</option>
+                <option >Pick up</option>
+                <option >recouvrement</option>
+            </select>
+
+            <select>
+                <option value="wilaya">wilaya</option>
+                <option >Adrar</option>
+                <option >Chlef</option>
+                <option >Aghouat</option>
+            </select>
+
+            <select>
+                <option value="type de demande">Type de demande</option>
+                <option >Demande de retour</option>
+                <option >Nouvelle tentative</option>
+            </select>
+            <select>
+                <option value="Nombre de tentative">Nombre de tentative</option>
+
+            </select>
+        
+            <select>
+                <option value="type de tentative">Type de tentative</option>
+                <option >Ecrire un commentaire</option>
+                <option >Le client demande à etre livre le </option>
+                <option >colis refuse par le client </option>
+            </select>
+            <select>
+                <option value=" a livrer dans ">A livrer dans </option>
+
+            </select>
+            <select > 
+                <option  value="type-de-prestation">Type de prestation</option>
+                <option >A domicile</option>
+                <option >Stop desk</option>
+            </select>
+        </div>
+    </div>
+
+
+{% endblock %}  

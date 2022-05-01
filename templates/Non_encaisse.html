@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content%}
+    <div class="pret_container">        
+        <div class="liste">
+            <select >
+                <option >type</option>
+                <option >livraison</option>
+                <option >Echange</option>
+                <option >Pick up</option>
+                <option >recouvrement</option>
+            </select>
+            <select>
+                <option value="wilaya">wilaya</option>
+                <option >Adrar</option>
+                <option >Chlef</option>
+                <option >Aghouat</option>
+            </select>
+            <select > 
+                <option  value="type-de-prestation">Type de prestation</option>
+                <option >A domicile</option>
+                <option >Stop desk</option>
+            </select>
+        </div>
+    </div>
+    {% endblock %}

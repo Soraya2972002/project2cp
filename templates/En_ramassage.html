@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content%}
+    
+    
+    <div class="pret_container">
+        <div class="button">
+            <a href="#" class="imprimer2">
+               <i class="fa fa-print"></i> Suprrimer une decharge
+            </a>
+            <a href="#" class="imprimer">
+                <i class="fa fa-print"></i> imprimer les etiquettes 
+            </a>  
+        </div>
+        <div class="liste">
+            <select >
+                <option >type</option>
+                <option >livraison</option>
+                <option >echange</option>
+                <option >Pick up</option>
+                <option >recouvrement</option>
+            </select>
+
+            <select>
+                <option value="wilaya">wilaya</option>
+                <option >Adrar</option>
+                <option >Chlef</option>
+                <option >Aghouat</option>
+            </select>
+
+        
+            <select > 
+                <option >Type de prestation</option>
+                <option >A domicile</option>
+                <option >Stop desk</option>
+            </select>
+        
+
+        </div>
+    </div>
+       
+
+    {% endblock %}

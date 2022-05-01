@@ -1,0 +1,422 @@
+*{
+    text-decoration: none;
+    color: #333333;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: rgb(232, 232, 232);
+    margin: 0;
+    padding: 0;
+}
+
+.menu{
+    background-color: #fff;
+    width: 20%;
+    position: fixed;
+    top:0;
+    bottom: 0;
+    box-shadow: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-right: 1px black solid;
+}
+
+.menu .logo h3 {
+    text-align:center;
+    width: 100%;
+    color: #444;
+    font-size: 25px;
+}
+
+.menu .logo{
+    align-items: center;
+    margin-top: 20px;
+    height: 10%;
+}
+
+.menu li {
+    display: inline-block;
+    
+}
+
+.sub li a {
+    color: #000;
+
+}
+
+.sub li:hover a {
+    color: red;
+}
+
+.menu li a {
+    position: relative;
+    display:block;
+    float:left;
+    width:200px;
+    height:25px;
+    padding: 10px; 
+}
+
+.menu i {
+    margin-right: 5px;
+}
+ 
+.menu .hide_sub .sub{
+    display: none;
+}
+
+.menu:hover{
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar{
+    width: 0px;
+}
+
+::-webkit-scrollbar-track{
+    background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: gainsboro;
+    border-radius: 10px;
+}
+
+.bar_items {
+    width: 80%;
+    height: 100%;
+}
+
+.profil{
+    text-align: center;
+    justify-self: flex-end;
+}
+
+.profil img{
+    height: 60px;
+    width: 60px;
+}
+
+.nav_hover{
+    content: "";
+    left: 0;
+    top: 0;
+    background-color: black;
+    width: 2px;
+    height: 0%;
+    position: absolute;
+    bottom: 0;
+    transition: .5s;
+}
+
+.current_place .nav_hover{
+    height: 90%;
+}
+
+
+
+
+
+/*  fgdgfdgdf */
+
+
+
+a.supp-button{
+    background-color: rgb(199, 199, 199);
+    color: black;
+    text-decoration: none;
+    padding: 0px 0px;
+    border-radius: 10px;
+    border-bottom: 2px solid #444;
+    transition: all .1s;
+    -webkit-transition: all .1s;
+    float: right;
+}
+a.supp-button:active{
+    transform: translate(0,5px);
+    -webkit-transform: translate(0,5px);
+    border-bottom: 1px solid ;
+}
+
+
+
+a.imprimer{
+    background-color: rgb(199, 199, 199);
+    color: black;
+    text-decoration: none;
+    padding: 0px 0px;
+    border-radius: 10px;
+    border-bottom: 2px solid #444;
+    transition: all .1s;
+    -webkit-transition: all .1s;
+    float: right;
+    
+}
+
+a.imprimer:active{
+    transform: translate(0,5px);
+    -webkit-transform: translate(0,5px);
+    border-bottom: 1px solid ;
+}
+
+
+a.imprimer2{
+    background-color: rgb(199, 199, 199);
+    color: black;
+    text-decoration: none;
+    padding: 0px 0px;
+    border-radius: 10px;
+    border-bottom: 2px solid #444;
+    transition: all .1s;
+    -webkit-transition: all .1s;
+    float: right;
+    
+}
+
+a.imprimer2:active{
+    transform: translate(0,5px);
+    -webkit-transform: translate(0,5px);
+    border-bottom: 1px solid ;
+}
+
+
+a.valider1{
+    background-color: rgb(199, 199, 199);
+    color: black;
+    text-decoration: none;
+    padding: 0px 0px;
+    border-radius: 10px;
+    border-bottom: 2px solid #444;
+    transition: all .1s;
+    -webkit-transition: all .1s;
+    float: right;
+    
+}
+
+a.valider1:active{
+    transform: translate(0,5px);
+    -webkit-transform: translate(0,5px);
+    border-bottom: 1px solid ;
+}
+
+.pret_container{
+    float: right;
+    width: 80%;
+    height: 100%;
+    background-color: white;
+    margin: 0;
+}
+
+.button{
+    width: 100%;
+    height: 5%;
+    color: #000;
+    border-radius: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.button a {
+    padding: 0px 20px;
+    line-height: 10px;
+    margin: 5px;
+}
+
+.button i  {
+    color: rgb(179, 29, 29);  
+}
+
+.liste{
+    width: 100%;
+    background-color:#fff;
+    border-radius: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.button1{
+    width: 100%;
+    height: 5%;
+    color: #000;
+    border-radius: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.button1 a {
+    display: block;
+    padding: 0px 20px;
+    line-height: 10px;
+    position: relative;
+    right: 25%;
+    margin: 5px;
+    top: 0%;
+}
+
+.button1 i  {
+    color: rgb(179, 29, 29);  
+}
+
+.liste1{
+    position: absolute;
+    float: right;
+    width: 80%;
+    top: 47%;
+    left: 20%;
+    height: 5%;
+    background-color:#fff;
+    border: 0.5px solid rgb(203, 203, 203);
+    border-radius: 5%;
+    
+}
+
+.liste1 select {
+    display: inline-block;
+    padding: 0 10px;
+    line-height: 20px;
+    top: 20%;
+    position: relative;
+    left: 35%;
+}
+
+.liste2{
+    position: absolute;
+    float: right;
+    width: 80%;
+    top: 47%;
+    left: 20%;
+    height: 5%;
+    background-color:#fff;
+    border: 0.5px solid rgb(203, 203, 203);
+    border-radius: 5%;
+    
+}
+
+.liste2 select {
+    display: inline-block;
+    padding: 0 10px;
+    line-height: 20px;
+    top: 20%;
+    position: relative;
+    left: 25%;
+}
+
+.liste3{
+    position: absolute;
+    float: right;
+    width: 80%;
+    top: 47%;
+    left: 20%;
+    height: 5%;
+    background-color:#fff;
+    border: 0.5px solid rgb(203, 203, 203);
+    border-radius: 5%;
+    
+}
+
+.liste3 select {
+    display: inline-block;
+    padding: 0 10px;
+    line-height: 20px;
+    top: 20%;
+    position: relative;
+    left: 25%;
+}
+
+
+.liste4{
+    position: absolute;
+    float: right;
+    width: 80%;
+    top: 47%;
+    left: 20%;
+    height: 5%;
+    background-color:#fff;
+    border: 0.5px solid rgb(203, 203, 203);
+    border-radius: 5%;
+    
+}
+
+.liste4 select {
+    display: inline-block;
+    padding: 5 10px;
+    line-height: 20px;
+    top: 20%;
+    position: relative;
+    left: 5%;
+}
+
+
+.liste5{
+    position: absolute;
+    float: right;
+    width: 80%;
+    top: 47%;
+    left: 20%;
+    height: 5%;
+    background-color:#fff;
+    border: 0.5px solid rgb(203, 203, 203);
+    border-radius: 5%;
+    
+}
+
+.liste5 select {
+    display: inline-block;
+    padding: 5 10px;
+    line-height: 20px;
+    top: 20%;
+    position: relative;
+    left: 5%;
+}
+
+
+.liste6{
+    position: absolute;
+    float: right;
+    width: 80%;
+    top: 47%;
+    left: 20%;
+    height: 5%;
+    background-color:#fff;
+    border: 0.5px solid rgb(203, 203, 203);
+    border-radius: 5%;
+    
+}
+
+.liste6 select {
+    display: inline-block;
+    padding: 5 10px;
+    line-height: 20px;
+    top: 20%;
+    position: relative;
+    left: 10%;
+}
+
+
+.liste7{
+    position: absolute;
+    float: right;
+    width: 80%;
+    top: 47%;
+    left: 20%;
+    height: 5%;
+    background-color:#fff;
+    border: 0.5px solid rgb(203, 203, 203);
+    border-radius: 5%;
+    
+}
+
+.liste7 select {
+    display: inline-block;
+    padding: 5 10px;
+    line-height: 20px;
+    top: 20%;
+    position: relative;
+    left: 10%;
+}
+

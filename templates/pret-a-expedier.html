@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content%}
+
+    <div class="pret_container">
+        <div class="button">
+            <a href="#" class="valider1">
+                <i class="fa fa-check"></i> valider l'expedetion
+           </a>  
+
+            <a href="#" class="imprimer2">
+               <i class="fa fa-print"></i> Suprrimer une decharge
+            </a>
+        
+            <a href="#" class="imprimer">
+                <i class="fa fa-print"></i> imprimer les etiquettes 
+            </a>  
+        
+            <a href="#" class="supp-button">
+                <i class="fa fa-trash"></i> Suprrimer un colis
+            </a>
+        </div>
+        <div class="liste">
+            <select >
+                <option >type</option>
+                <option >livraison</option>
+                <option >echange</option>
+                <option >Pick up</option>
+                <option >recouvrement</option>
+            </select>
+
+            <select>
+                <option value="wilaya">wilaya</option>
+                <option >Adrar</option>
+                <option >Chlef</option>
+                <option >Aghouat</option>
+            </select>
+
+            <input id="date" type="date" value="2017-06-01">
+
+        
+            <select > 
+                <option >Type de prestation</option>
+                <option >A domicile</option>
+                <option >Stop desk</option>
+            </select>
+        
+
+        </div>
+    </div>
+    
+ 
+
+    {% endblock %}

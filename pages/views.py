@@ -32,3 +32,31 @@ def admin_wilaya_view(request, *args, **kwargs):
 @user_passes_test(is_livreur)
 def livreur_view(request, *args, **kwargs):
     return render(request,'livreurs.html',{})
+@login_required
+@user_passes_test(is_client)
+def ramassage_view(request, *args, **kwargs):
+    return render(request,'En_ramassage.html',{})
+@login_required
+@user_passes_test(is_client)
+def transit_view(request, *args, **kwargs):
+    return render(request,'En_transit.html',{})
+@login_required
+@user_passes_test(is_client)
+def livraison_view(request, *args, **kwargs):
+    return render(request,'En-livraison.html',{})
+@login_required
+@user_passes_test(is_client)
+def non_encaisse_view(request, *args, **kwargs):
+    return render(request,'Non_encaisse.html',{})
+@login_required
+@user_passes_test(is_client)
+def pret_a_expedier_view(request, *args, **kwargs):
+    return render(request,'pret-a-expedier.html',{})
+@login_required
+@user_passes_test(is_client)
+def suspendus_view(request, *args, **kwargs):
+    return render(request,'Suspendus.html',{})
+@login_required
+@user_passes_test(is_client)
+def hub_view(request, *args, **kwargs):
+    return render(request,'En_hub.html',{})
