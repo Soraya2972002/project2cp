@@ -2,50 +2,161 @@
 {% block content%}
     
     
-    <div class="pret_container">
-        <div class="liste">
-            <select >
-                <option >type</option>
-                <option >livraison</option>
-                <option >Echange</option>
-                <option >Pick up</option>
-                <option >recouvrement</option>
-            </select>
+<div class="ajouter_conatainer">
+    <div class="description">
+        <h3 id="text_font_titles">en hub</h3>
+        <p id="text_font_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae assumenda nostrum quidem atque delectus.</p>
+    </div>
+    <div class="main_container">
+        <div class="filtre filtre_pret">
+            <div class="filtre_tit">
+                <h3 id="text_font_titles">Filtre:</h3>
+            </div>
+            <div>
+                <select name="type" id="">
+                    <option value="0">type</option>
+                    <option value="livraison">livraison</option>
+                    <option value="echange">échange</option>
+                    <option value="pick up">pick up</option>
+                    <option value="recouvrement">recouvrement</option>
+                </select>
+            </div>
+            <div>
+                <select name="user_wilaya" id="wilaya_send">
+                    <option value="0">-- Select Willaya --</option>
+                    <option value="1">Adrar</option>
+                    <option value="2">Chlef</option>
+                    <option value="3">Laghouat</option>
+                    <option value="4"> Oum el-Bouaghi</option>
+                    <option value="5">Batna</option>
+                    <option value="6">Béjaïa</option>
+                    <option value="7">Biskra</option>
+                    <option value="8">Béchar</option>
+                    <option value="9">Blida</option>
+                    <option value="10">Bouira</option>
+                    <option value="11">Tamanghasset</option>
+                    <option value="12">Tébessa</option>
+                    <option value="13">Tlemcen</option>
+                    <option value="14">Tiaret</option>
+                    <option value=" 15">Tizi Ouzou</option>
+                    <option value="16">Algiers</option>
+                    <option value="17">Djelfa</option>
+                    <option value="18">Jijel</option>
+                    <option value="19">Sétif</option>
+                    <option value="20">Saïda</option>
+                    <option value="21">Skikda</option>
+                    <option value="22">Sidi Bel Abbes</option>
+                    <option value="23">Annaba</option>
+                    <option value="24">Guelma</option>
+                    <option value="25">Constantine</option>
+                    <option value="26">Médéa</option>
+                    <option value="27">Mostaganem</option>
+                    <option value="28">M'Sila</option>
+                    <option value="29">Mascara</option>
+                    <option value="30">Ouargla</option>
+                    <option value="30">Oran</option>
+                    <option value="32">El Bayadh</option>
+                    <option value="33">Illizi</option>
+                    <option value="34">Bordj Bou Arréridj</option>
+                    <option value="35">Boumerdès</option>
+                    <option value="36">El Taref</option>
+                    <option value="37">Tindouf</option>
+                    <option value="38">Tissemsilt</option>
+                    <option value="39">El Oued</option>
+                    <option value="40">Khenchela</option>
+                    <option value="40">Souk Ahras</option>
+                    <option value="41">Souk Ahras</option>
+                    <option value="42">Tipasa</option>
+                    <option value="43">Mila</option>
+                    <option value="44">Aïn Defla</option>
+                    <option value="45">Naama</option>
+                    <option value="46">Aïn Témouchent</option>
+                    <option value="47">Ghardaïa</option>
+                    <option value="48">Relizane</option>
+                </select>
+            </div>
+            <div>
+                <select name="type de prestation" id="type_prestation">
+                    <option value="0">type de prestation</option>
+                    <option value="domicile">à domicile</option>
+                    <option value="stop desk">stop desk</option>
+                </select>
+            </div>
+            <div>
+                <select name="etape" id="etape">
+                    <option value="0">étape</option>
+                    <option value="text">en attente de collecter</option>
+                    <option value="colis collecter">colis collecté</option>
+                    <option value="en route vers hub">en route vers hub</option>
+                </select>
+            </div>
+        </div>
+        <div class="element_container">
+            <div class="element_header" >
+                <div class="numb_afficher">
+                    <label for="nmb_afficher">Afficher:</label>
+                    <select name="nmb_afficher" id="nmb_afficher">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="ALL">ALL</option>
+                    </select>
+                    <label for="nmb_afficher">élément</label>
+                </div>
+                <div class="titles_colis">
+                    <div>
+                        <h4>informtion colis</h4>
+                    </div>
+                    <div>
+                        <h4>adresse destinataire</h4>
+                    </div>
+                    <div>
+                        <h4>information destinataire</h4>
+                    </div>
+                    <div>
+                        <h4>remarque et produit</h4>
+                    </div>
+                    <div>
+                        <h4>Montant</h4>
+                    </div>
 
-            <select>
-                <option value="wilaya">wilaya</option>
-                <option >Adrar</option>
-                <option >Chlef</option>
-                <option >Aghouat</option>
-            </select>
-
-            <select>
-                <option value="type de demande">Type de demande</option>
-                <option >Demande de retour</option>
-                <option >Nouvelle tentative</option>
-            </select>
-            <select>
-                <option value="Nombre de tentative">Nombre de tentative</option>
-
-            </select>
-        
-            <select>
-                <option value="type de tentative">Type de tentative</option>
-                <option >Ecrire un commentaire</option>
-                <option >Le client demande à etre livre le </option>
-                <option >colis refuse par le client </option>
-            </select>
-            <select>
-                <option value=" a livrer dans ">A livrer dans </option>
-
-            </select>
-            <select > 
-                <option  value="type-de-prestation">Type de prestation</option>
-                <option >A domicile</option>
-                <option >Stop desk</option>
-            </select>
+                </div>
+            </div>
+            <div class="element_desc">
+                <div class="ele_container aucune_element">
+                    <p>Aucune donnée disponible dans le tableau !!!</p>
+                </div>
+                <div class="ele_container table_element">
+                    <div class="mod_ele">
+                        <button>Modifier</button>
+                    </div>
+                    <div class="autre_ele">
+                        <div class="ele">
+                            <p>information</p>
+                        </div>
+                        <div>
+                            <p>destination</p>
+                        </div>
+                        <div>
+                            <p>destinataire</p>
+                        </div>
+                        <div>
+                            <p>remarque</p>
+                        </div>
+                        <div class="ele">
+                            <p>prix</p>
+                        </div>
+                    </div>
+                    <div class="mod_ele">
+                        <button >Supprimer</button>
+                        <button>valider l'expedition</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
 
 

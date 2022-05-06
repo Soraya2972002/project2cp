@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="ajouter_conatainer">
+    <div class="description">
+        <h3 id="text_font_titles">ajouter un colis</h3>
+        <p id="text_font_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae assumenda nostrum quidem atque delectus.</p>
+    </div>
+    <div class="form_container">
+        <div class="ajouter_forms">
+            {{ form.non_field_errors }}
+            <form action='.' method='POST'>{% csrf_token %}
+            <div class="destinataire">
+                <div class="destitel">
+                    <h3>déstinataire</h3>
+                </div>
+                <div class="desform">
+                    <div class="name">
+                        {{ form.nometpren.errors }}
+                        <label for="{{ form.nometpren.id_for_label }}"><i class="fa fa-paragraph"></i></label>
+                        {{ form.nometpren }}
+                    </div>
+                    <div class="phone">
+                        {{ form.telephone.errors }}
+                        <label for="{{ form.telephone.id_for_label }}"><i class="fa fa-phone"></i></label>
+                        {{ form.telephone }}
+                    </div>
+                    <div class="phone">
+                        {{ form.telephone1.errors }}
+                        <label for="{{ form.telephone1.id_for_label }}"><i class="fa fa-phone"></i></label>
+                        {{ form.telephone1 }}
+                    </div>
+                </div>
+            </div>
+            <div class="info_adresse">
+                <h3>adresse information</h3> 
+                <div class="fieldWrapper">
+                    {{ form.wilaya.errors }}
+                    <label for="{{ form.wilaya.id_for_label }}" name="user_wilaya">Your wilaya</label>
+                    {{ form.wilaya }}
+                </div>
+                <div class="fieldWrapper">
+                    {{ form.commune.errors }}
+                    <label for="{{ form.commune.id_for_label }}">Your commune</label>
+                    {{ form.commune }}
+                </div>            
+                <div class="fieldWrapper">
+                    {{ form.adresse.errors }}
+                    <label for="{{ form.adresse.id_for_label }}">Your adress</label>
+                    {{ form.adresse }}
+                </div>
+            </div>
+            <div class="commande_info">
+                <div>
+                    <h3>Sur La Commande</h3>
+                </div>
+                <div class="fieldWrapper">
+                    {{ form.montant.errors }}
+                    <label for="{{ form.montant.id_for_label }}">Your montant</label>
+                    {{ form.montant }}
+                </div>
+                <div class="fieldWrapper">
+                    {{ form.numerocommande.errors }}
+                    <label for="{{ form.numerocommande.id_for_label }}">Your numerocommande</label>
+                    {{ form.numerocommande }}
+                </div>
+                <div class="fieldWrapper">
+                    {{ form.poids.errors }}
+                    <label for="{{ form.poids.id_for_label }}">Your poids</label>
+                    {{ form.poids }}
+                </div>
+                <div class="fieldWrapper">
+                    {{ form.remarque.errors }}
+                    <label for="{{ form.remarque.id_for_label }}">Your remarks</label>
+                    {{ form.remarque }}
+                </div>
+            </div>
+            <div class="type_delivery">
+                <div>
+                    <h3>Type d'envoi</h3>
+                </div>
+                <div class="fieldWrapper">
+                    {{ form.produit.errors }}
+                    <label for="{{ form.produit.id_for_label }}">Your produit</label>
+                    {{ form.produit }}
+                </div>
+                <div class="fieldWrapper">
+                    {{ form.typeenvoi.errors }}
+                    <label for="{{ form.typeenvoi.id_for_label }}">Your typeenvoi</label>
+                    {{ form.typeenvoi }}
+                </div>
+                <div class="fieldWrapper">
+                    {{ form.typeprestation.errors }}
+                    <label for="{{ form.typeprestation.id_for_label }}">Your typeprestation</label>
+                    {{ form.typeprestation }}
+                </div>
+            </div>
+            <input type = "submit" value = 'save' />
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %} 

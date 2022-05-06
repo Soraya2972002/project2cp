@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,82 +6,84 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <link rel="stylesheet" href="../static/css/autre.css">
+    <link rel="stylesheet" href="{% static 'css/autre.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/>  
 
 </head>
 <body>
-    <div class="menu">
-        <div class="logo">
-            <a href="./ecotrack1.html"><h3>world express</h3></a>
-        </div>
-        <div class="bar_items">
-            <ul>
-            <li class="hide_sub">
-                <a href="#" title="Ajouter" class="hidden_ele a_hover"><span class="nav_hover"></span><i class="fa fa-cloud-upload-alt"></i> Ajouter <i class="fa fa-angle-down "> </i></i></a>
-                <ul class="sub">
-                    <li>
-                        <a href="{% url 'products:product-create' %}"  title="Ajouter" class="a_hover"><span class="nav_hover"></span> Ajouter un colis</a>
-                    </li>
-                    <li>
-                        <a href="#" title="AjouterP" class="a_hover"><span class="nav_hover"></span> Ajouter plusieurs colis</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'products:product-list-client' %}" title="Historique" class="a_hover"><span class="nav_hover"></span> Historique de l'importation</a>
-                    </li>
+    <div class="nav_menu_container">
+        <div class="menu">
+            <div class="logo">
+                <a href="#"><h3 id="text_font_new">world express</h3></a>
+            </div>
+            <div class="bar_items" id="text_font_paragraph">
+                <ul class="bar_ul">
+                <li class="hide_sub">
+                    <a href="#" title="Ajouter" class="hidden_ele a_hover"><span class="nav_hover"></span><i class="fa fa-cloud-upload-alt"></i> Ajouter <i class="fa fa-angle-down "> </i></i></a>
+                    <ul class="sub toggle_ele">
+                        <li>
+                            <a href="{% url 'products:product-create' %}" title="Ajouter" class="a_hover"><span class="nav_hover"></span> Ajouter un colis</a>
+                        </li>
+                        <li>
+                            <a href="#" title="AjouterP" class="a_hover"><span class="nav_hover"></span> Ajouter plusieurs colis</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'products:product-list-client' %}" title="Historique" class="a_hover"><span class="nav_hover"></span> Historique de l'importation</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{% url 'pret_a_expedier' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-check"></i> pret a expeder  </a>
+                    <a href="{% url 'ramassage' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-car"></i> En ramassage </a>
+                    <a href="{% url 'transit' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-exchange-alt"></i>En transit </a>
+                    <a href="{% url 'hub' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-home"> </i> En Hub</a>
+                    <a href="{% url 'livraison' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-car"> </i> En livraison</a>
+                    <a href="{% url 'suspendus' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"> </i> Suspendus</a>
+                </li>
+                <li class="hide_sub">
+                    <a href="#" title="livre" class="hidden_ele a_hover"><span class="nav_hover"></span> <i class="fa fa-angle-down"></i> Livre</a>
+                    <ul class="sub toggle_ele">
+                        <li>
+                            <a href="{% url 'non_encaisse' %}" title="non encaisse" class="a_hover"><span class="nav_hover"></span>non encaisse</a>
+                        </li>
+                        <li>
+                            <a href="#" title="encaisse non paye" class="a_hover"><span class="nav_hover"></span>encaisse non paye</a>
+                        </li>
+                        <li>
+                            <a href="#" title="paiement pret" class="a_hover"><span class="nav_hover"></span> paiement pret</a>
+                        </li>
+                        <li>
+                            <a href="#" title="historique des paiment recus" class="a_hover"><span class="nav_hover"></span> historique des paiements recus</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="hide_sub">
+                    <a href="#" title="retour" class="hidden_ele a_hover"><span class="nav_hover"></span> <i class="fa fa-angle-down"></i>Retour</a>
+                    <ul class="sub toggle_ele">
+                        <li>
+                            <a href="#" title="Chez livreur" class="a_hover"><span class="nav_hover"></span>Chez livreur</a>
+                        </li>
+                        <li>
+                            <a href="#" title="retours en traitement" class="a_hover"><span class="nav_hover"></span>retours en traitement</a>
+                        </li>
+                        <li>
+                            <a href="#" title="retours prets" class="a_hover"><span class="nav_hover"></span> retours prets</a>
+                        </li>
+                        <li>
+                            <a href="#" title="historique retours recus" class="a_hover"><span class="nav_hover"></span> historique retours recus</a>
+                        </li>
+                    </ul>
+                </li>
                 </ul>
-            </li>
-            <li>
-                <a href="{% url 'pret_a_expedier' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-check"></i> pret a expeder  </a>
-                <a href="{% url 'ramassage' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-car"></i> En ramassage </a>
-                <a href="{% url 'transit' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-exchange-alt"></i>En transit </a>
-                <a href="{% url 'hub' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-home"> </i> En Hub</a>
-                <a href="{% url 'livraison' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-car"> </i> En livraison</a>
-                <a href="{% url 'suspendus' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"> </i> Suspendus</a>
-            </li>
-            <li class="hide_sub">
-                <a href="#" title="livre" class="hidden_ele a_hover"><span class="nav_hover"></span> <i class="fa fa-angle-down"></i> Livre</a>
-                <ul class="sub">
-                    <li>
-                        <a href="{% url 'non_encaisse' %}" title="non encaisse" class="a_hover"><span class="nav_hover"></span>non encaisse</a>
-                    </li>
-                    <li>
-                        <a href="#" title="encaisse non paye" class="a_hover"><span class="nav_hover"></span>encaisse non paye</a>
-                    </li>
-                    <li>
-                        <a href="#" title="paiement pret" class="a_hover"><span class="nav_hover"></span> paiement pret</a>
-                    </li>
-                    <li>
-                        <a href="#" title="historique des paiment recus" class="a_hover"><span class="nav_hover"></span> historique des paiements recus</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="hide_sub">
-                <a href="#" title="retour" class="hidden_ele a_hover"><span class="nav_hover"></span> <i class="fa fa-angle-down"></i>Retour</a>
-                <ul class="sub">
-                    <li>
-                        <a href="#" title="Chez livreur" class="a_hover"><span class="nav_hover"></span>Chez livreur</a>
-                    </li>
-                    <li>
-                        <a href="#" title="retours en traitement" class="a_hover"><span class="nav_hover"></span>retours en traitement</a>
-                    </li>
-                    <li>
-                        <a href="#" title="retours prets" class="a_hover"><span class="nav_hover"></span> retours prets</a>
-                    </li>
-                    <li>
-                        <a href="#" title="historique retours recus" class="a_hover"><span class="nav_hover"></span> historique retours recus</a>
-                    </li>
-                </ul>
-            </li>
-            </ul>
+            </div>
+            <div class="profil">
+                <a href="./profil.html"><img src='{% static "image/profile_pic.png" %}' alt="Profil"></a>
+            </div>
         </div>
-        <div class="profil">
-            <a href="#"><img src="../img/profile_pic.png" alt="Profil"></a>
-        </div>
-    </div>
+    </div>   
     {% block content%}  
 
     {% endblock %}  
-    <script src="../static/javascript/autre.js"></script>
+    <script src="{% static 'javascript/autre.js' %}"></script>
   </body>
   </html>
