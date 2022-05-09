@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content%}
-
+    <div class="test_container">
     <h3>Log In to your account!</h3>
     <form method="post" action="" class="sign-in-form">
         {% csrf_token %}
@@ -23,6 +23,7 @@
         <button type="submit" class="btn btn-primary">Log In</button>
         <a href="{% url 'password_reset' %}"><i>Forgot Password?</i></a>
     </form>
+</div>
 </body>
 </html>
 

@@ -2,6 +2,7 @@
 {% block content%}
 
 <div class="ajouter_conatainer">
+    
     <div class="description pret_main">
         <h3 id="text_font_titles">Prét à Expédier</h3>
         <p id="text_font_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae assumenda nostrum quidem atque delectus.</p>
@@ -123,19 +124,21 @@
                 <div class="ele_container aucune_element">
                     <p>Aucune donnée disponible dans le tableau !!!</p>
                 </div>
+                {% for instance in object_list %}
+
                 <div class="ele_container table_element">
                     <div class="mod_ele">
                         <button>Modifier</button>
                     </div>
                     <div class="autre_ele">
                         <div class="ele">
-                            <p>information</p>
+                            <p>{{ instance.id }}</p>
                         </div>
                         <div>
-                            <p>destination</p>
+                            <p>{{ instance.nometpren }}</p>
                         </div>
                         <div>
-                            <p>destinataire</p>
+                            <p>{{ instance.wilaya }}</p>
                         </div>
                         <div>
                             <p>remarque</p>
@@ -149,6 +152,10 @@
                         <button>valider l'expedition</button>
                     </div>
                 </div>
+
+{% endfor %}
+                
+                
             </div>
         </div>
     </div>

@@ -819,7 +819,9 @@ body{
     height: 80%;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
     color: var(--second-color-blue);
 }
 
@@ -832,11 +834,11 @@ body{
 }
 
 .aucune_element{
-    background-color: gainsboro;
+    background-color: red;
     display: flex;
     align-items: center;
     justify-content: center;
-    display: none;
+    
 }
 
 .ele_container p{
@@ -899,3 +901,10 @@ body{
     background-color: var(--green);
 }
 
+
+
+.test_container{
+    float: right;
+    height: 100%;
+    width: 50%;
+}

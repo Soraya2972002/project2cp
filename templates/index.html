@@ -38,8 +38,8 @@
         <div class="contact_container">
             <form method = "post" action=''>
                 {% csrf_token %}
-                  <button type = "submit"><a href = "{% url 'signup' %}" id= "text_font_new">Signup</a></button>
-                  <button type = "submit"><a href = "{% url "signin" %}" id= "text_font_new">SignIn</a></button>
+                  <button type = "submit" class="btn_log"><a href = "{% url 'signup' %}" id= "text_font_new">Signup</a></button>
+                  <button type = "submit" class="btn_log"><a href = "{% url "signin" %}" id= "text_font_new">SignIn</a></button>
             </form>
         </div>
     </div>

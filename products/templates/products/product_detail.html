@@ -1,10 +1,9 @@
-{% extends 'base.html' %}
+
 {% load static %}
-{% block content %}
+
 <h1>{{object.nometpren}}</h1>
 <h1>{{object.id}}</h1>
 <div>
     <h4>Your QR Code is:</h4>
     <img src="{% static 'image/test.png' %}">
 </div>
-{% endblock %} 

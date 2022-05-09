@@ -1,6 +1,10 @@
+from datetime import datetime
 from django.db import models
 from django.urls import reverse
 from django import forms
+from django.utils import timezone
+from django.utils.timezone import now
+from django.core.exceptions import ValidationError
 # Create your models here.
 import json
 from django.contrib.auth import get_user_model
@@ -11,32 +15,46 @@ data = json.load(file)
 WILAYAS_CHOICES = []
 for el in data :
     WILAYAS_CHOICES.append((el['name'],el['name']))
+def clean_number(number):
+    number = str(number)
+    if len(number) == 10:
+        print('here')
+        print(number[:2])
+        if number[:2] != '05' and  number[:2] != '07' and number[:2] != '06':
+            raise ValidationError('This is not a valid phone number')
+    return number
+
+def clean_nompren(n):
+        if ' ' not in n:
+            raise ValidationError('This is not a valid name and last name')
+        return n
 class Product(models.Model):
-    nometpren = models.CharField(max_length=120)
-    telephone = models.DecimalField(max_digits=10, decimal_places=0, unique=True)
-    telephone1 = models.DecimalField(max_digits=10, decimal_places=0, unique= True)
-    wilaya = models.CharField(max_length=100, choices = WILAYAS_CHOICES)
-    commune = models.CharField(max_length=10)
+    nometpren = models.CharField(max_length=120, validators=[clean_nompren])
+    telephone = models.DecimalField(max_digits=10, decimal_places=0, validators=[clean_number])
+    telephone1 = models.DecimalField(max_digits=10, decimal_places=0, validators=[clean_number])
+    wilaya = models.CharField(max_length=200, choices = WILAYAS_CHOICES)
+    commune = models.CharField(max_length=200)
     adresse = models.CharField(max_length= 200) 
-    montant = models.DecimalField(max_digits=10,decimal_places=5)
+    montant = models.DecimalField(max_digits=10,decimal_places=0)
     numerocommande = models.DecimalField(max_digits=10,decimal_places=0)
     poids = models.DecimalField(max_digits=4,decimal_places=0)
     remarque = models.TextField(max_length=100) 
     produit = models.TextField(blank = False, null = True) 
+    date = models.DateTimeField(default=timezone.now)
 
     TYPE_ENVOI_CHOICES = [
         ('V', '---------'),
-        ('LI', 'livraison'),
-        ('EC', 'échange'),
-        ('PU', 'Pick up'),
-        ('RE', 'recouvrement'),
+        ('livraison', 'livraison'),
+        ('échange', 'échange'),
+        ('Pick up', 'Pick up'),
+        ('recouvrement', 'recouvrement'),
     ]
     typeenvoi = models.CharField(max_length=100, choices = TYPE_ENVOI_CHOICES, default= "V")
 
     TYPE_PRESENTATION_CHOICES = [
         ('V', '---------'),
-        ('AD', 'à domicile'),
-        ('SD', 'Stop desk'),
+        ('à domicile', 'à domicile'),
+        ('Stop desk', 'Stop desk'),
     ]
     typeprestation = models.CharField(max_length=100, choices = TYPE_PRESENTATION_CHOICES, default= "V")
 

@@ -194,6 +194,13 @@
  
  /* section 1 class */
  
+.btn_log{
+    cursor: pointer;
+    padding: 20px;
+    border: none;
+    background-color: var(--main-color-red);
+}
+
  .main_section_container {
      margin-top: 25px;
      height: 20%;
