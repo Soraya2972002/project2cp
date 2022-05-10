@@ -8,168 +8,90 @@
         <p id="text_font_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae assumenda nostrum quidem atque delectus.</p>
     </div>
     <div class="main_container">
-        <form method="POST" action="/products/hub">
-            {% csrf_token %}
-            <select name="type" id="">
-                <option value="0">type</option>
-                <option value="livraison">livraison</option>
-                <option value="echange">échange</option>
-                <option value="pick up">pick up</option>
-                <option value="recouvrement">recouvrement</option>
-            </select>
-            <select name="user_wilaya" id="wilaya_send">
-                <option value="0">-- Select Willaya --</option>
-                <option value="Adrar">Adrar</option>
-                <option value="Chlef">Chlef</option>
-                <option value="Laghouat">Laghouat</option>
-                <option value="Oum el-Bouaghi"> Oum el-Bouaghi</option>
-                <option value="Batna">Batna</option>
-                <option value="6">Béjaïa</option>
-                <option value="7">Biskra</option>
-                <option value="8">Béchar</option>
-                <option value="9">Blida</option>
-                <option value="10">Bouira</option>
-                <option value="11">Tamanghasset</option>
-                <option value="12">Tébessa</option>
-                <option value="13">Tlemcen</option>
-                <option value="14">Tiaret</option>
-                <option value=" 15">Tizi Ouzou</option>
-                <option value="16">Algiers</option>
-                <option value="17">Djelfa</option>
-                <option value="18">Jijel</option>
-                <option value="19">Sétif</option>
-                <option value="20">Saïda</option>
-                <option value="21">Skikda</option>
-                <option value="22">Sidi Bel Abbes</option>
-                <option value="23">Annaba</option>
-                <option value="24">Guelma</option>
-                <option value="25">Constantine</option>
-                <option value="26">Médéa</option>
-                <option value="27">Mostaganem</option>
-                <option value="28">M'Sila</option>
-                <option value="29">Mascara</option>
-                <option value="30">Ouargla</option>
-                <option value="30">Oran</option>
-                <option value="32">El Bayadh</option>
-                <option value="33">Illizi</option>
-                <option value="34">Bordj Bou Arréridj</option>
-                <option value="35">Boumerdès</option>
-                <option value="36">El Taref</option>
-                <option value="37">Tindouf</option>
-                <option value="38">Tissemsilt</option>
-                <option value="39">El Oued</option>
-                <option value="40">Khenchela</option>
-                <option value="40">Souk Ahras</option>
-                <option value="41">Souk Ahras</option>
-                <option value="42">Tipasa</option>
-                <option value="43">Mila</option>
-                <option value="44">Aïn Defla</option>
-                <option value="45">Naama</option>
-                <option value="46">Aïn Témouchent</option>
-                <option value="47">Ghardaïa</option>
-                <option value="48">Relizane</option>
-            </select>
-
-            <select name="type de prestation" id="type_prestation">
-                <option value="0">type de prestation</option>
-                <option value="à domicile">à domicile</option>
-                <option value="stop desk">stop desk</option>
-            </select>
-
-            <select name="etape" id="etape">
-                <option value="0">étape</option>
-                <option value="text">en attente de collecter</option>
-                <option value="colis collecter">colis collecté</option>
-                <option value="en route vers hub">en route vers hub</option>
-            </select>
-
-            <button type="submit">Filter</button>
-        </form>
-            
+        <div class="btn btn_pret">
+            <button class="supprimer">suprimer les colis</button>
+            <button class="impremer">impremer les etiquettes</button>
+            <button class="impremer">impremer une decharge</button>
+            <button class="valider">valider l'éxpedition</button>
+        </div>
         <div class="filtre filtre_pret">
-            <div class="filtre_tit">
-                <h3 id="text_font_titles">Filtre:</h3>
-            </div>
             
-            <div>
-                <select name="type" id="">
-                    <option value="0">type</option>
-                    <option value="livraison">livraison</option>
-                    <option value="echange">échange</option>
-                    <option value="pick up">pick up</option>
-                    <option value="recouvrement">recouvrement</option>
-                </select>
-                
-            </div>
-            <div>
-                <select name="user_wilaya" id="wilaya_send">
-                    <option value="0">-- Select Willaya --</option>
-                    <option value="Adrar">Adrar</option>
-                    <option value="Chlef">Chlef</option>
-                    <option value="3">Laghouat</option>
-                    <option value="4"> Oum el-Bouaghi</option>
-                    <option value="5">Batna</option>
-                    <option value="6">Béjaïa</option>
-                    <option value="7">Biskra</option>
-                    <option value="8">Béchar</option>
-                    <option value="9">Blida</option>
-                    <option value="10">Bouira</option>
-                    <option value="11">Tamanghasset</option>
-                    <option value="12">Tébessa</option>
-                    <option value="13">Tlemcen</option>
-                    <option value="14">Tiaret</option>
-                    <option value=" 15">Tizi Ouzou</option>
-                    <option value="16">Algiers</option>
-                    <option value="17">Djelfa</option>
-                    <option value="18">Jijel</option>
-                    <option value="19">Sétif</option>
-                    <option value="20">Saïda</option>
-                    <option value="21">Skikda</option>
-                    <option value="22">Sidi Bel Abbes</option>
-                    <option value="23">Annaba</option>
-                    <option value="24">Guelma</option>
-                    <option value="25">Constantine</option>
-                    <option value="26">Médéa</option>
-                    <option value="27">Mostaganem</option>
-                    <option value="28">M'Sila</option>
-                    <option value="29">Mascara</option>
-                    <option value="30">Ouargla</option>
-                    <option value="30">Oran</option>
-                    <option value="32">El Bayadh</option>
-                    <option value="33">Illizi</option>
-                    <option value="34">Bordj Bou Arréridj</option>
-                    <option value="35">Boumerdès</option>
-                    <option value="36">El Taref</option>
-                    <option value="37">Tindouf</option>
-                    <option value="38">Tissemsilt</option>
-                    <option value="39">El Oued</option>
-                    <option value="40">Khenchela</option>
-                    <option value="40">Souk Ahras</option>
-                    <option value="41">Souk Ahras</option>
-                    <option value="42">Tipasa</option>
-                    <option value="43">Mila</option>
-                    <option value="44">Aïn Defla</option>
-                    <option value="45">Naama</option>
-                    <option value="46">Aïn Témouchent</option>
-                    <option value="47">Ghardaïa</option>
-                    <option value="48">Relizane</option>
-                </select>
-            </div>
-            <div>
-                <select name="type de prestation" id="type_prestation">
-                    <option value="0">type de prestation</option>
-                    <option value="domicile">à domicile</option>
-                    <option value="stop desk">stop desk</option>
-                </select>
-            </div>
-            <div>
-                <select name="etape" id="etape">
-                    <option value="0">étape</option>
-                    <option value="text">en attente de collecter</option>
-                    <option value="colis collecter">colis collecté</option>
-                    <option value="en route vers hub">en route vers hub</option>
-                </select>
-            </div>
+    <form method="POST" action="/products/hub" class="form_container">
+        {% csrf_token %}
+        <select name="type" id="">
+            <option value="0">type</option>
+            <option value="livraison">livraison</option>
+            <option value="echange">échange</option>
+            <option value="pick up">pick up</option>
+            <option value="recouvrement">recouvrement</option>
+        </select>
+        <select name="user_wilaya" id="wilaya_send">
+            <option value="0">-- Select Willaya --</option>
+            <option value="Adrar">Adrar</option>
+            <option value="Chlef">Chlef</option>
+            <option value="Laghouat">Laghouat</option>
+            <option value="Oum el-Bouaghi"> Oum el-Bouaghi</option>
+            <option value="Batna">Batna</option>
+            <option value="6">Béjaïa</option>
+            <option value="7">Biskra</option>
+            <option value="8">Béchar</option>
+            <option value="9">Blida</option>
+            <option value="10">Bouira</option>
+            <option value="11">Tamanghasset</option>
+            <option value="12">Tébessa</option>
+            <option value="13">Tlemcen</option>
+            <option value="14">Tiaret</option>
+            <option value=" 15">Tizi Ouzou</option>
+            <option value="16">Algiers</option>
+            <option value="17">Djelfa</option>
+            <option value="18">Jijel</option>
+            <option value="19">Sétif</option>
+            <option value="20">Saïda</option>
+            <option value="21">Skikda</option>
+            <option value="22">Sidi Bel Abbes</option>
+            <option value="23">Annaba</option>
+            <option value="24">Guelma</option>
+            <option value="25">Constantine</option>
+            <option value="26">Médéa</option>
+            <option value="27">Mostaganem</option>
+            <option value="28">M'Sila</option>
+            <option value="29">Mascara</option>
+            <option value="30">Ouargla</option>
+            <option value="30">Oran</option>
+            <option value="32">El Bayadh</option>
+            <option value="33">Illizi</option>
+            <option value="34">Bordj Bou Arréridj</option>
+            <option value="35">Boumerdès</option>
+            <option value="36">El Taref</option>
+            <option value="37">Tindouf</option>
+            <option value="38">Tissemsilt</option>
+            <option value="39">El Oued</option>
+            <option value="40">Khenchela</option>
+            <option value="40">Souk Ahras</option>
+            <option value="41">Souk Ahras</option>
+            <option value="42">Tipasa</option>
+            <option value="43">Mila</option>
+            <option value="44">Aïn Defla</option>
+            <option value="45">Naama</option>
+            <option value="46">Aïn Témouchent</option>
+            <option value="47">Ghardaïa</option>
+            <option value="48">Relizane</option>
+        </select>
+    
+        <select name="type de prestation" id="type_prestation">
+            <option value="0">type de prestation</option>
+            <option value="à domicile">à domicile</option>
+            <option value="stop desk">stop desk</option>
+        </select>
+    
+        <select name="etape" id="etape">
+            <option value="0">étape</option>
+            <option value="text">en attente de collecter</option>
+            <option value="colis collecter">colis collecté</option>
+            <option value="en route vers hub">en route vers hub</option>
+        </select>
+        <button type="submit">Filter</button>
+        </form>
         </div>
         <div class="element_container">
             <div class="element_header" >
@@ -209,15 +131,13 @@
                 </div>
                 {% for instance in object_list %}
                 <div class="ele_container table_element">
-                    <div class="mod_ele">
-                        <button>Modifier</button>
-                    </div>
+                    >
                     <div class="autre_ele">
                         <div class="ele">
                             <p>{{ instance.id }}</p>
                         </div>
                         <div>
-                            <p>{{ instance.nometpren }}</p>
+                            <p>{{ instance.date }}</p>
                         </div>
                         <div>
                             <p>{{ instance.wilaya }}</p>
@@ -230,12 +150,23 @@
                         </div>
                     </div>
                     <div class="mod_ele">
-                        <button >Supprimer</button>
-                        <button>valider l'expedition</button>
+                        <form method="GET" action="{{ instance.get_absolute_url }}update/" class="form_container">
+                            {% csrf_token %}
+                        <button type="submit">UPDATE</button>
+                        </form>
+                        <form method="GET" action="{{ instance.get_absolute_url }}delete/" class="form_container">
+                            {% csrf_token %}
+                        <button type="submit">DELETE</button>
+                        <form method="POST" action="{{ instance.get_absolute_url }}validate/" class="form_container">
+                            {% csrf_token %}
+                        <button type="submit">VALIDATE</button>
+                        </form>
                     </div>
                 </div>
 
 {% endfor %}
+                
+                
             </div>
         </div>
     </div>

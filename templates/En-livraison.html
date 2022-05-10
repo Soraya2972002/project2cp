@@ -8,10 +8,9 @@
     </div>
     <div class="main_container">
         <div class="filtre filtre_pret">
-            <div class="filtre_tit">
-                <h3 id="text_font_titles">Filtre:</h3>
-            </div>
-            <div>
+            
+            <form method="POST" action="/products/livraison" class="form_container">
+                {% csrf_token %}
                 <select name="type" id="">
                     <option value="0">type</option>
                     <option value="livraison">livraison</option>
@@ -19,15 +18,13 @@
                     <option value="pick up">pick up</option>
                     <option value="recouvrement">recouvrement</option>
                 </select>
-            </div>
-            <div>
                 <select name="user_wilaya" id="wilaya_send">
                     <option value="0">-- Select Willaya --</option>
-                    <option value="1">Adrar</option>
-                    <option value="2">Chlef</option>
-                    <option value="3">Laghouat</option>
-                    <option value="4"> Oum el-Bouaghi</option>
-                    <option value="5">Batna</option>
+                    <option value="Adrar">Adrar</option>
+                    <option value="Chlef">Chlef</option>
+                    <option value="Laghouat">Laghouat</option>
+                    <option value="Oum el-Bouaghi"> Oum el-Bouaghi</option>
+                    <option value="Batna">Batna</option>
                     <option value="6">Béjaïa</option>
                     <option value="7">Biskra</option>
                     <option value="8">Béchar</option>
@@ -73,23 +70,22 @@
                     <option value="47">Ghardaïa</option>
                     <option value="48">Relizane</option>
                 </select>
-            </div>
-            <div>
+            
                 <select name="type de prestation" id="type_prestation">
                     <option value="0">type de prestation</option>
-                    <option value="domicile">à domicile</option>
+                    <option value="à domicile">à domicile</option>
                     <option value="stop desk">stop desk</option>
                 </select>
-            </div>
-            <div>
+            
                 <select name="etape" id="etape">
                     <option value="0">étape</option>
                     <option value="text">en attente de collecter</option>
                     <option value="colis collecter">colis collecté</option>
                     <option value="en route vers hub">en route vers hub</option>
                 </select>
-            </div>
-        </div>
+                <button type="submit">Filter</button>
+                </form>
+                </div>
         <div class="element_container">
             <div class="element_header" >
                 <div class="numb_afficher">
@@ -126,25 +122,26 @@
                 <div class="ele_container aucune_element">
                     <p>Aucune donnée disponible dans le tableau !!!</p>
                 </div>
+                {% for instance in object_list %}
                 <div class="ele_container table_element">
                     <div class="mod_ele">
                         <button>Modifier</button>
                     </div>
                     <div class="autre_ele">
                         <div class="ele">
-                            <p>information</p>
+                            <p>{{ instance.id }}</p>
                         </div>
                         <div>
-                            <p>destination</p>
+                            <p>{{ instance.nometpren }}</p>
                         </div>
                         <div>
-                            <p>destinataire</p>
+                            <p>{{ instance.wilaya }}</p>
                         </div>
                         <div>
-                            <p>remarque</p>
+                            <p>{{ instance.remarque }}</p>
                         </div>
                         <div class="ele">
-                            <p>prix</p>
+                            <p>{{ instance.prix }}</p>
                         </div>
                     </div>
                     <div class="mod_ele">
@@ -152,6 +149,8 @@
                         <button>valider l'expedition</button>
                     </div>
                 </div>
+
+{% endfor %}
             </div>
         </div>
     </div>
