@@ -80,7 +80,7 @@
         
             
                 <input type="date" id="start" name="date"
-                value="2022-05-09"
+                value="2022-05-10"
                 min="2000-01-01" max="2100-12-31">
                 <button type="submit">Filter</button>
                 </form>
@@ -144,8 +144,17 @@
                         </div>
                     </div>
                     <div class="mod_ele">
-                        <button >Supprimer</button>
-                        <button>valider l'expedition</button>
+                        <form method="GET" action="{{ instance.get_absolute_url }}update/" class="form_container">
+                            {% csrf_token %}
+                        <button type="submit">UPDATE</button>
+                        </form>
+                        <form method="GET" action="{{ instance.get_absolute_url }}delete/" class="form_container">
+                            {% csrf_token %}
+                        <button type="submit">DELETE</button>
+                        <form method="POST" action="{{ instance.get_absolute_url }}validate/" class="form_container">
+                            {% csrf_token %}
+                        <button type="submit">VALIDATE</button>
+                        </form>
                     </div>
                 </div>
 

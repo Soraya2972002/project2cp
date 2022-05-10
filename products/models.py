@@ -58,7 +58,7 @@ class Product(models.Model):
     ]
     typeprestation = models.CharField(max_length=100, choices = TYPE_PRESENTATION_CHOICES, default= "V")
 
-    pretaexpedier = models.BooleanField(default=False)
+    pretaexpedier = models.BooleanField(default=True)
     enramassage = models.BooleanField(default=False)
     entransit = models.BooleanField(default=False)
     enhub = models.BooleanField(default=False)

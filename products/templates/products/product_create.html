@@ -1,4 +1,4 @@
-{% extends base.html %}
+{% extends 'base.html' %}
 {% block content %}
 {{ form.non_field_errors }}
 <form action='.' method='POST'>{% csrf_token %}

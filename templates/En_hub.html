@@ -149,19 +149,6 @@
                             <p>{{ instance.prix }}</p>
                         </div>
                     </div>
-                    <div class="mod_ele">
-                        <form method="GET" action="{{ instance.get_absolute_url }}update/" class="form_container">
-                            {% csrf_token %}
-                        <button type="submit">UPDATE</button>
-                        </form>
-                        <form method="GET" action="{{ instance.get_absolute_url }}delete/" class="form_container">
-                            {% csrf_token %}
-                        <button type="submit">DELETE</button>
-                        <form method="POST" action="{{ instance.get_absolute_url }}validate/" class="form_container">
-                            {% csrf_token %}
-                        <button type="submit">VALIDATE</button>
-                        </form>
-                    </div>
                 </div>
 
 {% endfor %}

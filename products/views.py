@@ -31,7 +31,7 @@ def product_update_view(request, id=id):
     if form.is_valid():
         form.save()
         Product.objects.filter(id=id).update(enhub=True)
-        return redirect('hub')
+        return redirect('expedier')
     context = {
         'form': form
     }
@@ -85,7 +85,7 @@ def product_delete_view(request, id):
     obj = get_object_or_404(Product, id=id)
     if request.method == "POST":
         obj.delete()
-        return redirect('hub')
+        return redirect('expedier')
     context = {
         "object": obj
     }
@@ -118,19 +118,20 @@ def product_filter_expedier(request):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
     search_date = request.POST.get('date', None)
-    l = search_date.split('-')
-    print(search_date)
-    print(search_wilaya)
-    """user = request.user
-    email = user.email
-    queryset = Product.objects.filter(email = email)"""
-    queryset = Product.objects.filter(wilaya = search_wilaya) 
-    queryset = queryset.filter(pretaexpedier = True) 
-    queryset = queryset.filter(typeenvoi = search_type) 
-    queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
-    context = {
-        "object_list": queryset
-    }
+    try:
+        l = search_date.split('-')
+        """user = request.user
+        email = user.email
+        queryset = Product.objects.filter(email = email)"""
+        queryset = Product.objects.filter(wilaya = search_wilaya) 
+        queryset = queryset.filter(pretaexpedier = True) 
+        queryset = queryset.filter(typeenvoi = search_type) 
+        queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        context = {
+            "object_list": queryset
+        }
+    except:
+        pass
     return render(request, "pret-a-expedier.html", context)
 
 def product_filter_ramassage(request):
@@ -206,6 +207,6 @@ def product_filter_suspendus(request):
     return render(request, "Suspendus.html", context)
 
 def valider_colis(request, id=id):
-    Product.objects.filter(id=id).update(enhub=False)
-    Product.objects.filter(id=id).update(pretaexpedier=True)
-    return redirect('hub') 
+    Product.objects.filter(id=id).update(enhub=True)
+    Product.objects.filter(id=id).update(pretaexpedier=False)
+    return redirect('expedier') 
