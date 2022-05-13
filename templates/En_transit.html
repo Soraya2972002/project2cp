@@ -123,9 +123,6 @@
                 </div>
             </div>
             <div class="element_desc">
-                <div class="ele_container aucune_element">
-                    <p>Aucune donnée disponible dans le tableau !!!</p>
-                </div>
                 {% for instance in object_list %}
                 <div class="ele_container table_element">
                     <div class="mod_ele">
@@ -154,7 +151,9 @@
                     </div>
                 </div>
                 {% empty %}
-                <p> sorry, no queries match your search </p>
+                <div class="ele_container aucune_element">
+                    <p> sorry, no queries match your search </p>
+                </div>
 {% endfor %}
             </div>
         </div>

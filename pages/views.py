@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import user_passes_test, login_required
 import datetime
+import string
+from accounts.models import CustomUser
 from newspaper_project.decorators import is_admin, is_adminwilaya, is_client, is_livreur
 from django.contrib.auth import get_user_model
 from products.models import Product
@@ -239,13 +241,13 @@ def choisir_livreur(request):
     users = User.objects.filter(groups__name = 'Livreurs')
     search_username = request.POST.get('username', None)
     if search_username != None:
-        users = users.filter(username = search_username)
+        users = users.filter(username = search_username.lower())
     search_fname = request.POST.get('fname', None)
     if search_fname != None:
-        users = users.filter(first_name = search_fname)
+        users = users.filter(first_name = search_fname.lower())
     search_lname = request.POST.get('lname', None)
     if search_lname != None:
-        users = users.filter(last_name = search_lname)
+        users = users.filter(last_name = search_lname.lower())
     search_disponible = request.POST.get('etat', None)
     if search_disponible == '0':
         users = users.filter(disponible = True)
@@ -257,15 +259,21 @@ def choisir_livreur(request):
     context = {
         "users": users
     }
-    if request.method == 'POST':
+    if request.POST.get('submit', None) != None:
         search_date = request.POST.get('date', None)
         print(search_date)
         idd = request.POST.get('submit', None)
-        print(idd)
         search_time = request.POST.get('time', None)
-        user = User.objects.get(id = idd)
-        user.
-
+        print(search_time)
+        queryset = Product.objects.filter(checked = True)
+        s = ''
+        for product in queryset:
+            s += ";" + str(product.id)
+        s = s[1:]
+        CustomUser.objects.filter(id=idd).update(en_cours_livraison = s)
+        CustomUser.objects.filter(id=idd).update(date = search_date + " " + search_time)
+        Product.objects.filter(checked = True).update(checked = False)
+        return redirect("expedier_admin")
     return render(request, 'choisir_livreurs.html', context)
 
 def pret_a_expedier_admin_view(request):

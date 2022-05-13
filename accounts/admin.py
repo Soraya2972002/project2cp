@@ -20,7 +20,7 @@ class MyUserChangeForm(EmailRequiredMixin, UserChangeForm):
 
 class CustomUserAdmin(UserAdmin):
     list_display = (
-        'username', 'email', 'first_name', 'last_name', 'wilaya','num','disponible',
+        'username', 'email', 'first_name', 'last_name', 'wilaya','num','disponible',"en_cours_livraison","date",
         )
     exclude = ['Important dates']
     fieldsets = (
@@ -33,7 +33,7 @@ class CustomUserAdmin(UserAdmin):
                 )
         }),
         ('Personal info', {
-            'fields': ('first_name', 'last_name', 'email','num','disponible'),
+            'fields': ('first_name', 'last_name', 'email','num','disponible',"en_cours_livraison","date",),
         }),
         ('Additional info', {
             'fields': ('wilaya',)
@@ -59,7 +59,7 @@ class CustomUserAdmin(UserAdmin):
                 )
         }),
         ('Personal info', {
-            'fields': ('first_name', 'last_name', 'email','num','disponible',)
+            'fields': ('first_name', 'last_name', 'email','num','disponible',"en_cours_livraison","date",)
         }),
         ('Additional info', {
             'fields': ('wilaya',)

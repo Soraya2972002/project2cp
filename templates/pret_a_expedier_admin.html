@@ -117,9 +117,6 @@
                 </div>
             </div>
             <div class="element_desc">
-                <div class="ele_container aucune_element">
-                    <p>Aucune donnée disponible dans le tableau !!!</p>
-                </div>
                 <form method="POST" action="{% url 'selectionner' %}" class="form_container">
                     {% csrf_token %}
                 {% for instance in object_list %}

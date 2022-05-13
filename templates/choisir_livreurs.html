@@ -144,9 +144,10 @@
                         <div class="ele">
                             <form method="POST" action="" class="form_container">
                                 {% csrf_token %}
+                            <label>Choose a deadline</label>
                             <input type = 'date' name = 'date'  >
                             <input type = 'time' name = 'time' >
-                            <button type="submit" name = 'submit' value = {{user.id}} >Choose</button>
+                            <button type="submit" name = 'submit' value = {{user.id}} >Choose this delivery-man</button>
                             </form>
                         </div>
                     </div>
