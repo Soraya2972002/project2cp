@@ -30,7 +30,6 @@ def product_update_view(request, id=id):
     form = ProductForm(request.POST or None, instance=obj)
     if form.is_valid():
         form.save()
-        Product.objects.filter(id=id).update(enhub=True)
         return redirect('expedier')
     context = {
         'form': form
@@ -96,117 +95,15 @@ def product_delete_view(request, id):
 
 @login_required
 
-def product_filter_hub(request):
-    search_wilaya = request.POST.get('user_wilaya', None)
-    search_type = request.POST.get('type', None)
-    search_prestation = request.POST.get('type de prestation', None)
-    search_etape = request.POST.get('etape', None)
-    """user = request.user
-    email = user.email
-    queryset = Product.objects.filter(email = email)"""
-    queryset = Product.objects.filter(wilaya = search_wilaya) 
-    queryset = queryset.filter(enhub = True) 
-    queryset = queryset.filter(typeprestation = search_prestation) 
-    queryset = queryset.filter(typeenvoi = search_type) 
-    print(queryset)
-    context = {
-        "object_list": queryset
-    }
-    return render(request, "En_hub.html", context)
-
-def product_filter_expedier(request):
-    search_wilaya = request.POST.get('user_wilaya', None)
-    search_type = request.POST.get('type', None)
-    search_date = request.POST.get('date', None)
-    try:
-        l = search_date.split('-')
-        """user = request.user
-        email = user.email
-        queryset = Product.objects.filter(email = email)"""
-        queryset = Product.objects.filter(wilaya = search_wilaya) 
-        queryset = queryset.filter(pretaexpedier = True) 
-        queryset = queryset.filter(typeenvoi = search_type) 
-        queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
-        context = {
-            "object_list": queryset
-        }
-    except:
-        pass
-    return render(request, "pret-a-expedier.html", context)
-
-def product_filter_ramassage(request):
-    search_wilaya = request.POST.get('user_wilaya', None)
-    search_type = request.POST.get('type', None)
-    search_prestation = request.POST.get('type de prestation', None)
-    """user = request.user
-    email = user.email
-    queryset = Product.objects.filter(email = email)"""
-    queryset = Product.objects.filter(wilaya = search_wilaya) 
-    queryset = queryset.filter(enramassage = True) 
-    queryset = queryset.filter(typeprestation = search_prestation) 
-    queryset = queryset.filter(typeenvoi = search_type) 
-    print(queryset)
-    context = {
-        "object_list": queryset
-    }
-    return render(request, "En_ramassage.html", context)
-
-def product_filter_transit(request):
-    search_wilaya = request.POST.get('user_wilaya', None)
-    search_type = request.POST.get('type', None)
-    search_prestation = request.POST.get('type de prestation', None)
-    """user = request.user
-    email = user.email
-    queryset = Product.objects.filter(email = email)"""
-    queryset = Product.objects.filter(wilaya = search_wilaya) 
-    queryset = queryset.filter(entransit = True) 
-    queryset = queryset.filter(typeprestation = search_prestation) 
-    queryset = queryset.filter(typeenvoi = search_type) 
-    print(queryset)
-    context = {
-        "object_list": queryset
-    }
-    return render(request, "En_transit.html", context)
-
-def product_filter_livraison(request):
-    search_wilaya = request.POST.get('user_wilaya', None)
-    search_type = request.POST.get('type', None)
-    search_prestation = request.POST.get('type de prestation', None)
-    """user = request.user
-    email = user.email
-    queryset = Product.objects.filter(email = email)"""
-    queryset = Product.objects.filter(wilaya = search_wilaya) 
-    queryset = queryset.filter(enlivraison = True) 
-    queryset = queryset.filter(typeprestation = search_prestation) 
-    queryset = queryset.filter(typeenvoi = search_type) 
-    print(queryset)
-    context = {
-        "object_list": queryset
-    }
-    return render(request, "En-livraison.html", context)
-
-def product_filter_suspendus(request):
-    search_wilaya = request.POST.get('user_wilaya', None)
-    print(search_wilaya)
-    search_type = request.POST.get('type', None)
-    print(search_type)
-    search_prestation = request.POST.get('type de prestation', None)
-    print(search_prestation)
-    search_etape = request.POST.get('etape', None)
-    """user = request.user
-    email = user.email
-    queryset = Product.objects.filter(email = email)"""
-    queryset = Product.objects.filter(wilaya = search_wilaya) 
-    queryset = queryset.filter(suspendus = True) 
-    queryset = queryset.filter(typeprestation = search_prestation) 
-    queryset = queryset.filter(typeenvoi = search_type) 
-    print(queryset)
-    context = {
-        "object_list": queryset
-    }
-    return render(request, "Suspendus.html", context)
 
 def valider_colis(request, id=id):
     Product.objects.filter(id=id).update(enhub=True)
     Product.objects.filter(id=id).update(pretaexpedier=False)
-    return redirect('expedier') 
+    return redirect('/client/pret_a_expedier') 
+
+def product_list_view(request):
+    queryset = Product.objects.filter() # list of objects
+    context = {
+        "object_list": queryset
+    }
+    return render(request, "products/product_list.html", context)

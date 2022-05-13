@@ -9,7 +9,7 @@
     <div class="main_container">
         <div class="filtre filtre_pret">
             
-            <form method="POST" action="/products/livraison" class="form_container">
+            <form method="POST" action="" class="form_container">
                 {% csrf_token %}
                 <select name="type" id="">
                     <option value="0">type</option>
@@ -149,7 +149,8 @@
                         <button>valider l'expedition</button>
                     </div>
                 </div>
-
+                {% empty %}
+                <p> sorry, no queries match your search </p>
 {% endfor %}
             </div>
         </div>

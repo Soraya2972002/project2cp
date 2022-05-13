@@ -16,7 +16,7 @@
         </div>
         <div class="filtre filtre_pret">
             
-            <form method="POST" action="/products/expedier" class="form_container">
+            <form method="POST" action="" class="form_container">
                 {% csrf_token %}
                 <select name="type" id="">
                     <option value="0">type</option>
@@ -26,7 +26,7 @@
                     <option value="recouvrement">recouvrement</option>
                 </select>
                 <select name="user_wilaya" id="wilaya_send">
-                    <option value="0">-- Select Willaya --</option>
+                    <option value="0">-- Select Wilaya --</option>
                     <option value="Adrar">Adrar</option>
                     <option value="Chlef">Chlef</option>
                     <option value="Laghouat">Laghouat</option>
@@ -80,7 +80,6 @@
         
             
                 <input type="date" id="start" name="date"
-                value="2022-05-10"
                 min="2000-01-01" max="2100-12-31">
                 <button type="submit">Filter</button>
                 </form>
@@ -151,13 +150,15 @@
                         <form method="GET" action="{{ instance.get_absolute_url }}delete/" class="form_container">
                             {% csrf_token %}
                         <button type="submit">DELETE</button>
-                        <form method="POST" action="{{ instance.get_absolute_url }}validate/" class="form_container">
+                        </form>
+                        <form method="GET" action="{{ instance.get_absolute_url }}validate/" class="form_container">
                             {% csrf_token %}
                         <button type="submit">VALIDATE</button>
                         </form>
                     </div>
                 </div>
-
+                {% empty %}
+                <p> sorry, no queries match your search </p>
                 {% endfor %}
                 
                 

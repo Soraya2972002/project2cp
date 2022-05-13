@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content%}
     
-    
 <div class="ajouter_conatainer">
     <div class="description">
         <h3 id="text_font_titles">en hub</h3>
@@ -16,7 +15,7 @@
         </div>
         <div class="filtre filtre_pret">
             
-    <form method="POST" action="/products/hub" class="form_container">
+    <form method="POST" action="" class="form_container">
         {% csrf_token %}
         <select name="type" id="">
             <option value="0">type</option>
@@ -150,7 +149,8 @@
                         </div>
                     </div>
                 </div>
-
+                {% empty %}
+                <p> sorry, no queries match your search </p>
 {% endfor %}
                 
                 

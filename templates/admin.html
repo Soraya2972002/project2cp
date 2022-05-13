@@ -1,13 +1,23 @@
-{% extends 'base.html' %}
+{% extends 'admin_base.html' %}
+{% load static %}
 {% block content%}
 
-<p> Ceci est la page pour l'administrateur </p >
-<form method="post" action=''>
-    {% csrf_token %}
-    <a href="/admin/">advanced administration interface</a>
-    <a href="/admin/">create admin wilaya account</a>
-    <a href="/admin/">create livreur account</a>
-    <a href="/admin/">create superuser account</a>
-    <a href="/admin/">see the database</a>
-</form>
+
+    <div class="container closeSidebare">
+        <div class="picture_container">
+            <div>
+                <img src="{% static "image/admin.png" %}" alt="admin">
+            </div>
+        </div>
+        <div class="description_container">
+            <div class="text_container">
+                <h1 id="text_font_titles">welcome <span id="green">world express Admin</span></h1>
+                <p id="text_font_paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem perspiciatis provident, ipsam voluptatibus laborum voluptas asperiores! Tenetur ad hic velit illum natus, rerum ullam nisi, odit temporibus tempore voluptate voluptatibus.</p>
+            </div>
+            <div class="order_container">
+                <a href="#">Crée un compte</a>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

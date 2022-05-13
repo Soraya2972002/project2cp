@@ -31,6 +31,7 @@ class ProductForm(forms.ModelForm):
                 'retoursprets',
                 "email",
                 'date',
+                'checked'
         ]
         widgets = {
             'adresse': forms.TextInput(attrs={'placeholder': 'entrez votre adresse'}),

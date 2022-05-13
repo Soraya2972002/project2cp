@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {{ form.non_field_errors }}
-<form action='.' method='POST'>{% csrf_token %}
+<form action='.' method='POST'class="test_container">{% csrf_token %}
 <div class="fieldWrapper">
     {{ form.nometpren.errors }}
     <label for="{{ form.nometpren.id_for_label }}">Your nometpren:</label>

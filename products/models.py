@@ -72,6 +72,7 @@ class Product(models.Model):
     retoursprets = models.BooleanField(default=False)
 
     email = models.EmailField(max_length = 100, default='soraya@gmail.com')
+    checked = models.BooleanField(default = False)
 
 
     def get_absolute_url(self):

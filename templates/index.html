@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,14 +14,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <title>World Express</title>
 </head>
 <body>
   <header>
     <div class="head_container hidde_nav">
         <div class="logo_container">
-            <a href="./index.html"><img src="../static/image/world_express_logo.png" alt="logo"></a>
+            <a href="./index.html"><img src="{% static 'image/world_express_logo.png' %}" alt="logo"></a>
         </div>
         <a href="#" class="toggle-button" id="toggle">
             <span class="bar"></span>
@@ -48,7 +49,7 @@
         <div class="main_section_container"> 
             <div class="text_container">
                 <div class="paragraphe_titel_container" id="text_font_titles">
-                    <h1><span id="second_red">World Express</span><br>The Quickest <br><span id="second_red">delivery</span> in <br><span id="second_red">Algeria</span></h1>
+                    <h1><span id="second_red">World Express</span> The Quickest <span id="second_red">delivery</span> in <br><span id="second_red">Algeria</span></h1>
                 </div>
                 <div class="paragraphe_container">
                     <p>Order your products at any time and we will <br> deliver them directly to your home.</p>
@@ -58,7 +59,7 @@
                 </div>
             </div>
             <div class="main_picture_container">
-            <img src="../static/image/In no time-pana.svg" alt="delivery">
+            <img src="{% static 'image/In no time-pana.svg' %}" alt="delivery">
             </div>
             <div class="drone">
                 <img src="../static/image/drone-voilet.svg" alt="Drone">
@@ -81,7 +82,7 @@
             </div>
             <div class="picture_desc_container">
                <div class="picture_container">
-                <div class="box_img" id="first_box"><img src="../static/image/Coronavirus Delivery Preventions-rafiki.svg" alt="box"></div>
+                <div class="box_img" id="first_box"><img src="{% static 'image/Coronavirus Delivery Preventions-rafiki.svg' %}" alt="box"></div>
                </div>
             </div>
         </div>
@@ -95,17 +96,17 @@
             <div class="sending_steps_container">
                 <div class="steps_container hover">
                     <div class="steps_img hover_items">
-                    <img src="../static/image/locked_password_icon.png" alt="login" class="hover_items"></div>
+                    <img src="{% static 'image/locked_password_icon.png' %}" alt="login" class="hover_items"></div>
                     <h3 class="hover_items">login</h3>
                     <p class="hover_items">Creat your acount and <br>login</p>
                 </div>
                 <div class="steps_container ">
-                    <div class="steps_img hover_items"><img src="../static/image/guide_list_icon.png" alt="form"></div>
+                    <div class="steps_img hover_items"><img src="{% static 'image/guide_list_icon.png' %}" alt="form"></div>
                     <h3 class="hover_items">Destination</h3>
                     <p class="hover_items">Fill Up the form</p>
                 </div>
                 <div class="steps_container">
-                    <div class="steps_img hover_items"><img src="../static/image/delivery_truck_shippingicon.png" alt="login"></div>
+                    <div class="steps_img hover_items"><img src="{% static 'image/delivery_truck_shippingicon.png' %}" alt="login"></div>
                     <h3 class="hover_items">Recieve</h3>
                     <p class="hover_items">Recieve your package</p>
                 </div>
@@ -122,7 +123,7 @@
             </div>
             <div class="picture_our_container">
                 <div class="picture_container_2">
-                    <img src="../static/image/In no time-amico.svg" alt="picture">
+                    <img src="{% static 'image/In no time-amico.svg' %}" alt="picture">
                 </div>
             </div>
         </div>
@@ -344,9 +345,9 @@
                     </div>
                 </div>
                 <div class="social_media_container">
-                    <div class="social_media"><a href="#"><img src="../static/image/facebook.png" alt="facebook" ></a></div>
-                    <div class="social_media"><a href="#"><img src="../static/image/instagram.png" alt="instagram"></a></div>
-                    <div class="social_media"><a href="#"><img src="../static/image/linkedin.png" alt="linkedin"></a></div>
+                    <div class="social_media"><a href="#"><img src="{% static 'image/facebook.png' %}" alt="facebook" ></a></div>
+                    <div class="social_media"><a href="#"><img src="{% static 'image/instagram.png' %}" alt="instagram"></a></div>
+                    <div class="social_media"><a href="#"><img src="{% static 'image/linkedin.png' %}" alt="linkedin"></a></div>
                 </div>
                 <div class="copyright_container">
                     <p>World Express &copy; 2022</p>
@@ -354,7 +355,7 @@
             </div>
         </footer>
     </div> 
-    <script src="../static/javascript/main.js"></script>
+    <script src="{% static 'javascript/main.js' %}"></script>
 </body>
 </html>
 
