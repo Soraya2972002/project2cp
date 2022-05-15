@@ -462,7 +462,7 @@ def historique_admin_view(request):
     queryset = Product.objects.filter(pretaexpedier = False).filter(enramassage = False).filter(entransit = False).filter(enhub = False).filter(enlivraison = False).filter(suspendus = False)
     somme = 0
     for el in queryset:
-        somme += el.payés
+        somme += int(el.payés)
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
@@ -739,7 +739,7 @@ def historique_payements_client(request):
     queryset = queryset.exclude(payés = 0)
     somme = 0
     for el in queryset:
-        somme += el.payés
+        somme += int(el.payés)
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
