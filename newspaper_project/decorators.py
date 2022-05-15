@@ -1,14 +1,13 @@
 #User.objects.filter(groups__name = None)
 
 def is_client(user):
-    #return not user.groups.filter(name='Livreurs').exists() and not user.is_superuser
-    return True
+    return not user.groups.filter(name='Livreurs').exists() and not user.is_superuser
+
 def is_adminwilaya(user):
-    #return user.groups.filter(name='admin_wilaya').exists()
-    return True
+    return user.groups.filter(name='admin_wilaya').exists()
+
 def is_livreur(user):
-    #return user.groups.filter(name='Livreurs').exists()
-    return True
+    return user.groups.filter(name='Livreurs').exists()
+
 def is_admin(user):
-    #return user.is_superuser
-    return True
+    return user.is_superuser

@@ -54,7 +54,6 @@ def ramassage_view(request, *args, **kwargs):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
     search_prestation = request.POST.get('type de prestation', None)
-    #search_etape = request.POST.get('etape', None)
     user = request.user
     email = user.email
     queryset = Product.objects.filter(email = email) 
@@ -78,7 +77,6 @@ def transit_view(request, *args, **kwargs):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
     search_prestation = request.POST.get('type de prestation', None)
-    #search_etape = request.POST.get('etape', None)
     user = request.user
     email = user.email
     queryset = Product.objects.filter(email = email) 
@@ -102,7 +100,6 @@ def livraison_view(request, *args, **kwargs):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
     search_prestation = request.POST.get('type de prestation', None)
-    #search_etape = request.POST.get('etape', None)
     user = request.user
     email = user.email
     queryset = Product.objects.filter(email = email) 
@@ -129,7 +126,7 @@ def pret_a_expedier_view(request, *args, **kwargs):
     search_date = request.POST.get('date', None)
     user = request.user
     email = user.email
-    #queryset = Product.objects.filter(email = email) 
+    queryset = Product.objects.filter(email = email) 
     queryset = Product.objects.filter(pretaexpedier = True)
     queryset = queryset.filter(suspendus = False)
     print('date',search_date)
@@ -155,7 +152,6 @@ def hub_view(request, *args, **kwargs):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
     search_prestation = request.POST.get('type de prestation', None)
-    #search_etape = request.POST.get('etape', None)
     user = request.user
     email = user.email
     queryset = Product.objects.filter(email = email) 
@@ -348,7 +344,7 @@ def transit_admin_view(request):
     search_date = request.POST.get('date', None)
     user = request.user
     email = user.email
-    #queryset = Product.objects.filter(email = email) 
+    queryset = Product.objects.filter(email = email) 
     queryset = Product.objects.filter(entransit = True)
     queryset = queryset.filter(suspendus = False)
     if search_date != None and search_date != "":
