@@ -18,7 +18,6 @@ for el in data :
 def clean_number(number):
     number = str(number)
     if len(number) == 10:
-        print('here')
         print(number[:2])
         if number[:2] != '05' and  number[:2] != '07' and number[:2] != '06':
             raise ValidationError('This is not a valid phone number')
@@ -28,12 +27,18 @@ def clean_nompren(n):
         if ' ' not in n:
             raise ValidationError('This is not a valid name and last name')
         return n
+"""class Comm(models.Model):
+    commune = models.CharField(max_length=200)
+    def __str__(self):
+        return self.commune"""
+
 class Product(models.Model):
     nometpren = models.CharField(max_length=120, validators=[clean_nompren])
     telephone = models.DecimalField(max_digits=10, decimal_places=0, validators=[clean_number])
     telephone1 = models.DecimalField(max_digits=10, decimal_places=0, validators=[clean_number])
     wilaya = models.CharField(max_length=200, choices = WILAYAS_CHOICES)
     commune = models.CharField(max_length=200)
+    #commune = models.ForeignKey(comm,on_delete=models.SET_DEFAULT, default='unknown category')
     adresse = models.CharField(max_length= 200) 
     montant = models.DecimalField(max_digits=10,decimal_places=0)
     numerocommande = models.DecimalField(max_digits=10,decimal_places=0)
@@ -64,12 +69,8 @@ class Product(models.Model):
     enhub = models.BooleanField(default=False)
     enlivraison = models.BooleanField(default=False)
     suspendus = models.BooleanField(default=False)
-    nonencaissés = models.BooleanField(default=False)
-    encaissésnonpayes = models.BooleanField(default=False)
-    paiementsprets = models.BooleanField(default=False)
-    chezclient = models.BooleanField(default=False)
-    retoursentraitement = models.BooleanField(default=False)
-    retoursprets = models.BooleanField(default=False)
+    payés = models.DecimalField(max_digits=10,decimal_places=0,default=0)
+    retour_chez_livreur = models.BooleanField(default=False)
 
     email = models.EmailField(max_length = 100, default='soraya@gmail.com')
     checked = models.BooleanField(default = False)
@@ -77,3 +78,5 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse("products:product-detail", kwargs={"id": self.id})
+    def __str__(self):
+        return self.wilaya

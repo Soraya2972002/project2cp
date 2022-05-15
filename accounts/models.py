@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 import json
 from django.core.exceptions import ValidationError
+import uuid
 
 file = open('/home/ubuntu/Bureau/news/products/wilayas.json')
 data = json.load(file)
@@ -21,7 +22,7 @@ def clean_number(number):
 
 class CustomUser(AbstractUser):
     wilaya = models.CharField(max_length=100, choices = WILAYAS_CHOICES, default='')
-    num = models.DecimalField(max_digits=10,decimal_places=0, unique=True, default= 0000000000, validators = [clean_number])
+    num = models.DecimalField(max_digits=10,decimal_places=0, unique=True, validators = [clean_number],blank = False, null = True)
     email = models.EmailField(unique=True)
     #these are the fields for livreur
     disponible = models.BooleanField(default = True)

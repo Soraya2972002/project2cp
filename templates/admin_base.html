@@ -43,12 +43,13 @@
                     </ul>
                 </li>
                 <li>
-                    <a href={% url "expedier_admin" %} class="a_hover"><span class="nav_hover"></span> <i class="fa fa-check"></i> pret a expeder</a>
-                    <a href="./En_ramassage.html" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-car"></i> En ramassage </a>
-                    <a href="./En_transit.html" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-exchange-alt"></i>En transit </a>
-                    <a href="./En_hub.html" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-home"> </i> En Hub</a>
-                    <a href="./En-livraison.html" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-car"> </i> En livraison</a>
-                    <a href="./Suspendus.html" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"> </i> Suspendus</a>
+                    <a href="{% url "en_ramassage_admin" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-car"></i> En ramassage </a>
+                    <a href="{% url "transit_admin" %} " class="a_hover"><span class="nav_hover"></span> <i class="fa fa-exchange-alt"></i>En transit </a>
+                    <a href="{% url "en_hub_admin" %} " class="a_hover"><span class="nav_hover"></span> <i class="fa fa-home"> </i> En Hub</a>
+                    <a href="{% url "en_livraison_admin" %} " class="a_hover"><span class="nav_hover"></span> <i class="fa fa-car"> </i> En livraison</a>
+                    <a href="{% url "suspendus_admin" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"> </i> Suspendus</a>
+                    <a href="{% url "retour_livreur_admin" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"> </i> retour livreur</a>
+                    
                 </li>
                 <li class="hide_sub">
                     <a href="#" title="livre" class="hidden_ele a_hover"><span class="nav_hover"></span> <i class="fa fa-angle-down"></i>listes</a>
@@ -60,7 +61,7 @@
                             <a href="{% url 'afficher_livreurs' %}" title="encaisse non paye" class="a_hover"><span class="nav_hover"></span>Les Livreurs</a>
                         </li>
                         <li>
-                            <a href="{% url 'products:product_list' %}" title="historique des paiment recus" class="a_hover"><span class="nav_hover"></span>historique des colis</a>
+                            <a href="{% url 'historique_admin' %}" title="historique des colis recus" class="a_hover"><span class="nav_hover"></span>historique des colis</a>
                         </li>
                     </ul>
                 </li>

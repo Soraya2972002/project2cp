@@ -48,6 +48,9 @@
     <section>
         <div class="main_section_container"> 
             <div class="text_container">
+                {% for message in messages %}
+                    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+                    {% endfor %}
                 <div class="paragraphe_titel_container" id="text_font_titles">
                     <h1><span id="second_red">World Express</span> The Quickest <span id="second_red">delivery</span> in <br><span id="second_red">Algeria</span></h1>
                 </div>

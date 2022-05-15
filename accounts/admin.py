@@ -9,7 +9,7 @@ class EmailRequiredMixin(object):
         super(EmailRequiredMixin, self).__init__(*args, **kwargs)
         # make user email field required
         self.fields['email'].required = True
-        self.fields['num'].required = True
+        #self.fields['num'].required = True
 
 class MyUserCreationForm(EmailRequiredMixin, UserCreationForm):
     pass

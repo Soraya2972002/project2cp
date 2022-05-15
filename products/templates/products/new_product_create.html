@@ -39,10 +39,15 @@
                     {{ form.wilaya }}
                 </div>
                 <div class="fieldWrapper">
-                    {{ form.commune.errors }}
+                    <select name = 'wilaya'
                     <label for="{{ form.commune.id_for_label }}">Your commune</label>
-                    {{ form.commune }}
-                </div>            
+                    
+                </div>    
+                <div>
+                    <select name = 'commune' id = "id_for_commune" form = 'id_for_comm'>
+                        
+                    </select>
+                </div>        
                 <div class="fieldWrapper">
                     {{ form.adresse.errors }}
                     <label for="{{ form.adresse.id_for_label }}">Your adress</label>

@@ -25,10 +25,7 @@
                             <a href="{% url 'products:product-create' %}" title="Ajouter" class="a_hover"><span class="nav_hover"></span> Ajouter un colis</a>
                         </li>
                         <li>
-                            <a href="#" title="AjouterP" class="a_hover"><span class="nav_hover"></span> Ajouter plusieurs colis</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'products:product-list-client' %}" title="Historique" class="a_hover"><span class="nav_hover"></span> Historique de l'importation</a>
+                            <a href="{% url 'historique_client' %}" title="Historique" class="a_hover"><span class="nav_hover"></span> Historique de l'importation</a>
                         </li>
                     </ul>
                 </li>
@@ -38,22 +35,19 @@
                     <a href="{% url 'transit' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-exchange-alt"></i>En transit </a>
                     <a href="{% url 'hub' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-home"> </i> En Hub</a>
                     <a href="{% url 'livraison' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-car"> </i> En livraison</a>
-                    <a href="{% url 'suspendus' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"> </i> Suspendus</a>
+                    <a href="{% url 'suspendus_client' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"> </i> Suspendus</a>
                 </li>
                 <li class="hide_sub">
                     <a href="#" title="livre" class="hidden_ele a_hover"><span class="nav_hover"></span> <i class="fa fa-angle-down"></i> Livre</a>
                     <ul class="sub toggle_ele">
                         <li>
-                            <a href="{% url 'non_encaisse' %}" title="non encaisse" class="a_hover"><span class="nav_hover"></span>non encaisse</a>
+                            <a href="{% url 'payes_client' %}" title="non encaisse" class="a_hover"><span class="nav_hover"></span>payés</a>
                         </li>
                         <li>
-                            <a href="#" title="encaisse non paye" class="a_hover"><span class="nav_hover"></span>encaisse non paye</a>
+                            <a href="{% url 'non_payes_client' %}" title="encaisse non paye" class="a_hover"><span class="nav_hover"></span>non paye</a>
                         </li>
                         <li>
-                            <a href="#" title="paiement pret" class="a_hover"><span class="nav_hover"></span> paiement pret</a>
-                        </li>
-                        <li>
-                            <a href="#" title="historique des paiment recus" class="a_hover"><span class="nav_hover"></span> historique des paiements recus</a>
+                            <a href="{% url 'historique_payements_client' %}" title="historique des paiment recus" class="a_hover"><span class="nav_hover"></span> historique des paiements</a>
                         </li>
                     </ul>
                 </li>
@@ -61,16 +55,7 @@
                     <a href="#" title="retour" class="hidden_ele a_hover"><span class="nav_hover"></span> <i class="fa fa-angle-down"></i>Retour</a>
                     <ul class="sub toggle_ele">
                         <li>
-                            <a href="#" title="Chez livreur" class="a_hover"><span class="nav_hover"></span>Chez livreur</a>
-                        </li>
-                        <li>
-                            <a href="#" title="retours en traitement" class="a_hover"><span class="nav_hover"></span>retours en traitement</a>
-                        </li>
-                        <li>
-                            <a href="#" title="retours prets" class="a_hover"><span class="nav_hover"></span> retours prets</a>
-                        </li>
-                        <li>
-                            <a href="#" title="historique retours recus" class="a_hover"><span class="nav_hover"></span> historique retours recus</a>
+                            <a href="{% url 'retour_livreur_client' %}" title="Chez livreur" class="a_hover"><span class="nav_hover"></span>Chez livreur</a>
                         </li>
                     </ul>
                 </li>

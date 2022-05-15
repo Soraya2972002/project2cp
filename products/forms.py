@@ -1,7 +1,8 @@
 from django import forms
 from .models import Product
+from dynamic_forms import DynamicField, DynamicFormMixin
 
-class ProductForm(forms.ModelForm): 
+class ProductForm(DynamicFormMixin, forms.ModelForm): 
     class Meta:
         model = Product
         fields = ["nometpren", 
@@ -23,12 +24,8 @@ class ProductForm(forms.ModelForm):
                 'enhub',
                 "enlivraison",
                 'suspendus',
-                "nonencaissés",
-                'encaissésnonpayes',
-                'paiementsprets',
-                "chezclient",
-                "retoursentraitement",
-                'retoursprets',
+                "payés",
+                "retour_chez_livreur",
                 "email",
                 'date',
                 'checked'
@@ -39,10 +36,12 @@ class ProductForm(forms.ModelForm):
                 attrs={"placeholder": "ecrivez vos remarque a propos de l'envoi ici",}),
             'produit': forms.Textarea(
                 attrs={'placeholder': 'décrivez le produit ici'}),
+            #'wilaya' : forms.TextInput(attrs={'id': 'wilaya_id'}),
         }
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
         self.fields['email'].required = False
         self.fields['date'].required = False
         self.fields['remarque'].required = False
+
 

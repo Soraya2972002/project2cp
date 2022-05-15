@@ -58,7 +58,7 @@ def signup(request):
         email_body = {
                     'user': myuser,
                     'domain': current_site.domain,
-                    'uid': urlsafe_base64_encode(force_bytes(myuser.pk)).decode(),
+                    'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
                     'token': account_activation_token.make_token(myuser),
         }
         link = reverse('activate', kwargs={
@@ -68,15 +68,15 @@ def signup(request):
             email_subject,
             'Hi ' + myuser.username + ', Please the link below to activate your account \n'+activate_url,
             'noreply@semycolon.com',
-            [email],
+            [myuser.email],
         )
         email.send(fail_silently=False)
         messages.success(request, 'Account successfully created, please check your email in order to activate your account')
         
-        return render(request, "index.html")
+        return redirect("home")
         
         
-    return render(request, "signup.html")
+    return render(request, "original_signup.html")
 
 
 def activate(request, uidb64, token):  
