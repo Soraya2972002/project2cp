@@ -15,7 +15,6 @@
             <button class="valider">valider l'éxpedition</button>
         </div>
         <div class="filtre filtre_pret">
-            
             <form method="POST" action="" class="form_container">
                 {% csrf_token %}
                 <select name="type" id="">
@@ -77,12 +76,14 @@
                     <option value="47">Ghardaïa</option>
                     <option value="48">Relizane</option>
                 </select>
-        
             
                 <input type="date" id="start" name="date"
                 min="2000-01-01" max="2100-12-31">
                 <button type="submit">Filter</button>
                 </form>
+                    {% for element in list %}
+                        {{element}}
+                    {% endfor %}
                 </div>
         <div class="element_container">
             <div class="element_header" >
@@ -125,8 +126,7 @@
                         
                         <input type = 'checkbox' value = {{ instance.id }} name = 'selection'>
                         
-                    </div>
-        
+                    </div>        
                     
                     <div class="autre_ele">
                         <div class="ele">
@@ -145,20 +145,6 @@
                             <p>{{ instance.prix }}</p>
                         </div>
                     </div>
-                    <!--<div class="mod_ele">
-                    <form method="POST" action="{{ instance.get_absolute_url }}update/" class="form_container">
-                            {% csrf_token %}
-                        <button type="submit">UPDATE</button>
-                        </form>
-                        <form method="POST" action="{{ instance.get_absolute_url }}delete/" class="form_container">
-                            {% csrf_token %}
-                        <button type="submit">DELETE</button>
-                        </form>
-                        <form method="POST" action="{{ instance.get_absolute_url }}validate/" class="form_container">
-                            {% csrf_token %}
-                        <button type="submit">VALIDATE</button>
-                        </form>
-                    </div>-->
                 </div>
                 {% empty %}
                 <div class="ele_container aucune_element">

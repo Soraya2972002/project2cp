@@ -1,0 +1,10 @@
+{% extends 'livreur_base_main.html' %}
+{% block content%}
+
+<form method="POST" action="" class="form_container">
+    {% csrf_token %}
+    <input type = 'texte' name = "feedback_client">
+    <button type = "submit">submit</button>
+</form>
+
+{% endblock %}

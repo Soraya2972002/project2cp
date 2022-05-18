@@ -22,7 +22,7 @@ urlpatterns = [
     path("administrateur/suspendus", views.suspendus_admin_view, name = 'suspendus_admin'),
     path("admin_wilaya", views.admin_wilaya_view, name = 'admin_wilaya'),
     path("retour_livreur_admin", views.retour_livreur_admin, name = 'retour_livreur_admin'),
-    #path('administrateur/profile',views.profile_admin,name = 'admin_profile'),
+    path('administrateur/profile',views.profile_admin,name = 'admin_profile'),
     
 
 
@@ -33,7 +33,7 @@ urlpatterns = [
     path("livreur/selectionner_livraison", views.selectionner_livreur_livraison, name = 'selectionner_livreur_livraison'),
     path("livreur/historique", views.historique_livreur_view, name = 'historique_livreur'),
     path("livreur/non_payés", views.livreur_non_payés, name = 'livreur_non_payés'),
-    #path('livreur/profile',views.profile_livreur,name = 'livreur_profile'),
+    path('livreur/profile',views.profile_livreur,name = 'livreur_profile'),
 
     
 
@@ -49,7 +49,8 @@ urlpatterns = [
     path("client/payes_client", views.payes_client, name = 'payes_client'),
     path("client/non_payes_client", views.non_payes_client, name = 'non_payes_client'),
     path("client/historique_payements_client", views.historique_payements_client, name = 'historique_payements_client'),
-    #path('client/profile',views.profile_client,name = 'client_profile'),
+    path('client/profile',views.profile_client,name = 'client_profile'),
+    path('client/feedback',views.add_feedback_client,name = 'client_feedback'),
 ]
 
 

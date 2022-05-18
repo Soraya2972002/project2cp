@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content%}
+<form action='' method='POST' class="test_container">
+    {% csrf_token %}
+{{ form.comment.errors }}
+    <label for="{{ form.comment.id_for_label }}">Your Feedback:</label>
+{{ form.comment }}
+{{form.errors}}
+<input type = "submit" value = 'save' />
+</form>
+
+{% endblock %}

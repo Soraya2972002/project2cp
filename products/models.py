@@ -78,3 +78,7 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse("products:product-detail", kwargs={"id": self.id})
+
+class Feedback(models.Model):
+    id_user = models.DecimalField(max_digits=10000, decimal_places=0,blank = False, null = True)
+    comment = models.TextField()

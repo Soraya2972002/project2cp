@@ -4,7 +4,8 @@ from django.contrib.auth.decorators import user_passes_test, login_required
 import datetime
 from accounts.models import CustomUser
 from django.contrib.auth import get_user_model
-from products.models import Product
+from products.models import Product,Feedback
+from products.forms import FeedbackForm
 from django.contrib.auth.decorators import user_passes_test, login_required
 from newspaper_project.decorators import is_admin, is_adminwilaya, is_client, is_livreur
 from django.core.mail import send_mail
@@ -54,6 +55,7 @@ def ramassage_view(request, *args, **kwargs):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
     search_prestation = request.POST.get('type de prestation', None)
+    l = []
     user = request.user
     email = user.email
     queryset = Product.objects.filter(email = email) 
@@ -61,12 +63,16 @@ def ramassage_view(request, *args, **kwargs):
     queryset = queryset.filter(enramassage = True)
     if search_wilaya != "0" and search_wilaya != None:
         queryset = queryset.filter(wilaya = search_wilaya) 
+        l.append(search_wilaya)
     if search_prestation != "0" and search_prestation != None:
         queryset = queryset.filter(typeprestation = search_prestation) 
+        l.append(search_prestation)
     if search_type != "0" and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        l.append(search_type)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : l
     }
     return render(request,'En_ramassage.html',context)
 
@@ -77,6 +83,7 @@ def transit_view(request, *args, **kwargs):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
     search_prestation = request.POST.get('type de prestation', None)
+    l = []
     user = request.user
     email = user.email
     queryset = Product.objects.filter(email = email) 
@@ -84,12 +91,16 @@ def transit_view(request, *args, **kwargs):
     queryset = queryset.filter(entransit = True)
     if search_wilaya != "0" and search_wilaya != None:
         queryset = queryset.filter(wilaya = search_wilaya) 
+        l.append(search_wilaya)
     if search_prestation != "0" and search_prestation != None:
-        queryset = queryset.filter(typeprestation = search_prestation) 
+        queryset = queryset.filter(typeprestation = search_prestation)
+        l.append(search_prestation) 
     if search_type != "0" and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        l.append(search_type)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : l
     }
     return render(request,'En_transit.html',context)
 
@@ -101,18 +112,23 @@ def livraison_view(request, *args, **kwargs):
     search_type = request.POST.get('type', None)
     search_prestation = request.POST.get('type de prestation', None)
     user = request.user
+    l = []
     email = user.email
     queryset = Product.objects.filter(email = email) 
     queryset = queryset.filter(suspendus = False)
     queryset = queryset.filter(enlivraison = True)
     if search_wilaya != "0" and search_wilaya != None:
         queryset = queryset.filter(wilaya = search_wilaya) 
+        l.append(search_wilaya)
     if search_prestation != "0" and search_prestation != None:
         queryset = queryset.filter(typeprestation = search_prestation) 
+        l.append(search_prestation)
     if search_type != "0" and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        l.append(search_type)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : l
     }
     return render(request,'En-livraison.html',context)
 
@@ -125,6 +141,7 @@ def pret_a_expedier_view(request, *args, **kwargs):
     search_type = request.POST.get('type', None)
     search_date = request.POST.get('date', None)
     user = request.user
+    li = []
     email = user.email
     queryset = Product.objects.filter(email = email) 
     queryset = Product.objects.filter(pretaexpedier = True)
@@ -134,12 +151,16 @@ def pret_a_expedier_view(request, *args, **kwargs):
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
+        li.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : li
     }
     return render(request,'pret-a-expedier.html',context)
 
@@ -154,17 +175,22 @@ def hub_view(request, *args, **kwargs):
     search_prestation = request.POST.get('type de prestation', None)
     user = request.user
     email = user.email
+    l = []
     queryset = Product.objects.filter(email = email) 
     queryset = queryset.filter(suspendus = False)
     queryset = queryset.filter(enhub = True)
     if search_wilaya != "0" and search_wilaya != None:
         queryset = queryset.filter(wilaya = search_wilaya) 
+        l.append(search_wilaya)
     if search_prestation != "0" and search_prestation != None:
         queryset = queryset.filter(typeprestation = search_prestation) 
+        l.append(search_prestation)
     if search_type != "0" and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        l.append(search_type)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : l
     }
     return render(request,'En_hub.html',context)
 
@@ -173,8 +199,27 @@ def hub_view(request, *args, **kwargs):
 
 def afficher_livreurs(request):
     users = User.objects.filter(groups__name = 'Livreurs')
+    search_username = request.POST.get('username', None)
+    li = []
+    if search_username != None:
+        users = users.filter(username = search_username.lower())
+        li.append(search_username)
+    search_fname = request.POST.get('fname', None)
+    if search_fname != None:
+        users = users.filter(first_name__iexact = search_fname.lower())
+        li.append(search_fname)
+    search_lname = request.POST.get('lname', None)
+    if search_lname != None:
+        users = users.filter(last_name__iexact = search_lname.lower())
+        li.append(search_lname)
+    somme = 0
+    for user in users :
+        somme += 1
     context = {
-        "users": users
+        "users": users,
+        'userr' : 'livreurs',
+        'somme' : somme,
+        'list' : li
     }
     return render(request, 'list_livreur.html', context)
 
@@ -183,8 +228,27 @@ def afficher_livreurs(request):
 
 def afficher_clients(request):
     users = User.objects.filter(groups__name = None)
+    search_username = request.POST.get('username', None)
+    li = []
+    if search_username != None:
+        users = users.filter(username = search_username.lower())
+        li.append(search_username)
+    search_fname = request.POST.get('fname', None)
+    if search_fname != None:
+        users = users.filter(first_name__iexact = search_fname.lower())
+        li.append(search_fname)
+    search_lname = request.POST.get('lname', None)
+    if search_lname != None:
+        users = users.filter(last_name__iexact = search_lname.lower())
+        li.append(search_lname)
+    somme = 0
+    for user in users :
+        somme += 1
     context = {
-        "users": users
+        "users": users,
+        'userr' : 'clients',
+        'somme' : somme,
+        'list' : li
     }
     return render(request, 'list_livreur.html', context)
 
@@ -223,7 +287,7 @@ def selectionner_hub(request):
                             fail_silently=False,
                         )
 
-    return redirect('hub_admin')
+    return redirect('en_hub_admin')
 
 @login_required
 @user_passes_test(is_admin)
@@ -258,6 +322,7 @@ def selectionner_suspendus(request):
                     [email],
                     fail_silently=False,
                 )
+    return redirect('suspendus_admin')
 
 @login_required
 @user_passes_test(is_livreur)
@@ -304,24 +369,32 @@ def selectionner_livreur_livraison(request):
 def choisir_livreur(request):
     users = User.objects.filter(groups__name = 'Livreurs')
     search_username = request.POST.get('username', None)
+    li = []
     if search_username != None:
         users = users.filter(username = search_username.lower())
+        li.append(search_username)
     search_fname = request.POST.get('fname', None)
     if search_fname != None:
-        users = users.filter(first_name = search_fname.lower())
+        users = users.filter(first_name__iexact = search_fname.lower())
+        li.append(search_fname)
     search_lname = request.POST.get('lname', None)
     if search_lname != None:
-        users = users.filter(last_name = search_lname.lower())
+        users = users.filter(last_name__iexact = search_lname.lower())
+        li.append(search_lname)
     search_disponible = request.POST.get('etat', None)
     if search_disponible == '0':
         users = users.filter(disponible = True)
+        li.append(search_disponible)
     if search_disponible == '1':
         users = users.filter(disponible = False)
+        li.append(search_disponible)
     search_wilaya = request.POST.get('user_wilaya', None)
     if search_wilaya != '0' and search_wilaya!= None:
         users = users.filter(wilaya = search_wilaya)
+        li.append(search_wilaya)
     context = {
-        "users": users
+        "users": users,
+        'list' : li
     }
     if request.POST.get('submit', None) != None:
         search_date = request.POST.get('date', None)
@@ -358,6 +431,7 @@ def transit_admin_view(request):
     search_date = request.POST.get('date', None)
     user = request.user
     email = user.email
+    li = []
     queryset = Product.objects.filter(email = email) 
     queryset = Product.objects.filter(entransit = True)
     queryset = queryset.filter(suspendus = False)
@@ -365,12 +439,16 @@ def transit_admin_view(request):
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
+        li.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : li
     }
     return render(request,'en_transit_admin.html',context)
 
@@ -384,6 +462,7 @@ def a_recuperer_livreur_view(request):
     search_date = request.POST.get('date', None)
     user = request.user
     email = user.email
+    li = []
     queryset = Product.objects.filter(email = email)
     queryset = queryset.filter(suspendus = False) 
     a = user.en_cours_livraison
@@ -395,12 +474,16 @@ def a_recuperer_livreur_view(request):
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
+        li.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : li
     }
     return render(request,'a_recuperer_livreur.html',context)
 
@@ -412,8 +495,8 @@ def en_livraison_livreur_view(request):
     search_type = request.POST.get('type', None)
     search_date = request.POST.get('date', None)
     user = request.user
-    email = user.email
-    queryset = Product.objects.filter(username = '')
+    li = []
+    queryset = Product.objects.filter(nometpren = '')
     a = user.en_cours_livraison
     l = a.split(';')
     for el in a:
@@ -423,12 +506,16 @@ def en_livraison_livreur_view(request):
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
+        li.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : li
     }
     return render(request,'en_livraison_livreur.html',context)
 
@@ -441,6 +528,7 @@ def historique_livreur_view(request):
     search_date = request.POST.get('date', None)
     user = request.user
     livres = user.livres
+    li = []
     l = livres.split(';')
     Product.objects.all().order_by('date')
     queryset = Product.objects.filter(nometpren = '')
@@ -452,12 +540,16 @@ def historique_livreur_view(request):
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
+        li.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_wilaya)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_wilaya)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : li
     }
     return render(request,'historique_livreur.html',context)
 
@@ -472,20 +564,23 @@ def historique_admin_view(request):
     search_date2 = request.POST.get('second_date', None)
     search_price1 = request.POST.get('first_number', None)
     search_price2 = request.POST.get('second_number', None)
+    li = []
     Product.objects.all().order_by('date')
     queryset = Product.objects.filter(pretaexpedier = False).filter(enramassage = False).filter(entransit = False).filter(enhub = False).filter(enlivraison = False).filter(suspendus = False)
     somme = 0
-    for el in queryset:
-        somme += int(el.payés)
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
+        li.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
     if search_date1 != None and search_date2 != None :
+        li.append(search_date1 + ' :: ' + search_date2)
         new_queryset = queryset
         for el in queryset:
             date = el.date
@@ -500,17 +595,20 @@ def historique_admin_view(request):
                 new_queryset.union(new_queryset, el)
         queryset = new_queryset
     if search_price1 != None and search_price2 != 0:
+        li.append(search_price1 + ' :: ' + search_price2)
         new_queryset = queryset
         for el in queryset :
             price = el.payés
             if price >= search_price1 and price <= search_price2:
                 new_queryset.union(new_queryset, el)
         queryset = new_queryset
-
+    for el in queryset:
+        somme += int(el.payés)
     queryset = queryset.order_by('date')
     context = {
         "object_list": queryset,
-        'somme' : somme
+        'somme' : somme,
+        'list' : l
     }
     return render(request,'historique_admin.html',context)
 
@@ -521,6 +619,7 @@ def historique_client_view(request):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
     search_date = request.POST.get('date', None)
+    li = []
     Product.objects.all().order_by('date')
     email = request.user.email
     queryset = Product.objects.filter(email = email)
@@ -529,13 +628,21 @@ def historique_client_view(request):
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
+        li.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
     queryset = queryset.order_by('date')
+    somme = 0
+    for query in queryset:
+        somme += 1
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'somme1' : somme,
+        'list' : l
     }
     return render(request,'historique_client.html',context)
 
@@ -546,18 +653,24 @@ def en_hub_admin_view(request):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
     search_date = request.POST.get('date', None)
+    li = []
     queryset = Product.objects.filter(enhub = True) 
     queryset = queryset.filter(suspendus = False)
+    l = []
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
+        li.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : li
     }
     return render(request,'en_hub_admin.html',context)
 
@@ -569,17 +682,22 @@ def en_livraison_admin_view(request):
     search_type = request.POST.get('type', None)
     search_date = request.POST.get('date', None)
     queryset = Product.objects.filter(enlivraison = True) 
+    li = []
     queryset = queryset.filter(suspendus = False)
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
+        li.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : li
     }
     return render(request,'en_livraison_admin.html',context)
 
@@ -591,17 +709,22 @@ def en_ramassage_admin_view(request):
     search_type = request.POST.get('type', None)
     search_date = request.POST.get('date', None)
     queryset = Product.objects.filter(enramassage = True) 
+    li = []
     queryset = queryset.filter(suspendus = False)
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
+        li.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : li
     }
     return render(request,'en_ramassage_admin.html',context)
 
@@ -610,19 +733,24 @@ def en_ramassage_admin_view(request):
 
 def suspendus_admin_view(request):
     search_wilaya = request.POST.get('user_wilaya', None)
+    li = []
     search_type = request.POST.get('type', None)
     search_date = request.POST.get('date', None)
     queryset = Product.objects.filter(suspendus = True) 
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
-        queryset = queryset.filter(wilaya = search_wilaya)  
+        queryset = queryset.filter(wilaya = search_wilaya) 
+        li.append(search_wilaya) 
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : li
     }
     return render(request,'suspendus_admin.html',context)
 
@@ -633,18 +761,23 @@ def suspendus_client_view(request):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
     search_date = request.POST.get('date', None)
+    li = []
     queryset = Product.objects.filter(email = request.user.email) 
     queryset = queryset.filter(suspendus = True) 
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
+        li.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : li
     }
     return render(request,'suspendus_client.html',context)
 
@@ -656,6 +789,7 @@ def livreur_non_payés(request):
     search_type = request.POST.get('type', None)
     search_date = request.POST.get('date', None)
     user = request.user
+    li = []
     livres = user.livres
     l = livres.split(';')
     Product.objects.all().order_by('date')
@@ -667,13 +801,17 @@ def livreur_non_payés(request):
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
-        queryset = queryset.filter(wilaya = search_wilaya)  
+        queryset = queryset.filter(wilaya = search_wilaya) 
+        li.append(search_wilaya) 
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : li
     }
     return render(request,'livreur_non_payés.html',context)
 
@@ -684,17 +822,22 @@ def retour_livreur_admin(request):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
     search_date = request.POST.get('date', None)
-    queryset = Product.objects.filter(retour_livreur = True) 
+    queryset = Product.objects.filter(retour_chez_livreur = True) 
+    li = []
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
+        li.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : li
     }
     return render(request,'retour_livreur_admin.html',context)
 
@@ -706,17 +849,22 @@ def payes_client(request):
     search_type = request.POST.get('type', None)
     search_date = request.POST.get('date', None)
     queryset = Product.objects.filter(email = request.user.email) 
+    li = []
     queryset = queryset.exclude(payés = 0)
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
+        li.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : li
     }
     return render(request,'payes_client.html',context)
 
@@ -728,17 +876,22 @@ def non_payes_client(request):
     search_type = request.POST.get('type', None)
     search_date = request.POST.get('date', None)
     queryset = Product.objects.filter(email = request.user.email) 
+    li = []
     queryset = queryset.filter(payés = 0)
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
-        queryset = queryset.filter(wilaya = search_wilaya)  
+        queryset = queryset.filter(wilaya = search_wilaya) 
+        li.append(search_wilaya) 
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : li
     }
     return render(request,'non_payes_client.html',context)
 
@@ -749,22 +902,27 @@ def historique_payements_client(request):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
     search_date = request.POST.get('date', None)
+    li = []
     queryset = Product.objects.filter(email = request.user.email) 
     queryset = queryset.exclude(payés = 0)
-    somme = 0
-    for el in queryset:
-        somme += int(el.payés)
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
+        li.append(search_wilaya)
     if search_type != '0' and search_type != None:
-        queryset = queryset.filter(typeenvoi = search_type) 
+        queryset = queryset.filter(typeenvoi = search_type)
+        li.append(search_type) 
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
+    somme = 0
+    for el in queryset:
+        somme += int(el.payés)
     context = {
         "object_list": queryset,
-        'somme' : somme
+        'somme' : somme,
+        'list' : li
     }
     return render(request,'historique_payements_client.html',context)
 
@@ -775,17 +933,64 @@ def retour_livreur_client(request):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
     search_date = request.POST.get('date', None)
+    li = []
     queryset = Product.objects.filter(email = request.user.email) 
     queryset = queryset.filter(retour_chez_livreur = True)
     if search_date != None and search_date != "":
         l = search_date.split('-')
-    if search_wilaya != "0" and search_wilaya!= None:
+    if search_wilaya != "0" and search_wilaya != None:
         queryset = queryset.filter(wilaya = search_wilaya)  
+        li.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
+        li.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
+        li.append(search_date)
     context = {
-        "object_list": queryset
+        "object_list": queryset,
+        'list' : li
     }
     return render(request,'retour_livreur_client.html',context)
+
+@login_required
+@user_passes_test(is_livreur)
+
+def profile_livreur(request):
+    user = request.user
+    context = {
+        user : user
+    }
+    return render(request,'profile.html',context)
+
+@login_required
+@user_passes_test(is_admin)
+
+def profile_admin(request):
+    user = request.user
+    context = {
+        user : user
+    }
+    return render(request,'profile.html',context)
+
+@login_required
+@user_passes_test(is_client)
+
+def profile_client(request):
+    user = request.user
+    context = {
+        user : user
+    }
+    return render(request,'profile.html',context)
+
+def add_feedback_client(request):
+    form = FeedbackForm(request.POST or None)
+    if form.is_valid():
+        obj = form.save(commit=False)
+        obj.id_user = request.user.id
+        obj.save()
+        return redirect('client')
+    context = {
+        'form': form
+    }
+    return render(request, "add_feedback_client.html", context)

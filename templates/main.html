@@ -74,11 +74,12 @@
                             <a href="{% url 'retour_livreur_client' %}" title="Chez livreur" class="a_hover"><span class="nav_hover"></span>Chez livreur</a>
                         </li>
                     </ul>
+                    <a href="{% url 'client_feedback' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"> </i> Feedback</a>
                 </li>
                 </ul>
             </div>
             <div class="profil">
-                <a href="#"><img src="{% static 'image/profile_pic.png' %}" alt="Profil"></a>
+                <a href="{% url 'client_profile' %}"><img src="{% static 'image/profile_pic.png' %}" alt="Profil"></a>
             </div>
         </div>
     </div>    

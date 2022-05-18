@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product
+from .models import Product,Feedback
 
 class ProductForm(forms.ModelForm): 
     class Meta:
@@ -47,4 +47,10 @@ class ProductForm(forms.ModelForm):
         self.fields['numerocommande'].required = False
         self.fields['payés'].required = False
 
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = [
+            'comment'
+        ]
 

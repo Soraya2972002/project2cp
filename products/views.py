@@ -7,7 +7,6 @@ from qrcode import *
 from django.contrib.auth.decorators import user_passes_test, login_required
 from newspaper_project.decorators import is_admin, is_adminwilaya, is_client, is_livreur
 import json
-from django.http import JsonResponse
 from django.core.mail import send_mail
 
 file = open('/home/ubuntu/Bureau/news/products/wilayas.json')
@@ -33,7 +32,6 @@ data = json.load(file)
 
 def product_create_view(request):
     form = ProductForm(request.POST or None)
-    print(form.is_valid())
     if form.is_valid():
         user = request.user
         email = user.email

@@ -1,31 +1,34 @@
 {% extends 'admin_base_main.html' %}
 {% block content%}
 
-<div class="ajouter_conatainer closeSidebare">
+<div class="ajouter_container closeSidebare">
     <div class="description pret_main">
-        <h3 id="text_font_titles">En transit</h3>
+        <h3 id="text_font_titles">Suspendus</h3>
         <p id="text_font_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae assumenda nostrum quidem atque delectus.</p>
     </div>
     <div class="main_container">
         <div class="btn btn_pret">
-            <button class="supprimer">suprimer les colis</button>
-            <button class="impremer">impremer les etiquettes</button>
-            <button class="impremer">impremer une decharge</button>
-            <button class="valider">valider l'éxpedition</button>
+            <button class="impremer"><i class="fa fa-print" aria-hidden="true"></i>impremer les etiquettes</button>
+            <button class="impremer"><i class="fa fa-print" aria-hidden="true"></i>impremer une decharge</button>
         </div>
         <div class="filtre filtre_pret">
-            
-            <form method="POST" action="" class="form_container">
-                {% csrf_token %}
+            <form method="POST" action="" class="form_pret_exp">
+            {% csrf_token %}
+            <div class="filtre_tit">
+                <h3 id="text_font_titles">Filtre:</h3>
+            </div>
+            <div>
                 <select name="type" id="">
-                    <option value="0">type</option>
+                    <option value="0">Type De Livraison</option>
                     <option value="livraison">livraison</option>
                     <option value="echange">échange</option>
                     <option value="pick up">pick up</option>
                     <option value="recouvrement">recouvrement</option>
                 </select>
+            </div>
+            <div>
                 <select name="user_wilaya" id="wilaya_send">
-                    <option value="0">-- Select Wilaya --</option>
+                    <option value="0">La Wilaya </option>
                     <option value="Adrar">Adrar</option>
                     <option value="Chlef">Chlef</option>
                     <option value="Laghouat">Laghouat</option>
@@ -76,15 +79,21 @@
                     <option value="47">Ghardaïa</option>
                     <option value="48">Relizane</option>
                 </select>
-        
-            
-                <input type="date" id="start" name="date"
-                min="2000-01-01" max="2100-12-31">
-                <button type="submit">Filter</button>
-                </form>
-                </div>
+            </div>
+            <div>
+                <select name="type de prestation" id="type_prestation">
+                    <option value="0">Type De Prestation</option>
+                    <option value="à domicile">à domicile</option>
+                    <option value="stop desk">stop desk</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" class = "filtrBtn">Filter</button>
+            </div>
+        </form>
+        </div>
         <div class="element_container">
-            <div class="element_header" >
+            <div class="element_header hide_title_colis" >
                 <div class="numb_afficher">
                     <label for="nmb_afficher">Afficher:</label>
                     <select name="nmb_afficher" id="nmb_afficher">
@@ -96,85 +105,91 @@
                     </select>
                     <label for="nmb_afficher">élément</label>
                 </div>
-                <div class="titles_colis">
+                <div class="titles_colis form1">
                     <div>
-                        <h4>informtion colis</h4>
+                        <h4>info colis</h4>
                     </div>
                     <div>
-                        <h4>adresse destinataire</h4>
+                        <h4>ADR destinataire</h4>
                     </div>
                     <div>
-                        <h4>information destinataire</h4>
+                        <h4>info destinataire</h4>
                     </div>
                     <div>
-                        <h4>remarque et produit</h4>
+                        <h4>RQ et produit</h4>
                     </div>
                     <div>
                         <h4>Montant</h4>
                     </div>
-
+                </div>
+                <div class="titles_colis form2">
+                    <div>
+                        <h4>info colis</h4>
+                    </div>
+                    <div>
+                        <h4>Adr Des</h4>
+                    </div>
+                    <div>
+                        <h4>info DES</h4>
+                    </div>
+                    <div>
+                        <h4>RQ & PR</h4>
+                    </div>
+                    <div>
+                        <h4>Montant</h4>
+                    </div>
                 </div>
             </div>
             <div class="element_desc">
-                <form method="POST" action="{% url 'selectionner_transit' %}" class="form_container">
-                    {% csrf_token %}
                 {% for instance in object_list %}
                 <div class="ele_container table_element">
                     <div class="mod_ele">
-                        
-                        <input type = 'checkbox' value = {{ instance.id }} name = 'selection'>
-                        
                     </div>
-                    
                     <div class="autre_ele">
                         <div class="ele">
-                            <p>{{ instance.date }}</p>
+                            <p><i class="fa fa-id-badge" aria-hidden="true"></i>  {{instance.id}}</p>
+                            <p><i class="fa fa-archive" aria-hidden="true"></i> {{instance.numerocommande}} </p>
+                            <p><i class="fa fa-truck" aria-hidden="true"></i> {{instance.typeenvoi}} {{instance.typeprestation}}</p>
+                            <p><i class="fa fa-calendar" ></i> {{instance.date}}</p>
                         </div>
                         <div>
-                            <p>{{ instance.nometpren }}</p>
+                            <p><i class="fa fa-map" aria-hidden="true"></i> {{instance.wilaya}} </p>
+                            <p><i class="fa fa-location-arrow" aria-hidden="true"></i>{{instance.commune}}</p>
+                            <p><i class="fa fa-map-marker" aria-hidden="true"></i>{{instance.adresse}}</p>
                         </div>
                         <div>
-                            <p>{{ instance.wilaya }}</p>
+                            <p><i class="fa fa-id-card" aria-hidden="true"></i> {{instance.nometpren}} </p>
+                            <p><i class="fa fa-mobile" aria-hidden="true"></i>{{instance.telephone1}} / {{instance.telephone2}}</p>
                         </div>
                         <div>
-                            <p>{{ instance.remarque }}</p>
+                            <p><i class="fa fa-comment" aria-hidden="true"></i> {{instance.remarque}}</p>
+                            <p><i class="fa fa-box"></i> </p>
+                            <p><i class="fa fa-cubes" aria-hidden="true"></i> {{instance.poids}}</p>
                         </div>
                         <div class="ele">
-                            <p>{{ instance.prix }}</p>
+                            <p><i class="fa fa-dollar-sign" aria-hidden="true"></i> {{instance.montant}}</p>
                         </div>
                     </div>
-                    <!--<div class="mod_ele">
-                    <form method="POST" action="{{ instance.get_absolute_url }}update/" class="form_container">
+                    <div class="mod_ele mod_ele2">
+                        <form method="POST" action="{{ instance.get_absolute_url }}retour_suspendre/">
                             {% csrf_token %}
-                        <button type="submit">UPDATE</button>
+                        <button type="submit">Suspendre</button>
                         </form>
-                        <form method="POST" action="{{ instance.get_absolute_url }}delete/" class="form_container">
-                            {% csrf_token %}
-                        <button type="submit">DELETE</button>
-                        </form>
-                        <form method="POST" action="{{ instance.get_absolute_url }}validate/" class="form_container">
-                            {% csrf_token %}
-                        <button type="submit">VALIDATE</button>
-                        </form>
-                    </div>-->
+                        <button class="imprimer">Etiquettes</button>
+                    </div>
                 </div>
                 {% empty %}
                 <div class="ele_container aucune_element">
                     <p> sorry, no queries match your search </p>
                 </div>
                 {% endfor %}
-                {% if object_list %}
-                <button type = "submit">valider les colis sélectionnés</button>
-                {% endif %}
-                </form>
             </div>
         </div>
     </div>
-</div>
+</div> 
     
 
     {% endblock %}
-
 
 
 

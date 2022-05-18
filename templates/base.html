@@ -14,7 +14,7 @@
     <div class="nav_menu_container">
         <div class="menu">
             <div class="logo">
-                <a href="/client"><h3 id="text_font_new">world express</h3></a>
+                <a href="/client"><h3 id="text_font_new">World Express</h3></a>
             </div>
             <div class="bar_items" id="text_font_paragraph">
                 <ul class="bar_ul">
@@ -57,12 +57,13 @@
                         <li>
                             <a href="{% url 'retour_livreur_client' %}" title="Chez livreur" class="a_hover"><span class="nav_hover"></span>Chez livreur</a>
                         </li>
+                        <a href="{% url 'client_feedback' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"> </i> Feedback</a>
                     </ul>
                 </li>
                 </ul>
             </div>
             <div class="profil">
-                <a href="#"><img src='{% static "image/profile_pic.png" %}' alt="Profil"></a>
+                <a href="{% url 'client_profile' %}"><img src='{% static "image/profile_pic.png" %}' alt="Profil"></a>
             </div>
         </div>
     </div>   
