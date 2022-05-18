@@ -1,107 +1,203 @@
-{% extends 'base.html' %}
-{% block content %}
-<div class="ajouter_conatainer ">
-    <div class="description">
-        <h3 id="text_font_titles">ajouter un colis</h3>
-        <p id="text_font_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae assumenda nostrum quidem atque delectus.</p>
-    </div>
-    <div class="form_container">
-        <div class="ajouter_forms">
-            {{ form.non_field_errors }}
-            <form action='.' method='POST'>{% csrf_token %}
-            <div class="destinataire">
-                <div class="destitel">
-                    <h3>déstinataire</h3>
-                </div>
-                <div class="desform">
-                    <div class="name">
-                        {{ form.nometpren.errors }}
-                        <label for="{{ form.nometpren.id_for_label }}"><i class="fa fa-paragraph"></i></label>
-                        {{ form.nometpren }}
-                    </div>
-                    <div class="phone">
-                        {{ form.telephone.errors }}
-                        <label for="{{ form.telephone.id_for_label }}"><i class="fa fa-phone"></i></label>
-                        {{ form.telephone }}
-                    </div>
-                    <div class="phone">
-                        {{ form.telephone1.errors }}
-                        <label for="{{ form.telephone1.id_for_label }}"><i class="fa fa-phone"></i></label>
-                        {{ form.telephone1 }}
-                    </div>
-                </div>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="{% static 'css/autre.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/>  
+
+</head>
+<body>
+    <div class="nav_menu_container">
+        <div class="menu">
+            <div class="logo">
+                <a href="/client"><h3 id="text_font_new">world express</h3></a>
             </div>
-            <div class="info_adresse">
-                <h3>adresse information</h3> 
-                <div class="fieldWrapper">
-                    {{ form.wilaya.errors }}
-                    <label for="{{ form.wilaya.id_for_label }}" name="user_wilaya">Your wilaya</label>
-                    {{ form.wilaya }}
-                </div>
-                <div class="fieldWrapper">
-                    <select name = 'wilaya'
-                    <label for="{{ form.commune.id_for_label }}">Your commune</label>
-                    
-                </div>    
-                <div>
-                    <select name = 'commune' id = "id_for_commune" form = 'id_for_comm'>
+            <div class="bar_items" id="text_font_paragraph">
+                <ul class="bar_ul">
+                <li class="hide_sub">
+                    <a href="#" title="Ajouter" class="hidden_ele a_hover"><span class="nav_hover"></span><i class="fa fa-cloud-upload-alt"></i> Ajouter <i class="fa fa-angle-down "> </i></i></a>
+                    <ul class="sub toggle_ele">
+                        <li>
+                            <a href="{% url 'products:product-create' %}" title="Ajouter" class="a_hover"><span class="nav_hover"></span> Ajouter un colis</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'historique_client' %}" title="Historique" class="a_hover"><span class="nav_hover"></span> Historique de l'importation</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{% url 'pret_a_expedier' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-check"></i> pret a expeder  </a>
+                    <a href="{% url 'ramassage' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-car"></i> En ramassage </a>
+                    <a href="{% url 'transit' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-exchange-alt"></i>En transit </a>
+                    <a href="{% url 'hub' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-home"> </i> En Hub</a>
+                    <a href="{% url 'livraison' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-car"> </i> En livraison</a>
+                    <a href="{% url 'suspendus_client' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"> </i> Suspendus</a>
+                </li>
+                <li class="hide_sub">
+                    <a href="#" title="livre" class="hidden_ele a_hover"><span class="nav_hover"></span> <i class="fa fa-angle-down"></i> Livre</a>
+                    <ul class="sub toggle_ele">
+                        <li>
+                            <a href="{% url 'payes_client' %}" title="non encaisse" class="a_hover"><span class="nav_hover"></span>payés</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'non_payes_client' %}" title="encaisse non paye" class="a_hover"><span class="nav_hover"></span>non paye</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'historique_payements_client' %}" title="historique des paiment recus" class="a_hover"><span class="nav_hover"></span> historique des paiements</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="hide_sub">
+                    <a href="#" title="retour" class="hidden_ele a_hover"><span class="nav_hover"></span> <i class="fa fa-angle-down"></i>Retour</a>
+                    <ul class="sub toggle_ele">
+                        <li>
+                            <a href="{% url 'retour_livreur_client' %}" title="Chez livreur" class="a_hover"><span class="nav_hover"></span>Chez livreur</a>
+                        </li>
+                    </ul>
+                </li>
+                </ul>
+            </div>
+            <div class="profil">
+                <a href="#"><img src='{% static "image/profile_pic.png" %}' alt="Profil"></a>
+            </div>
+        </div>
+    </div>  
+    <div class="ajouter_container">
+        <div class="description">
+            <h3 id="text_font_titles">{{form.errors}}</h3>
+            <p id="text_font_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae assumenda nostrum quidem atque delectus.</p>
+        </div>
+        <div class="form_container">
+            <div class="form_container">
+            <div class="ajouter_forms">
+                <form action='' method='POST'class="ajouter_colis">{% csrf_token %}
+                    <div class="destinataire">
+                        <div class="destitel">
+                            <h3>Déstinataire:</h3>
+                        </div>
+                        <div class="desform">
+                            <div class="name name_container">
+                                {{ form.nometpren.errors }}
+                                <label for="{{ form.nometpren.id_for_label }}"></label>
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                {{ form.nometpren }}
+                            </div>
+                            <div class="phone_container name">
+                                <div class="phone">
+                                    {{ form.telephone.errors }}
+                                    <label for="{{ form.telephone.id_for_label }}"></label>
+                                    <i class="fa fa-phone-square" aria-hidden="true"></i>
+                                    {{ form.telephone }}
+                                </div>
+                                <div class="phone">
+                                    {{ form.telephone1.errors }}
+                                    <label for="{{ form.telephone1.id_for_label }}"></label>
+                                    <i class="fa fa-phone-square" aria-hidden="true"></i>
+                                    {{ form.telephone1 }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info_adresse">
+                        <div class="info_title">
+                            <h3>Adresse Info:</h3>
+                        </div>
+                        <div class="info_input">
+                            <div class="select_wilaya">
+                                <div>
+                                    {{ form.wilaya.errors }}
+                                    <label for="{{ form.wilaya.id_for_label }}" ></label>
+                                    <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                    {{ form.wilaya }}
+                                </div>
+                                <div>
+                                    {{ form.commune.errors }}
+                                    <label for="{{ form.commune.id_for_label }}"></label>
+                                    <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                    {{ form.commune }}
+                                </div>
+                            </div>
+                            <div class="adresse_txt">
+                                {{ form.adresse.errors }}
+                                <label for="{{ form.adresse.id_for_label }}"></label>
+                                <i class="fa fa-address-card" aria-hidden="true"></i>
+                                {{ form.adresse }}
+                            </div>
+                        </div>
                         
-                    </select>
-                </div>        
-                <div class="fieldWrapper">
-                    {{ form.adresse.errors }}
-                    <label for="{{ form.adresse.id_for_label }}">Your adress</label>
-                    {{ form.adresse }}
-                </div>
+                    </div>
+                    <div class="commande_info">
+                        <div class="cmdinfo_title">
+                            <h3>Sur La Commande:</h3>
+                        </div>
+                        <div class="cmdinfo_input">
+                            <div class="cdm_ele">
+                                {{ form.montant.errors }}
+                                <label for="{{ form.montant.id_for_label }}"></label>
+                                <i class="fa fa-dollar-sign" aria-hidden="true"></i>
+                                {{ form.montant }}
+                                <label for="price" class="lb2">DA</label>
+                            </div>
+                            <div class="cdm_ele">
+                                {{ form.poids.errors }}
+                                <label for="{{ form.poids.id_for_label }}"></label>
+                                <i class="fa fa-cubes" aria-hidden="true"></i>
+                                {{ form.poids }}
+                                <label for="kg" class="lb2">Kg</label>
+                            </div>
+                            <div class="cdm_ele">
+                                {{ form.numerocommande.errors }}
+                                <label for="{{ form.numerocommande.id_for_label }}"></label>
+                                <i class="fa fa-barcode" aria-hidden="true"></i>
+                                {{ form.numerocommande }}
+                            </div>
+                            <div class="remarque_txt">
+                                <label for="{{ form.remarque.id_for_label }}"></label>
+                                {{ form.remarque.errors }}
+                                <i class="fa fa-comment" aria-hidden="true"></i>
+                                {{ form.remarque }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="type_delivery">
+                        <div class="type_title">
+                            <h3>Type d'envoi:</h3>
+                        </div>
+                        <div class="type_select">
+                            <div class="type_select_ele">
+                                <div class="type_input">
+                                    <label for="{{ form.typeprestation.id_for_label }}">Type de préstation:</label>
+                                    {{ form.typeprestation }}
+                                </div>
+                                <div class="type_input">
+                                    {{ form.typeenvoi.errors }}
+                                    <label for="{{ form.typeenvoi.id_for_label }}">Type d'envoi:</label>
+                                    {{ form.typeenvoi }}
+                                </div>
+                            </div>
+                            <div class="type_desc">
+                                {{ form.produit.errors }}
+                                <label for="{{ form.produit.id_for_label }}"></label>
+                                <i class="fa fa-microphone"></i>
+                                {{ form.produit }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit_btn">    
+                        <button type="submit" class="sbmit"><i class="fa fa-upload"></i> Inserer le colis</button>
+                        <button type="reset" class="rest">Reset</button>
+                    </div>
+                </form>
             </div>
-            <div class="commande_info">
-                <div>
-                    <h3>Sur La Commande</h3>
-                </div>
-                <div class="fieldWrapper">
-                    {{ form.montant.errors }}
-                    <label for="{{ form.montant.id_for_label }}">Your montant</label>
-                    {{ form.montant }}
-                </div>
-                <div class="fieldWrapper">
-                    {{ form.numerocommande.errors }}
-                    <label for="{{ form.numerocommande.id_for_label }}">Your numerocommande</label>
-                    {{ form.numerocommande }}
-                </div>
-                <div class="fieldWrapper">
-                    {{ form.poids.errors }}
-                    <label for="{{ form.poids.id_for_label }}">Your poids</label>
-                    {{ form.poids }}
-                </div>
-                <div class="fieldWrapper">
-                    {{ form.remarque.errors }}
-                    <label for="{{ form.remarque.id_for_label }}">Your remarks</label>
-                    {{ form.remarque }}
-                </div>
+            <div class="form_img">
+                
             </div>
-            <div class="type_delivery">
-                <div>
-                    <h3>Type d'envoi</h3>
-                </div>
-                <div class="fieldWrapper">
-                    {{ form.produit.errors }}
-                    <label for="{{ form.produit.id_for_label }}">Your produit</label>
-                    {{ form.produit }}
-                </div>
-                <div class="fieldWrapper">
-                    {{ form.typeenvoi.errors }}
-                    <label for="{{ form.typeenvoi.id_for_label }}">Your typeenvoi</label>
-                    {{ form.typeenvoi }}
-                </div>
-                <div class="fieldWrapper">
-                    {{ form.typeprestation.errors }}
-                    <label for="{{ form.typeprestation.id_for_label }}">Your typeprestation</label>
-                    {{ form.typeprestation }}
-                </div>
-            </div>
-            <input type = "submit" value = 'save' />
-            </form>
         </div>
     </div>
-</div>
-{% endblock %} 
+    <script src="{% static 'javascript/ajoutercolis.js' %}"></script>
+</body>
+</html>

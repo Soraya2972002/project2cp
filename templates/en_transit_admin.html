@@ -1,8 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'admin_base_main.html' %}
 {% block content%}
 
-<div class="ajouter_conatainer">
-    
+<div class="ajouter_conatainer closeSidebare">
     <div class="description pret_main">
         <h3 id="text_font_titles">En transit</h3>
         <p id="text_font_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae assumenda nostrum quidem atque delectus.</p>
@@ -121,13 +120,11 @@
                     {% csrf_token %}
                 {% for instance in object_list %}
                 <div class="ele_container table_element">
-                    
                     <div class="mod_ele">
                         
                         <input type = 'checkbox' value = {{ instance.id }} name = 'selection'>
                         
                     </div>
-        
                     
                     <div class="autre_ele">
                         <div class="ele">
@@ -167,13 +164,7 @@
                 </div>
                 {% endfor %}
                 {% if object_list %}
-                <select name="Choices" id="">
-                    <option value="1">Choose a delivery man</option>
-                    <option value="2">Validate selected entries</option>
-                    <option value="3">Suspendre les colis sélectionnés</option>
-                    <option value="0">Delete selected entries</option>
-                </select>
-                <button type = "submit">submit</button>
+                <button type = "submit">valider les colis sélectionnés</button>
                 {% endif %}
                 </form>
             </div>

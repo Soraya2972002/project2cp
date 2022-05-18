@@ -22,7 +22,7 @@ class CustomUserAdmin(UserAdmin):
     list_display = (
         'username', 'email', 'first_name', 'last_name', 'wilaya','num','disponible',"en_cours_livraison","date",
         )
-    exclude = ['Important dates']
+    exclude = ['Important dates',]
     fieldsets = (
         (None, {
             'fields': ('username',),'classes': ('wide',)
@@ -33,7 +33,7 @@ class CustomUserAdmin(UserAdmin):
                 )
         }),
         ('Personal info', {
-            'fields': ('first_name', 'last_name', 'email','num','disponible',"en_cours_livraison","date",),
+            'fields': ('first_name', 'last_name', 'email','num'),
         }),
         ('Additional info', {
             'fields': ('wilaya',)
@@ -59,13 +59,14 @@ class CustomUserAdmin(UserAdmin):
                 )
         }),
         ('Personal info', {
-            'fields': ('first_name', 'last_name', 'email','num','disponible',"en_cours_livraison","date",)
+            'fields': ('first_name', 'last_name', 'email','num')
         }),
         ('Additional info', {
             'fields': ('wilaya',)
         })
         
     )
+    
     search_fields = ('username',)
     form = UserChangeForm
     add_form = UserCreationForm

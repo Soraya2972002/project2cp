@@ -26,7 +26,7 @@ def clean_number(number):
 def clean_nompren(n):
         if ' ' not in n:
             raise ValidationError('This is not a valid name and last name')
-        return n
+        return n.lower()
 """class Comm(models.Model):
     commune = models.CharField(max_length=200)
     def __str__(self):
@@ -35,7 +35,7 @@ def clean_nompren(n):
 class Product(models.Model):
     nometpren = models.CharField(max_length=120, validators=[clean_nompren])
     telephone = models.DecimalField(max_digits=10, decimal_places=0, validators=[clean_number])
-    telephone1 = models.DecimalField(max_digits=10, decimal_places=0, validators=[clean_number])
+    telephone1 = models.DecimalField(max_digits=10, decimal_places=0, validators=[clean_number],blank = False, null = True)
     wilaya = models.CharField(max_length=200, choices = WILAYAS_CHOICES)
     commune = models.CharField(max_length=200)
     #commune = models.ForeignKey(comm,on_delete=models.SET_DEFAULT, default='unknown category')
@@ -43,8 +43,8 @@ class Product(models.Model):
     montant = models.DecimalField(max_digits=10,decimal_places=0)
     numerocommande = models.DecimalField(max_digits=10,decimal_places=0)
     poids = models.DecimalField(max_digits=4,decimal_places=0)
-    remarque = models.TextField(max_length=100) 
-    produit = models.TextField(blank = False, null = True) 
+    remarque = models.CharField(max_length=100,blank = False, null = True) 
+    produit = models.CharField(max_length= 200,blank = False, null = True) 
     date = models.DateTimeField(default=timezone.now)
 
     TYPE_ENVOI_CHOICES = [
@@ -69,7 +69,7 @@ class Product(models.Model):
     enhub = models.BooleanField(default=False)
     enlivraison = models.BooleanField(default=False)
     suspendus = models.BooleanField(default=False)
-    payés = models.DecimalField(max_digits=10,decimal_places=0,default=0)
+    payés = models.DecimalField(max_digits=10,decimal_places=0,default=0,blank = False, null = True)
     retour_chez_livreur = models.BooleanField(default=False)
 
     email = models.EmailField(max_length = 100, default='soraya@gmail.com')
@@ -78,5 +78,3 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse("products:product-detail", kwargs={"id": self.id})
-    def __str__(self):
-        return self.wilaya

@@ -196,7 +196,7 @@
  
 .btn_log{
     cursor: pointer;
-    padding: 20px;
+    padding: 10px;
     border: none;
     background-color: var(--main-color-red);
 }

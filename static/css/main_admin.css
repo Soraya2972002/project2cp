@@ -340,8 +340,6 @@ body{
     transition: .5s linear;
 }
 
-
-
 @media (max-width : 992px){
     .menu{
         width: 30%;

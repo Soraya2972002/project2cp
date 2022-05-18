@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% block content%}
-
-<div class="ajouter_conatainer">
     
+<div class="ajouter_container closeSidebare">
     <div class="description pret_main">
         <h3 id="text_font_titles">Prét à Expédier</h3>
         <p id="text_font_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae assumenda nostrum quidem atque delectus.</p>
@@ -12,12 +11,14 @@
             <button class="supprimer">suprimer les colis</button>
             <button class="impremer">impremer les etiquettes</button>
             <button class="impremer">impremer une decharge</button>
-            <button class="valider">valider l'éxpedition</button>
+            <button class="valider"><i class="fa fa-check" aria-hidden="true"></i>valider l'éxpedition</button>
         </div>
         <div class="filtre filtre_pret">
-            
-            <form method="POST" action="" class="form_container">
-                {% csrf_token %}
+            <form method="POST" action="" class="form_pret_exp">
+            <div class="filtre_tit">
+                <h3 id="text_font_titles">Filtre:</h3>
+            </div>
+            <div>
                 <select name="type" id="">
                     <option value="0">type</option>
                     <option value="livraison">livraison</option>
@@ -25,6 +26,8 @@
                     <option value="pick up">pick up</option>
                     <option value="recouvrement">recouvrement</option>
                 </select>
+            </div>
+            <div>
                 <select name="user_wilaya" id="wilaya_send">
                     <option value="0">-- Select Wilaya --</option>
                     <option value="Adrar">Adrar</option>
@@ -77,15 +80,17 @@
                     <option value="47">Ghardaïa</option>
                     <option value="48">Relizane</option>
                 </select>
-        
-            
-                <input type="date" id="start" name="date"
-                min="2000-01-01" max="2100-12-31">
-                <button type="submit">Filter</button>
-                </form>
-                </div>
+            </div>
+            <div>
+                <input type="date" id="start" name="date" min="2000-01-01" max="2100-12-31">
+            </div>
+            <div>
+                <button type="submit" class = "filtrBtn">Filter</button>
+            </div>
+        </form>
+        </div>
         <div class="element_container">
-            <div class="element_header" >
+            <div class="element_header hide_title_colis" >
                 <div class="numb_afficher">
                     <label for="nmb_afficher">Afficher:</label>
                     <select name="nmb_afficher" id="nmb_afficher">
@@ -97,61 +102,85 @@
                     </select>
                     <label for="nmb_afficher">élément</label>
                 </div>
-                <div class="titles_colis">
+                <div class="titles_colis form1">
                     <div>
-                        <h4>informtion colis</h4>
+                        <h4>info colis</h4>
                     </div>
                     <div>
-                        <h4>adresse destinataire</h4>
+                        <h4>ADR destinataire</h4>
                     </div>
                     <div>
-                        <h4>information destinataire</h4>
+                        <h4>info destinataire</h4>
                     </div>
                     <div>
-                        <h4>remarque et produit</h4>
+                        <h4>RQ et produit</h4>
                     </div>
                     <div>
                         <h4>Montant</h4>
                     </div>
-
+                </div>
+                <div class="titles_colis form2">
+                    <div>
+                        <h4>info colis</h4>
+                    </div>
+                    <div>
+                        <h4>Adr Des</h4>
+                    </div>
+                    <div>
+                        <h4>info DES</h4>
+                    </div>
+                    <div>
+                        <h4>RQ & PR</h4>
+                    </div>
+                    <div>
+                        <h4>Montant</h4>
+                    </div>
                 </div>
             </div>
             <div class="element_desc">
                 {% for instance in object_list %}
                 <div class="ele_container table_element">
                     <div class="mod_ele">
-                        <button>Modifier</button>
+                        <form method="POST" action="{{ instance.get_absolute_url }}update/" class="mod_ele">
+                            {% csrf_token %}
+                        <button type="submit" class="modifier">UPDATE</button>
+                        </form>
                     </div>
                     <div class="autre_ele">
                         <div class="ele">
-                            <p>{{ instance.date }}</p>
+                            <p><i class="fa fa-id-badge" aria-hidden="true"></i>  {{instance.id}}</p>
+                            <p><i class="fa fa-archive" aria-hidden="true"></i> {{instance.numerocommande}} </p>
+                            <p><i class="fa fa-truck" aria-hidden="true"></i> {{instance.typeenvoi}} {{instance.typeprestation}}</p>
+                            <p><i class="fa fa-calendar" ></i> {{instance.date}}</p>
                         </div>
                         <div>
-                            <p>{{ instance.nometpren }}</p>
+                            <p><i class="fa fa-map" aria-hidden="true"></i> {{instance.wilaya}} </p>
+                            <p><i class="fa fa-location-arrow" aria-hidden="true"></i>{{instance.commune}}</p>
+                            <p><i class="fa fa-map-marker" aria-hidden="true"></i>{{instance.adresse}}</p>
                         </div>
                         <div>
-                            <p>{{ instance.wilaya }}</p>
+                            <p><i class="fa fa-id-card" aria-hidden="true"></i> {{instance.nometpren}} </p>
+                            <p><i class="fa fa-mobile" aria-hidden="true"></i>{{instance.telephone1}} / {{instance.telephone2}}</p>
                         </div>
                         <div>
-                            <p>{{ instance.remarque }}</p>
+                            <p><i class="fa fa-comment" aria-hidden="true"></i> {{instance.remarque}}</p>
+                            <p><i class="fa fa-box"></i> </p>
+                            <p><i class="fa fa-cubes" aria-hidden="true"></i> {{instance.poids}}</p>
                         </div>
                         <div class="ele">
-                            <p>{{ instance.prix }}</p>
+                            <p><i class="fa fa-dollar-sign" aria-hidden="true"></i> {{instance.montant}}</p>
                         </div>
                     </div>
-                    <div class="mod_ele">
-                        <form method="POST" action="{{ instance.get_absolute_url }}update/" class="form_container">
-                            {% csrf_token %}
-                        <button type="submit">UPDATE</button>
-                        </form>
+                    <div class="mod_ele mod_ele2">
                         <form method="POST" action="{{ instance.get_absolute_url }}delete/" class="form_container">
                             {% csrf_token %}
-                        <button type="submit">DELETE</button>
+                        <button type="submit" class="supprimer_ele">DELETE</button>
                         </form>
                         <form method="POST" action="{{ instance.get_absolute_url }}validate_expedier/" class="form_container">
                             {% csrf_token %}
-                        <button type="submit">VALIDATE</button>
+                        <button type="submit" class="valider_lexp">VALIDATE</button>
                         </form>
+                        <button class="imprimer">Etiquettes</button>
                     </div>
                 </div>
                 {% empty %}
@@ -159,14 +188,10 @@
                     <p> sorry, no queries match your search </p>
                 </div>
                 {% endfor %}
-                
-                
             </div>
         </div>
     </div>
-</div>
-    
- 
+</div> 
 
     {% endblock %}
 

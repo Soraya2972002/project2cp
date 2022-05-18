@@ -33,11 +33,13 @@ data = json.load(file)
 
 def product_create_view(request):
     form = ProductForm(request.POST or None)
+    print(form.is_valid())
     if form.is_valid():
         user = request.user
         email = user.email
         product = form.save(commit=False)
         product.email = email
+        product.pretaexpedier = True
         product.save()
         form = ProductForm()
     context = {
@@ -46,7 +48,7 @@ def product_create_view(request):
     return render(request, "products/new_product_create.html", context)
 
 
-def product_update_view(request, id=id):
+def product_update_view(request, id):
     obj = get_object_or_404(Product, id=id)
     form = ProductForm(request.POST or None, instance=obj)
     if form.is_valid():

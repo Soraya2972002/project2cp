@@ -1,8 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'admin_base_main.html' %}
 {% block content%}
 
-<div class="ajouter_conatainer">
-    
+<div class="ajouter_conatainer closeSidebare">
     <div class="description pret_main">
         <h3 id="text_font_titles">En Livraison</h3>
         <p id="text_font_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae assumenda nostrum quidem atque delectus.</p>
@@ -77,8 +76,6 @@
                     <option value="47">Ghardaïa</option>
                     <option value="48">Relizane</option>
                 </select>
-        
-            
                 <input type="date" id="start" name="date"
                 min="2000-01-01" max="2100-12-31">
                 <button type="submit">Filter</button>

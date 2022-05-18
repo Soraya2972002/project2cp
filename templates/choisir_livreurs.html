@@ -1,7 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'admin_base_main.html' %}
 {% block content%}
     
-<div class="ajouter_conatainer">
+<div class="ajouter_conatainer closeSidebare">
     <div class="description">
         <h3 id="text_font_titles">en hub</h3>
         <p id="text_font_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae assumenda nostrum quidem atque delectus.</p>
@@ -127,7 +127,6 @@
             <div class="element_desc">
                 {% for user in users %}
                 <div class="ele_container table_element">
-                    >
                     <div class="autre_ele">
                         <div class="ele">
                             <p>{{ user.username }}</p>

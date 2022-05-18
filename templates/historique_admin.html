@@ -1,7 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'admin_base_main.html' %}
 {% block content%}
 
-<div class="ajouter_conatainer">
+<div class="ajouter_conatainer closeSidebare">
     
     <div class="description pret_main">
         <h3 id="text_font_titles">Historique</h3>
@@ -88,10 +88,10 @@
                     <form method="POST" action="" class="form_container">
                         {% csrf_token %}
                         <label>start</label>
-                        <input type="date" id="start" name="first-date"
+                        <input type="date" name="first_date"
                         min="2000-01-01" max="2100-12-31">
                         <label>end</label>
-                        <input type="date" id="start" name="second_date"
+                        <input type="date" name="second_date"
                         min="2000-01-01" max="2100-12-31">
                         <button type="submit">Filter</button>
                     </form>
@@ -183,6 +183,8 @@
                 {% endfor %}
                 <label> Total des payements : </label>
                 {{somme}}
+                <label> Total des colis : </label>
+                {{somme1}}
             </div>
         </div>
     </div>

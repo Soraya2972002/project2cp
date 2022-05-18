@@ -191,7 +191,7 @@ def afficher_clients(request):
 @login_required
 @user_passes_test(is_admin)
 
-def selectionner_transit(request):
+def selectionner_hub(request):
     if request.method == 'POST':
         id_list = request.POST.getlist('selection')
         choice =  request.POST.get('Choices')
@@ -223,7 +223,21 @@ def selectionner_transit(request):
                             fail_silently=False,
                         )
 
-    return redirect('expedier_admin')
+    return redirect('hub_admin')
+
+@login_required
+@user_passes_test(is_admin)
+
+def selectionner_transit(request):
+    if request.method == 'POST':
+        id_list = request.POST.getlist('selection')
+        choice =  request.POST.get('Choices')
+        for idd in id_list:
+            if idd != '':
+                Product.objects.filter(enhub = True)
+                Product.objects.filter(entransit = False)
+
+    return redirect('en_transit_admin')
 
 @login_required
 @user_passes_test(is_admin)

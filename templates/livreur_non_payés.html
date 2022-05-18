@@ -1,7 +1,7 @@
-{% extends 'livreur_base.html' %}
+{% extends 'livreur_base_main.html' %}
 {% block content%}
 
-<div class="ajouter_conatainer">
+<div class="ajouter_conatainer closeSidebare">
     
     <div class="description pret_main">
         <h3 id="text_font_titles">Non payés</h3>
@@ -79,8 +79,9 @@
                 </select>
         
             
-                <input type="date" id="start" name="date"
+                <input type="date" name="date"
                 min="2000-01-01" max="2100-12-31">
+                <input type="number"  name="number"0>
                 <button type="submit">Filter</button>
                 </form>
                 </div>

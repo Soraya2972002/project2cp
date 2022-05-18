@@ -1,7 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'admin_base_main.html' %}
 {% block content%}
 
-<div class="ajouter_conatainer">
+<div class="ajouter_conatainer closeSidebare">
     
     <div class="description pret_main">
         <h3 id="text_font_titles">En Hub</h3>
@@ -117,9 +117,15 @@
                 </div>
             </div>
             <div class="element_desc">
+                <form method="POST" action="{% url 'selectionner_hub' %}" class="form_container">
+                    {% csrf_token %}
                 {% for instance in object_list %}
                 <div class="ele_container table_element">
-                    
+                    <div class="mod_ele">
+                        
+                        <input type = 'checkbox' value = {{ instance.id }} name = 'selection'>
+                        
+                    </div>
         
                     
                     <div class="autre_ele">
@@ -159,6 +165,15 @@
                     <p> sorry, no queries match your search </p>
                 </div>
                 {% endfor %}
+                {% if object_list %}
+                <select name="Choices" id="">
+                    <option value="1">Choose a delivery man</option>
+                    <option value="3">Suspendre les colis sélectionnés</option>
+                    <option value="0">Delete selected entries</option>
+                </select>
+                <button type = "submit">submit</button>
+                {% endif %}
+                </form>
             </div>
         </div>
     </div>
