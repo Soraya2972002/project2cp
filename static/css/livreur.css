@@ -249,7 +249,7 @@ body{
     content: "";
     left: 0;
     top: 0;
-    background-color: var(--third-color-red_clair);
+    background-color: var(--livreue-second-color);
     width: 2px;
     height: 0%;
     position: absolute;
@@ -378,3 +378,4 @@ body{
     }
 
 }
+

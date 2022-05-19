@@ -12,6 +12,9 @@
 
 </head>
 <body>
+
+
+
     <div class="nav_menu_container">
         <div class="navbar_container">
             <div class="logo_main">
@@ -33,21 +36,20 @@
             <div class="bar_items" id="text_font_paragraph">
                 <ul class="bar_ul">
                     <li>
-                        <a href="{% url "a_recuperer_livreur" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-check"></i>liste des colis à récuperer</a>
-                        <a href="{% url "en_livraison_livreur" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-exchange-alt"></i>listes des colis en cours de livraison </a>
-                        <a href="{% url "livreur_non_payés" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa "></i> Colis non payés </a>
-                        <a href="{% url "historique_livreur" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa "></i> Historique </a>
-                        <a href="{% url 'livreur_feedback' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"> </i> Feedback</a>
-
+                        <a href="{% url "a_recuperer_livreur" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-check"></i>à récuperer</a>
+                        <a href="{% url "en_livraison_livreur" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-car"></i>colis en cours</a>
+                        <a href="{% url "livreur_non_payés" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-exchange-alt"></i>non payés </a>
+                        <a href="{% url "historique_livreur" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"></i>Historique</a>
+                        <a href="{% url 'livreur_feedback' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa "></i>Feedback</a>
                     </li>
-                
                 </ul>
             </div>
             <div class="profil">
                 <a href="{% url 'livreur_profile' %}"><img src="{% static "image/profile_pic.png" %}" alt="Profil"></a> 
             </div>
         </div>
-    </div>
+    </div>    
+    
 
     {% block content %} 
     {% endblock %} 
