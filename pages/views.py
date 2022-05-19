@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import user_passes_test, login_required
 import datetime
+from django.contrib import messages
 from accounts.models import CustomUser
 from django.contrib.auth import get_user_model
 from products.models import Product,Feedback
@@ -13,7 +14,16 @@ User = get_user_model()
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
-    return render(request,'index.html',{})
+    form = FeedbackForm(request.POST or None)
+    if form.is_valid():
+        obj = form.save(commit=False)
+        obj.id_user = -1
+        obj.save()
+        return redirect('home')
+    context = {
+        'form': form
+    }
+    return render(request,'index.html',context)
 def contact_view(request, *args, **kwargs):
     my_context = {
         'my_text' : "This is about us",
@@ -345,8 +355,8 @@ def selectionner_livreur_livraison(request):
         livres = user.livres
         livres = livres + en_cours_livraison
         idd = user.id
-        CustomUser.objects.get(id = idd).update(en_cours_livraison = '')
-        CustomUser.objects.get(id = idd).update(livres = livres)
+        CustomUser.objects.filter(id = idd).update(en_cours_livraison = '')
+        CustomUser.objects.filter(id = idd).update(livres = livres)
         id_list = request.POST.getlist('selection')
         for idd in id_list:
             if idd != '':
@@ -564,7 +574,7 @@ def historique_admin_view(request):
     search_date2 = request.POST.get('second_date', None)
     search_price1 = request.POST.get('first_number', None)
     search_price2 = request.POST.get('second_number', None)
-    li = []
+    lii = []
     Product.objects.all().order_by('date')
     queryset = Product.objects.filter(pretaexpedier = False).filter(enramassage = False).filter(entransit = False).filter(enhub = False).filter(enlivraison = False).filter(suspendus = False)
     somme = 0
@@ -572,15 +582,15 @@ def historique_admin_view(request):
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
-        li.append(search_wilaya)
+        lii.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
-        li.append(search_type)
+        lii.append(search_type)
     if search_date != None and search_date != "":
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
-        li.append(search_date)
+        lii.append(search_date)
     if search_date1 != None and search_date2 != None :
-        li.append(search_date1 + ' :: ' + search_date2)
+        lii.append(search_date1 + ' :: ' + search_date2)
         new_queryset = queryset
         for el in queryset:
             date = el.date
@@ -595,20 +605,23 @@ def historique_admin_view(request):
                 new_queryset.union(new_queryset, el)
         queryset = new_queryset
     if search_price1 != None and search_price2 != 0:
-        li.append(search_price1 + ' :: ' + search_price2)
+        lii.append(search_price1 + ' :: ' + search_price2)
         new_queryset = queryset
         for el in queryset :
             price = el.payés
             if price >= search_price1 and price <= search_price2:
                 new_queryset.union(new_queryset, el)
         queryset = new_queryset
+    somme1 = 0
     for el in queryset:
         somme += int(el.payés)
+        somme1 += 1
     queryset = queryset.order_by('date')
     context = {
         "object_list": queryset,
         'somme' : somme,
-        'list' : l
+        'somme1': somme1,
+        'list' : lii
     }
     return render(request,'historique_admin.html',context)
 
@@ -623,7 +636,7 @@ def historique_client_view(request):
     Product.objects.all().order_by('date')
     email = request.user.email
     queryset = Product.objects.filter(email = email)
-    queryset = queryset.filter(pretaexpedier = False).filter(enramassage = False).filter(entransit = False).filter(enhub = False).filter(enlivraison = False).filter(suspendus = False)
+    queryset = queryset.filter(pretaexpedier = False).filter(enramassage = False).filter(entransit = False).filter(fenhub = False).filter(enlivraison = False).filter(suspendus = False)
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
@@ -642,7 +655,7 @@ def historique_client_view(request):
     context = {
         "object_list": queryset,
         'somme1' : somme,
-        'list' : l
+        'list' : li
     }
     return render(request,'historique_client.html',context)
 
@@ -958,16 +971,41 @@ def retour_livreur_client(request):
 
 def profile_livreur(request):
     user = request.user
+    idd = user.id
+    new_username = request.POST.get('usernamee',None)
+    if new_username != None:
+        CustomUser.objects.filter(id = idd).update(username = new_username)
+        messages.success(request, 'Your username has been changed successfully')
     context = {
         user : user
     }
-    return render(request,'profile.html',context)
+    return render(request,'profile_livreur.html',context)
 
 @login_required
 @user_passes_test(is_admin)
 
 def profile_admin(request):
     user = request.user
+    idd = user.id
+    new_username = request.POST.get('usernamee',None)
+    if new_username != None:
+        CustomUser.objects.filter(id = idd).update(username = new_username)
+        messages.success(request, 'Your username has been changed successfully')
+    context = {
+        user : user
+    }
+    return render(request,'profile_admin.html',context)
+
+@login_required
+@user_passes_test(is_client)
+
+def profile_client(request):
+    user = request.user
+    idd = user.id
+    new_username = request.POST.get('usernamee',None)
+    if new_username != None:
+        CustomUser.objects.filter(id = idd).update(username = new_username)
+        messages.success(request, 'Your username has been changed successfully')
     context = {
         user : user
     }
@@ -975,13 +1013,6 @@ def profile_admin(request):
 
 @login_required
 @user_passes_test(is_client)
-
-def profile_client(request):
-    user = request.user
-    context = {
-        user : user
-    }
-    return render(request,'profile.html',context)
 
 def add_feedback_client(request):
     form = FeedbackForm(request.POST or None)
@@ -994,3 +1025,42 @@ def add_feedback_client(request):
         'form': form
     }
     return render(request, "add_feedback_client.html", context)
+
+@login_required
+@user_passes_test(is_livreur)
+
+def add_feedback_livreur(request):
+    form = FeedbackForm(request.POST or None)
+    if form.is_valid():
+        obj = form.save(commit=False)
+        obj.id_user = request.user.id
+        obj.save()
+        return redirect('livreur')
+    context = {
+        'form': form
+    }
+    return render(request, "add_feedback_livreur.html", context)
+
+@login_required
+@user_passes_test(is_admin)
+
+def see_feedbacks(request):
+    queryset = Feedback.objects.all()
+    user_type = request.POST.get('user_type',None)
+    l = []
+    if user_type != None:
+        if user_type == 'registrated':
+            queryset = Feedback.objects.exclude(id_user = -1)
+        else:
+            queryset = Feedback.objects.filter(id_user = -1)
+        l.append(user_type)
+    somme = 0
+    for query in queryset :
+        somme += 1
+    context = {
+        'object_list' : queryset,
+        'somme' : somme,
+        'list' : l
+    }
+    return render(request, "see_feedbacks.html", context)
+

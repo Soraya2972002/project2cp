@@ -15,79 +15,15 @@
             <button class="valider">valider l'éxpedition</button>
         </div>
         <div class="filtre filtre_pret">
-            <div >
-                {% for element in list %}
-                    {{element}}
-                {% endfor %}
-            </div>
             <form method="POST" action="" class="form_container">
                 {% csrf_token %}
-                <select name="type" id="">
-                    <option value="0">type</option>
-                    <option value="livraison">livraison</option>
-                    <option value="echange">échange</option>
-                    <option value="pick up">pick up</option>
-                    <option value="recouvrement">recouvrement</option>
+                <select name="user_type" id="">
+                    <option value="not registrated">registrated</option>
+                    <option value="registrated">not registrated</option>
                 </select>
-                <select name="user_wilaya" id="wilaya_send">
-                    <option value="0">-- Select Wilaya --</option>
-                    <option value="Adrar">Adrar</option>
-                    <option value="Chlef">Chlef</option>
-                    <option value="Laghouat">Laghouat</option>
-                    <option value="Oum el-Bouaghi"> Oum el-Bouaghi</option>
-                    <option value="Batna">Batna</option>
-                    <option value="6">Béjaïa</option>
-                    <option value="7">Biskra</option>
-                    <option value="8">Béchar</option>
-                    <option value="9">Blida</option>
-                    <option value="10">Bouira</option>
-                    <option value="11">Tamanghasset</option>
-                    <option value="12">Tébessa</option>
-                    <option value="13">Tlemcen</option>
-                    <option value="14">Tiaret</option>
-                    <option value=" 15">Tizi Ouzou</option>
-                    <option value="16">Algiers</option>
-                    <option value="17">Djelfa</option>
-                    <option value="18">Jijel</option>
-                    <option value="19">Sétif</option>
-                    <option value="20">Saïda</option>
-                    <option value="21">Skikda</option>
-                    <option value="22">Sidi Bel Abbes</option>
-                    <option value="23">Annaba</option>
-                    <option value="24">Guelma</option>
-                    <option value="25">Constantine</option>
-                    <option value="26">Médéa</option>
-                    <option value="27">Mostaganem</option>
-                    <option value="28">M'Sila</option>
-                    <option value="29">Mascara</option>
-                    <option value="30">Ouargla</option>
-                    <option value="30">Oran</option>
-                    <option value="32">El Bayadh</option>
-                    <option value="33">Illizi</option>
-                    <option value="34">Bordj Bou Arréridj</option>
-                    <option value="35">Boumerdès</option>
-                    <option value="36">El Taref</option>
-                    <option value="37">Tindouf</option>
-                    <option value="38">Tissemsilt</option>
-                    <option value="39">El Oued</option>
-                    <option value="40">Khenchela</option>
-                    <option value="40">Souk Ahras</option>
-                    <option value="41">Souk Ahras</option>
-                    <option value="42">Tipasa</option>
-                    <option value="43">Mila</option>
-                    <option value="44">Aïn Defla</option>
-                    <option value="45">Naama</option>
-                    <option value="46">Aïn Témouchent</option>
-                    <option value="47">Ghardaïa</option>
-                    <option value="48">Relizane</option>
-                </select>
-        
-            
-                <input type="date" id="start" name="date"
-                min="2000-01-01" max="2100-12-31">
                 <button type="submit">Filter</button>
-                </form>
-                </div>
+            </form>
+        </div>
         <div class="element_container">
             <div class="element_header" >
                 <div class="numb_afficher">
@@ -103,26 +39,15 @@
                 </div>
                 <div class="titles_colis">
                     <div>
-                        <h4>informtion colis</h4>
+                        <h4>username</h4>
                     </div>
                     <div>
-                        <h4>adresse destinataire</h4>
-                    </div>
-                    <div>
-                        <h4>information destinataire</h4>
-                    </div>
-                    <div>
-                        <h4>remarque et produit</h4>
-                    </div>
-                    <div>
-                        <h4>Montant</h4>
+                        <h4>feedback</h4>
                     </div>
 
                 </div>
             </div>
             <div class="element_desc">
-                <form method="POST" action="{% url 'selectionner_hub' %}" class="form_container">
-                    {% csrf_token %}
                 {% for instance in object_list %}
                 <div class="ele_container table_element">
                     <div class="mod_ele">
@@ -133,19 +58,10 @@
                     
                     <div class="autre_ele">
                         <div class="ele">
-                            <p>{{ instance.date }}</p>
+                            <p>{{ instance.username }}</p>
                         </div>
                         <div>
-                            <p>{{ instance.nometpren }}</p>
-                        </div>
-                        <div>
-                            <p>{{ instance.wilaya }}</p>
-                        </div>
-                        <div>
-                            <p>{{ instance.remarque }}</p>
-                        </div>
-                        <div class="ele">
-                            <p>{{ instance.prix }}</p>
+                            <p>{{ instance.comment }}</p>
                         </div>
                     </div>
                 </div>
@@ -155,14 +71,9 @@
                 </div>
                 {% endfor %}
                 {% if object_list %}
-                <select name="Choices" id="">
-                    <option value="1">Choose a delivery man</option>
-                    <option value="3">Suspendre les colis sélectionnés</option>
-                    <option value="0">Delete selected entries</option>
-                </select>
-                <button type = "submit">submit</button>
+                    <label>Nombre de feedbacks</label>
+                    {{somme}}
                 {% endif %}
-                </form>
             </div>
         </div>
     </div>

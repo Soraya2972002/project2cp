@@ -101,8 +101,7 @@
  }
  
  .nav_hover{
-     content: "";
-     background-color: var(--second-color-blue);
+     background-color: var(--third-color-red_clair);
      width: 0%;
      height: 2.5px;
      position: absolute;
@@ -117,42 +116,62 @@
  
  .contact_container{
      width: 20%;
+     height: 100%;
      display: flex;
      align-items: center;
      justify-content: center;
  }
+
+ .form_contact{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     height: 100%;
+     width: 100%;
+ }
+
+ .form_contact button{
+    font-size: 15px;
+    padding: 15px 0px;
+    border: none;
+    cursor: pointer;
+    border: none;
+    margin-left: 20px;
+    background-color: transparent;
+ }
  
  
- .contact_container  a:nth-child(2) {
+ .contact_container  .log_class {
      font-size: 15px;
-     padding: 15px 10px;
-     margin-left: 10px;
+     padding: 15px 15px;
      border: 3px solid var(--third-color-red_clair);
      background-color: var(--third-color-red_clair);
      color: var(--white);
      border-radius: 10px;
+     font-weight: bold;
      cursor: pointer;
+     
  }
  
  
- .contact_container  a:first-child{
+ .contact_container  .sign_class{
      cursor: pointer;
      font-size: 15px;
      color: var(--black-c);
-     padding: 15px 15px;
+     padding: 15px 10px;
      border: 3px solid var(--third-color-red_clair);
      border-radius: 10px;
      font-weight: bold;
  }
  
- .contact_container  a:first-child:hover{
+ .contact_container  .sign_class:hover{
      border: 3px solid var(--second-color-blue);
      background-color: var(--second-color-blue);
      color: var(--white);
      transition: .5s;
  }
  
- .contact_container  a:nth-child(2):hover {
+ .contact_container  .log_class:hover {
      color: var(--white);
      border: 3px solid  var(--second-color-blue);
      background-color: var(--second-color-blue);
@@ -194,13 +213,6 @@
  
  /* section 1 class */
  
-.btn_log{
-    cursor: pointer;
-    padding: 10px;
-    border: none;
-    background-color: var(--main-color-red);
-}
-
  .main_section_container {
      margin-top: 25px;
      height: 20%;
@@ -225,6 +237,10 @@
      height: 100%;
  }
  
+ .text_container div{
+     margin-bottom: 10px;
+ }
+
  .paragraphe_titel_container {
      font-size: 35px;
      font-weight: bold;
@@ -245,8 +261,7 @@
  }
  
  .order_button {
-     padding: 25px 50px;
-     margin: 20px 0px 10px 0px;
+     margin: 30px 0px 10px 0px;
      border: none;
      background-color: var(--second-color-blue);
      color: var(--white);
@@ -255,8 +270,15 @@
      box-shadow: 0px 20px 30px -20px  var(--second-color-blue);
      cursor: pointer;
  }  
+ .order_button a{
+    color: var(--white);
+    background-color: var(--second-color-blue);
+    padding: 25px 50px;
+    border-radius: 35px;
+    cursor: pointer;
+ }
  
- .order_button:hover {
+ .order_button  a:hover {
      background-color: var(--third-color-red_clair);
      transition: .4s;
  }
@@ -555,7 +577,7 @@
      align-items: center;
  }
  
- .location_container iframe {
+ .location iframe {
      border-radius: 10px;
      margin-bottom: 20px;
  }
@@ -688,7 +710,10 @@
  /* responsive */
  
  
- @media (max-width: 800px) {
+ 
+ 
+ 
+ @media (max-width: 1150px) {
      .toggle-button{
          display: flex;
      }
@@ -761,7 +786,6 @@
      .hidde_nav .contact_container{
          display: none;
      }
- 
  
      /* main section */
  

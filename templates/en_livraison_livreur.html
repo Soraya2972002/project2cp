@@ -179,7 +179,7 @@
                         </form>
                         <form method="POST" action="{{ instance.get_absolute_url }}non_payé/" class="form_container">
                             {% csrf_token %}
-                        <button type="submit">Valider l'arrivée du colis</button>
+                        <button type="submit">Valider l'arrivée du colis sans payement</button>
                         </form>
                         <form method="POST" action="{{ instance.get_absolute_url }}retour_chez_livreur/" class="form_container">
                             {% csrf_token %}

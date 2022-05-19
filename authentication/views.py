@@ -9,10 +9,11 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, user_logged_out
 from . tokens import account_activation_token
 from django.contrib.messages.views import SuccessMessageMixin
 from newspaper_project import urls
+
 
 # Create your views here.
 

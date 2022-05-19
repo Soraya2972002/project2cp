@@ -14,45 +14,46 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
     <title>World Express</title>
 </head>
 <body>
-  <header>
-    <div class="head_container hidde_nav">
-        <div class="logo_container">
-            <a href="./index.html"><img src="{% static 'image/world_express_logo.png' %}" alt="logo"></a>
+    <header>
+        <div class="head_container hidde_nav">
+            <div class="logo_container">
+                <a href="./index.html"><img src="{% static 'image/world_express_logo.png' %}" alt="logo"></a>
+            </div>
+            <a href="#" class="toggle-button" id="toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </a>
+            <div class="navbar_container">
+                <ul>
+                    <li class="nav_items"><a href="#" class="a_hover"><span class="nav_hover"></span>about</a></li>
+                    <li class="nav_items"><a href="#" class="a_hover"><span class="nav_hover"></span>Services</a></li>
+                    <li class="nav_items"><a href="#" class="a_hover"><span class="nav_hover"></span>Location</a></li>
+                    <li class="nav_items"><a href="#" class="a_hover"><span class="nav_hover"></span>contacts</a></li>
+                </ul>
+            </div>
+            <div class="contact_container">
+                <form method = "post" action='' class="form_contact">
+                    {% csrf_token %}
+                      <button type = "submit" class="btn_log"><a href = "{% url 'signup' %}" id= "text_font_new" class="sign_class">Signup</a></button>
+                      <button type = "submit" class="btn_log"><a href = "{% url "signin" %}" id= "text_font_new" class="log_class">SignIn</a></button>
+                </form>
+            </div>
         </div>
-        <a href="#" class="toggle-button" id="toggle">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </a>
-        <div class="navbar_container">
-            <ul>
-                <li class="nav_items"><a href="#" class="a_hover"><span class="nav_hover"></span>about</a></li>
-                <li class="nav_items"><a href="#" class="a_hover"><span class="nav_hover"></span>Services</a></li>
-                <li class="nav_items"><a href="#" class="a_hover"><span class="nav_hover"></span>Location</a></li>
-                <li class="nav_items"><a href="#" class="a_hover"><span class="nav_hover"></span>contacts</a></li>
-            </ul>
-        </div>
-        <div class="contact_container">
-            <form method = "post" action=''>
-                {% csrf_token %}
-                  <button type = "submit" class="btn_log"><a href = "{% url 'signup' %}" id= "text_font_new">Signup</a></button>
-                  <button type = "submit" class="btn_log"><a href = "{% url "signin" %}" id= "text_font_new">SignIn</a></button>
-            </form>
-        </div>
-    </div>
-  </header>
+    </header>
     <section>
         <div class="main_section_container"> 
             <div class="text_container">
-                {% for message in messages %}
+                <div class="paragraphe_titel_container" id="text_font_titles">
+
+{% for message in messages %}
                     <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
                     {% endfor %}
-                <div class="paragraphe_titel_container" id="text_font_titles">
-                    <h1><span id="second_red">World Express</span> The Quickest <span id="second_red">delivery</span> in <br><span id="second_red">Algeria</span></h1>
+                    <h1><span id="second_red">World Express</span><br>The Quickest <br><span id="second_red">delivery</span> in <br><span id="second_red">Algeria</span></h1>
                 </div>
                 <div class="paragraphe_container">
                     <p>Order your products at any time and we will <br> deliver them directly to your home.</p>
@@ -62,16 +63,16 @@
                 </div>
             </div>
             <div class="main_picture_container">
-            <img src="{% static 'image/In no time-pana.svg' %}" alt="delivery">
-            </div>
+                <img src="{% static 'image/In no time-pana.svg' %}" alt="delivery">
+                </div>
             <div class="drone">
-                <img src="../static/image/drone-voilet.svg" alt="Drone">
-                <img src="../static/image/drone-voilet.svg" alt="Drone">
-                <img src="../static/image/drone-voilet.svg" alt="Drone">
-                <img src="../static/image/drone-voilet.svg" alt="Drone">
-                <img src="../static/image/drone-voilet.svg" alt="Drone">
-                <img src="../static/image/drone-voilet.svg" alt="Drone">
-                <img src="../static/image/drone-voilet.svg" alt="Drone">
+                <img src="../static/image/drone-red.svg" alt="Drone">
+                <img src="../static/image/drone-red.svg" alt="Drone">
+                <img src="../static/image/drone-red.svg" alt="Drone">
+                <img src="../static/image/drone-red.svg" alt="Drone">
+                <img src="../static/image/drone-red.svg" alt="Drone">
+                <img src="../static/image/drone-red.svg" alt="Drone">
+                <img src="../static/image/drone-red.svg" alt="Drone">
             </div>
         </div>
     </section>
@@ -86,7 +87,6 @@
             <div class="picture_desc_container">
                <div class="picture_container">
                 <div class="box_img" id="first_box"><img src="{% static 'image/Coronavirus Delivery Preventions-rafiki.svg' %}" alt="box"></div>
-               </div>
             </div>
         </div>
     </section>
@@ -130,131 +130,6 @@
                 </div>
             </div>
         </div>
-        <div class="our_prices_container">
-            <div class="our_prices_header">
-                <h1>find out how much your package coste</h1>
-            </div>
-            <div class="our_prices_main">
-                <div class="prices_form">
-                    <div>
-                        <label for="sender">your wilaya: </label>
-                    <select name="user_wilaya" id="wilaya_send">
-                        <option value="0">-- Select Willaya --</option>
-                        <option value="1">Adrar</option>
-                        <option value="2">Chlef</option>
-                        <option value="3">Laghouat</option>
-                        <option value="4"> Oum el-Bouaghi</option>
-                        <option value="5">Batna</option>
-                        <option value="6">Béjaïa</option>
-                        <option value="7">Biskra</option>
-                        <option value="8">Béchar</option>
-                        <option value="9">Blida</option>
-                        <option value="10">Bouira</option>
-                        <option value="11">Tamanghasset</option>
-                        <option value="12">Tébessa</option>
-                        <option value="13">Tlemcen</option>
-                        <option value="14">Tiaret</option>
-                        <option value=" 15">Tizi Ouzou</option>
-                        <option value="16">Algiers</option>
-                        <option value="17">Djelfa</option>
-                        <option value="18">Jijel</option>
-                        <option value="19">Sétif</option>
-                        <option value="20">Saïda</option>
-                        <option value="21">Skikda</option>
-                        <option value="22">Sidi Bel Abbes</option>
-                        <option value="23">Annaba</option>
-                        <option value="24">Guelma</option>
-                        <option value="25">Constantine</option>
-                        <option value="26">Médéa</option>
-                        <option value="27">Mostaganem</option>
-                        <option value="28">M'Sila</option>
-                        <option value="29">Mascara</option>
-                        <option value="30">Ouargla</option>
-                        <option value="30">Oran</option>
-                        <option value="32">El Bayadh</option>
-                        <option value="33">Illizi</option>
-                        <option value="34">Bordj Bou Arréridj</option>
-                        <option value="35">El Taref</option>
-                        <option value="36">Tindouf</option>
-                        <option value="37">Tissemsilt</option>
-                        <option value="38">El Oued</option>
-                        <option value="39">Khenchela</option>
-                        <option value="40">Souk Ahras</option>
-                        <option value="41">Souk Ahras</option>
-                        <option value="42">Tipasa</option>
-                        <option value="43">Mila</option>
-                        <option value="44">Aïn Defla</option>
-                        <option value="45">Naama</option>
-                        <option value="46">Aïn Témouchent</option>
-                        <option value="47">Ghardaïa</option>
-                        <option value="48">Relizane</option>
-                    </select>
-                    </div>
-                    <div>
-                        <label for="Reciever">la distination: </label>
-                        <select name="user_wilaya" id="wilaya_rcv" onChange="update_rcv()">
-                        <option value="0">-- Select Willaya --</option>
-                        <option value="1">Adrar</option>
-                        <option value="2">Chlef</option>
-                        <option value="3">Laghouat</option>
-                        <option value="4"> Oum el-Bouaghi</option>
-                        <option value="5">Batna</option>
-                        <option value="6">Béjaïa</option>
-                        <option value="7">Biskra</option>
-                        <option value="8">Béchar</option>
-                        <option value="9">Blida</option>
-                        <option value="10">Bouira</option>
-                        <option value="11">Tamanghasset</option>
-                        <option value="12">Tébessa</option>
-                        <option value="13">Tlemcen</option>
-                        <option value="14">Tiaret</option>
-                        <option value="15">Tizi Ouzou</option>
-                        <option value="16">Algiers</option>
-                        <option value="17">Djelfa</option>
-                        <option value="18">Jijel</option>
-                        <option value="19">Sétif</option>
-                        <option value="20">Saïda</option>
-                        <option value="21">Skikda</option>
-                        <option value="22">Sidi Bel Abbes</option>
-                        <option value="23">Annaba</option>
-                        <option value="24">Guelma</option>
-                        <option value="25">Constantine</option>
-                        <option value="26">Médéa</option>
-                        <option value="27">Mostaganem</option>
-                        <option value="28">M'Sila</option>
-                        <option value="29">Mascara</option>
-                        <option value="30">Ouargla</option>
-                        <option value="30">Oran</option>
-                        <option value="32">El Bayadh</option>
-                        <option value="33">Illizi</option>
-                        <option value="34">Bordj Bou Arréridj</option>
-                        <option value="35">El Taref</option>
-                        <option value="36">Tindouf</option>
-                        <option value="37">Tissemsilt</option>
-                        <option value="38">El Oued</option>
-                        <option value="39">Khenchela</option>
-                        <option value="40">Souk Ahras</option>
-                        <option value="41">Souk Ahras</option>
-                        <option value="42">Tipasa</option>
-                        <option value="43">Mila</option>
-                        <option value="44">Aïn Defla</option>
-                        <option value="45">Naama</option>
-                        <option value="46">Aïn Témouchent</option>
-                        <option value="47">Ghardaïa</option>
-                        <option value="48">Relizane</option>
-                    </select>
-                    </div>
-                    <div>
-                        <label for="number">Kg</label>
-                        <input type="number" id="pois_KG" onChange="update_Kg() ,update_rcv()">
-                    </div>
-                </div>
-                <div class="price_result">
-                    <div><h3>your package will cost :</h3></div>
-                    <div><p id="price_text">00 DA</p></div>
-                </div>
-            </div>
-        </div>
     </section>
     <section>
         <div class="location_container">
@@ -266,59 +141,40 @@
                     <label for="willaya" id="text_font_new">your willaya:</label>
                     <select name="user_wilaya" id="wilaya_location" onChange="location_we()">
                         <option value="0">-- Select Willaya --</option>
-                        <option value="1">Adrar</option>
-                        <option value="2">Chlef</option>
-                        <option value="3">Laghouat</option>
-                        <option value="4"> Oum el-Bouaghi</option>
-                        <option value="5">Batna</option>
-                        <option value="6">Béjaïa</option>
-                        <option value="7">Biskra</option>
-                        <option value="8">Béchar</option>
-                        <option value="9">Blida</option>
-                        <option value="10">Bouira</option>
-                        <option value="11">Tamanghasset</option>
-                        <option value="12">Tébessa</option>
-                        <option value="13">Tlemcen</option>
-                        <option value="14">Tiaret</option>
-                        <option value="15">Tizi Ouzou</option>
-                        <option value="16">Algiers</option>
-                        <option value="17">Djelfa</option>
-                        <option value="18">Jijel</option>
-                        <option value="19">Sétif</option>
-                        <option value="20">Saïda</option>
-                        <option value="21">Skikda</option>
-                        <option value="22">Sidi Bel Abbes</option>
-                        <option value="23">Annaba</option>
-                        <option value="24">Guelma</option>
-                        <option value="25">Constantine</option>
-                        <option value="26">Médéa</option>
-                        <option value="27">Mostaganem</option>
-                        <option value="28">M'Sila</option>
-                        <option value="29">Mascara</option>
-                        <option value="30">Ouargla</option>
-                        <option value="30">Oran</option>
-                        <option value="32">El Bayadh</option>
-                        <option value="33">Illizi</option>
-                        <option value="34">Bordj Bou Arréridj</option>
-                        <option value="35">El Taref</option>
-                        <option value="36">Tindouf</option>
-                        <option value="37">Tissemsilt</option>
-                        <option value="38">El Oued</option>
-                        <option value="39">Khenchela</option>
-                        <option value="40">Souk Ahras</option>
-                        <option value="41">Souk Ahras</option>
-                        <option value="42">Tipasa</option>
-                        <option value="43">Mila</option>
-                        <option value="44">Aïn Defla</option>
-                        <option value="45">Naama</option>
-                        <option value="46">Aïn Témouchent</option>
-                        <option value="47">Ghardaïa</option>
-                        <option value="48">Relizane</option>
+                        <option value="chlef">Chlef</option>
+                        <option value="laghouat">Laghouat</option>
+                        <option value="batna">Batna</option>
+                        <option value="bejaia">Béjaïa</option>
+                        <option value="biskra">Biskra</option>
+                        <option value="blida">Blida</option>
+                        <option value="tiaret">Tiaret</option>
+                        <option value="tizi">Tizi Ouzou</option>
+                        <option value="alger">Algiers</option>
+                        <option value="djelfa">Djelfa</option>
+                        <option value="jijel">Jijel</option>
+                        <option value="setif">Sétif</option>
+                        <option value="eL_eULMA">EL-Eulma sétif</option>
+                        <option value="guelma">Guelma</option>
+                        <option value="constantine">Constantine</option>
+                        <option value="borj">Bordj Bou Arréridj</option>
+                        <option value="tipaza">Tipasa</option>
+                        <option value="mila">Mila</option>
+                        <option value="relizane">Relizane</option>
                     </select>
                 </div>
+                <div>
+                <form action='' method='POST' >
+                    {% csrf_token %}
+                {{ form.comment.errors }}
+                    <label for="{{ form.comment.id_for_label }}">Your Feedback:</label>
+                {{ form.comment }}
+                {{form.errors}}
+                <input type = "submit" value = 'save' />
+                </form>
+            </div>
             </div>
             <div id="localisation">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3196.821835086569!2d5.061867514778112!3d36.75084737817693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12f2cddf0e04825f%3A0x3a201bbb1afef761!2sWorld%20Express!5e0!3m2!1sen!2sdz!4v1648845814979!5m2!1sen!2sdz" width="1300" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe id="place" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3196.821835086569!2d5.061867514778112!3d36.75084737817693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12f2cddf0e04825f%3A0x3a201bbb1afef761!2sWorld%20Express!5e0!3m2!1sen!2sdz!4v1648845814979!5m2!1sen!2sdz" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
@@ -364,3 +220,24 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--{% for message in messages %}
+                    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+                    {% endfor %}-->

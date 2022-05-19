@@ -32,29 +32,14 @@
             </div>
             <div class="bar_items" id="text_font_paragraph">
                 <ul class="bar_ul">
-                    <!--
-                <li class="hide_sub">
-                    <a href="#" title="Ajouter" class="hidden_ele a_hover"><span class="nav_hover"></span><i class="fa fa-cloud-upload-alt"></i> <i class="fa fa-angle-down "> </i></i></a>
-                    <ul class="sub toggle_ele">
-                        <li>
-                            <a href="./ajouterColis.Html" title="Ajouter" class="a_hover"><span class="nav_hover"></span> Ajouter un colis</a>
-                        </li>
-                        <li>
-                            <a href="#" title="AjouterP" class="a_hover"><span class="nav_hover"></span> Ajouter plusieurs colis</a>
-                        </li>
-                        <li>
-                            <a href="#" title="Historique" class="a_hover"><span class="nav_hover"></span> Historique de l'importation</a>
-                        </li>
-                    </ul>
-                </li>-->
-                <li>
-                    <a href="{% url "a_recuperer_livreur" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-check"></i>liste des colis à récuperer</a>
-                    <a href="{% url "en_livraison_livreur" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-exchange-alt"></i>listes des colis en cours de livraison </a>
-                    <a href="{% url "livreur_non_payés" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa "></i> Colis non payés </a>
-                    <a href="{% url "historique_livreur" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa "></i> Historique </a>
-                    
+                    <li>
+                        <a href="{% url "a_recuperer_livreur" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-check"></i>liste des colis à récuperer</a>
+                        <a href="{% url "en_livraison_livreur" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-exchange-alt"></i>listes des colis en cours de livraison </a>
+                        <a href="{% url "livreur_non_payés" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa "></i> Colis non payés </a>
+                        <a href="{% url "historique_livreur" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa "></i> Historique </a>
+                        <a href="{% url 'livreur_feedback' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"> </i> Feedback</a>
 
-                </li>
+                    </li>
                 
                 </ul>
             </div>

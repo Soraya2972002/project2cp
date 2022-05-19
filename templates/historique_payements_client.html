@@ -177,8 +177,10 @@
                         <p> sorry, no queries match your search </p>
                     </div>
                     {% endfor %}
-                    <label> Somme totale : </label>
-                    {{somme}}
+                    {% if object_list %}
+                        <label> Somme totale : </label>
+                        {{somme}}
+                    {% endif %}
                 </div>
             </div>
         </div>

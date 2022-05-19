@@ -157,6 +157,12 @@ def retour_suspendre(request,id):
         obj.update(retour_chez_livreur = False)
         return redirect("administrateur")
 
+def all_suspendre(request,id):
+    obj = get_object_or_404(Product, id=id)
+    if request.method == "POST":
+        obj.update(suspendu = True)
+        return redirect("administrateur")
+
 @login_required
 
 def retour_hub(request,id):

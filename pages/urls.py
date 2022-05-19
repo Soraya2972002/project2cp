@@ -23,7 +23,8 @@ urlpatterns = [
     path("admin_wilaya", views.admin_wilaya_view, name = 'admin_wilaya'),
     path("retour_livreur_admin", views.retour_livreur_admin, name = 'retour_livreur_admin'),
     path('administrateur/profile',views.profile_admin,name = 'admin_profile'),
-    
+    path('administrateur/feedback',views.see_feedbacks,name = 'see_feedback'),
+
 
 
     path("livreur", views.livreur_view, name = 'livreur'),
@@ -34,6 +35,7 @@ urlpatterns = [
     path("livreur/historique", views.historique_livreur_view, name = 'historique_livreur'),
     path("livreur/non_payés", views.livreur_non_payés, name = 'livreur_non_payés'),
     path('livreur/profile',views.profile_livreur,name = 'livreur_profile'),
+    path('livreur/feedback',views.add_feedback_livreur,name = 'livreur_feedback'),
 
     
 
