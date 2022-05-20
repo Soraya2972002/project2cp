@@ -24,6 +24,9 @@ urlpatterns = [
     path("retour_livreur_admin", views.retour_livreur_admin, name = 'retour_livreur_admin'),
     path('administrateur/profile',views.profile_admin,name = 'admin_profile'),
     path('administrateur/feedback',views.see_feedbacks,name = 'see_feedback'),
+    path('administrateur/add_livreur',views.signup_livreur,name = 'signup_livreur'),
+    path('administrateur/add_client',views.signup_client,name = 'signup_client'),
+    path('administrateur/en_retard',views.en_retard_admin,name = 'en_retard'),
 
 
 
@@ -31,7 +34,7 @@ urlpatterns = [
     path("livreur/a_recuperer", views.a_recuperer_livreur_view, name = 'a_recuperer_livreur'),
     path("livreur/en_livraison", views.en_livraison_livreur_view, name = 'en_livraison_livreur'),
     path("livreur/selectionner_ramassage", views.selectionner_livreur_ramassage, name = 'selectionner_livreur_ramassage'),
-    path("livreur/selectionner_livraison", views.selectionner_livreur_livraison, name = 'selectionner_livreur_livraison'),
+    #path("livreur/selectionner_livraison", views.selectionner_livreur_livraison, name = 'selectionner_livreur_livraison'),
     path("livreur/historique", views.historique_livreur_view, name = 'historique_livreur'),
     path("livreur/non_payés", views.livreur_non_payés, name = 'livreur_non_payés'),
     path('livreur/profile',views.profile_livreur,name = 'livreur_profile'),

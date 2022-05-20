@@ -1,8 +1,11 @@
+from xmlrpc.client import DateTime
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import user_passes_test, login_required
+from django.utils import timezone
 import datetime
 from django.contrib import messages
+import pytz
 from accounts.models import CustomUser
 from django.contrib.auth import get_user_model
 from products.models import Product,Feedback
@@ -11,6 +14,7 @@ from django.contrib.auth.decorators import user_passes_test, login_required
 from newspaper_project.decorators import is_admin, is_adminwilaya, is_client, is_livreur
 from django.core.mail import send_mail
 User = get_user_model()
+from django.contrib.auth.models import Group
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
@@ -156,7 +160,6 @@ def pret_a_expedier_view(request, *args, **kwargs):
     queryset = Product.objects.filter(email = email) 
     queryset = Product.objects.filter(pretaexpedier = True)
     queryset = queryset.filter(suspendus = False)
-    print('date',search_date)
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
@@ -223,6 +226,28 @@ def afficher_livreurs(request):
         users = users.filter(last_name__iexact = search_lname.lower())
         li.append(search_lname)
     somme = 0
+    if request.POST.get('submit', None) != None:
+        idd = request.POST.get('submit', None)
+        users = User.objects.filter(id=idd)
+        for user in users:
+            email = user.email
+            user.delete()
+        body_text = "Bonjour,\nWorld Express vous informe que vous venez d'être licensié. Nous nous excusons et vous souhaitons plus de réussites personnelles"
+        send_mail(
+            'World Express notifications - Licensiement',
+            body_text,
+            'from@example.com',
+            [email],
+            fail_silently=False,
+        )
+        return redirect('administrateur')
+    if request.POST.get('submit1', None) != None:
+        idd = request.POST.get('submit1', None)
+        users = User.objects.filter(id=idd)
+        for user in users:
+            email = user.email
+            user.delete()
+        return redirect('administrateur')
     for user in users :
         somme += 1
     context = {
@@ -260,7 +285,7 @@ def afficher_clients(request):
         'somme' : somme,
         'list' : li
     }
-    return render(request, 'list_livreur.html', context)
+    return render(request, 'list_clients.html', context)
 
 @login_required
 @user_passes_test(is_admin)
@@ -288,7 +313,7 @@ def selectionner_hub(request):
                         Product.objects.filter(id=int(idd)).update(enlivraison=False)
                         query = Product.objects.get(id=int(idd))
                         email = query.email
-                        body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + query.id + " à destination vers " + query.wilaya + ' et envoyé à '+ query.nometpren + " a été suspendu, soit à votre demande, soit à cause d'un problème interne. Vous serez tenu au courant.\nWorld Express vous remercie pour votre confiance."
+                        body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + str(query.id) + " à destination vers " + query.wilaya + ' et envoyé à '+ query.nometpren + " a été suspendu, soit à votre demande, soit à cause d'un problème interne. Vous serez tenu au courant.\nWorld Express vous remercie pour votre confiance."
                         send_mail(
                             'World Express notifications - Colis suspendu',
                             body_text,
@@ -305,7 +330,6 @@ def selectionner_hub(request):
 def selectionner_transit(request):
     if request.method == 'POST':
         id_list = request.POST.getlist('selection')
-        choice =  request.POST.get('Choices')
         for idd in id_list:
             if idd != '':
                 Product.objects.filter(enhub = True)
@@ -324,7 +348,7 @@ def selectionner_suspendus(request):
                 Product.objects.filter(id=int(idd)).update(suspendus=False)
                 query = Product.objects.get(id=int(idd))
                 email = query.email
-                body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + query.id + " à destination vers " + query.wilaya + ' et envoyé à '+ query.nometpren + " n'est plus suspendu.\nWorld Express vous remercie pour votre confiance."
+                body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + str(query.id) + " à destination vers " + query.wilaya + ' et envoyé à '+ query.nometpren + " n'est plus suspendu.\nWorld Express vous remercie pour votre confiance."
                 send_mail(
                     'World Express notifications - arrêt de suspension',
                     body_text,
@@ -344,8 +368,14 @@ def selectionner_livreur_ramassage(request):
             if idd != '':
                 Product.objects.filter(id=int(idd)).update(enramassage=False)
                 Product.objects.filter(id=int(idd)).update(enlivraison=True)
-            
-@login_required
+                user = request.user
+                id = user.id
+                print(user.date)
+                Product.objects.filter(id=int(idd)).update(date='0101-01-01 01:01')
+                User.objects.filter(id = id).update(date = '')
+    
+    return redirect('a_recuperer_livreur')        
+"""@login_required
 @user_passes_test(is_livreur)
 
 def selectionner_livreur_livraison(request):
@@ -363,7 +393,7 @@ def selectionner_livreur_livraison(request):
                 Product.objects.filter(id=int(idd)).update(enlivraison=False)
                 query = Product.objects.get(id=int(idd))
                 email = query.email
-                body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + query.id + " à destination vers " + query.email + ' et envoyé à '+ query.nometpren + " est bien arrivé.\nWorld Express vous remercie pour votre confiance."
+                body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + str(query.id) + " à destination vers " + query.email + ' et envoyé à '+ query.nometpren + " est bien arrivé.\nWorld Express vous remercie pour votre confiance."
                 send_mail(
                     'World Express notifications - Colis arrivé à destination',
                     body_text,
@@ -371,7 +401,7 @@ def selectionner_livreur_livraison(request):
                     [email],
                     fail_silently=False,
                 )
-
+    return redirect('en_livraison_livreur')"""
 
 @login_required
 @user_passes_test(is_admin)
@@ -414,22 +444,27 @@ def choisir_livreur(request):
         s = ''
         compte = 0
         for product in queryset:
-            product.update(enhub = False)
-            product.update(enramassage = True)
+            idi = product.id
+            Product.objects.filter(id = idi).update(enhub = False)
+            Product.objects.filter(id = idi).update(enramassage = True)
             s += ";" + str(product.id)
             compte += 1
         CustomUser.objects.filter(id=int(idd)).update(en_cours_livraison = s)
-        CustomUser.objects.filter(id=int(idd)).update(date = search_date + " " + search_time)
+        if search_date != '' and search_time != '':
+            CustomUser.objects.filter(id=int(idd)).update(date = search_date + " " + search_time)
         Product.objects.filter(checked = True).update(checked = False)
+        queryset = User.objects.filter(id=idd)
+        for query in queryset:
+            email = query.email
         body_text = 'Bonjour,\nWorld Express vous informe que vous avez ' + str(compte) + " colis à venir récupérer avant le " + search_date + ' à '+ search_time + '.\nSalutations.'
         send_mail(
             'World Express notifications - Nouveaux Colis',
             body_text,
             'from@example.com',
-            [CustomUser.objects.get(id=idd).email],
+            [email],
             fail_silently=False,
         )
-        return redirect("expedier_admin")
+        return redirect("en_ramassage_admin")
     return render(request, 'choisir_livreurs.html', context)
 
 @login_required
@@ -471,29 +506,42 @@ def a_recuperer_livreur_view(request):
     search_type = request.POST.get('type', None)
     search_date = request.POST.get('date', None)
     user = request.user
-    email = user.email
+    a = str(user.date).split(' ')
+    a1 = a[0].split('-')
+    a2 = a[1].split(':')
+    date = datetime.datetime(int(a1[0]), int(a1[1]), int(a1[2]), int(a2[0]), int(a2[1]), int(a2[2][:2]))
+    a = str(datetime.datetime.now()).split(' ')
+    a1 = a[0].split('-')
+    a2 = a[1].split(':')
+    date2 = datetime.datetime(int(a1[0]), int(a1[1]), int(a1[2]), int(a2[0]), int(a2[1]), int(a2[2][:2]))
     li = []
-    queryset = Product.objects.filter(email = email)
-    queryset = queryset.filter(suspendus = False) 
+    retard = ''
+    if user.date != '0101-01-01 01:01' and user.en_cours_livraison != '' and date2 >= date :
+        retard = 'Vous avez dépassé la deadline : ' + str(user.date) + ' pour récuperer vos colis. Veuillez vous rapprocher des bureaux de World Express dans les plus brefs délais'
+    queryset = Product.objects.filter(nometpren = '')
     a = user.en_cours_livraison
     l = a.split(';')
-    for el in a:
-        queryset.union(queryset,Product.objects.get(id = int(el)))
-    queryset = queryset.filter(entransit = True)
+    for el in l:
+        if el != '':
+            queryset = queryset.union(Product.objects.filter(id = int(el)).filter(enramassage = True))
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
+        queryset = User.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(wilaya = search_wilaya)  
         li.append(search_wilaya)
     if search_type != '0' and search_type != None:
+        queryset = User.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(typeenvoi = search_type) 
         li.append(search_type)
     if search_date != None and search_date != "":
+        queryset = User.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
         li.append(search_date)
     context = {
         "object_list": queryset,
-        'list' : li
+        'list' : li,
+        'retard':retard
     }
     return render(request,'a_recuperer_livreur.html',context)
 
@@ -509,18 +557,21 @@ def en_livraison_livreur_view(request):
     queryset = Product.objects.filter(nometpren = '')
     a = user.en_cours_livraison
     l = a.split(';')
-    for el in a:
-        queryset.union(queryset,Product.objects.get(id = int(el)))
-    queryset = queryset.filter(enlivraison = True)
+    for el in l:
+        if el != '':
+            queryset = queryset.union(Product.objects.filter(id = int(el)).filter(enlivraison = True))
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
+        queryset = User.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(wilaya = search_wilaya)  
         li.append(search_wilaya)
     if search_type != '0' and search_type != None:
+        queryset = User.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(typeenvoi = search_type) 
         li.append(search_type)
     if search_date != None and search_date != "":
+        queryset = User.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
         li.append(search_date)
     context = {
@@ -538,28 +589,35 @@ def historique_livreur_view(request):
     search_date = request.POST.get('date', None)
     user = request.user
     livres = user.livres
+    print(livres)
     li = []
     l = livres.split(';')
     Product.objects.all().order_by('date')
     queryset = Product.objects.filter(nometpren = '')
     for idd in l:
         if idd != '':
-            queryset.union(queryset,Product.objects.get(id = int(idd)))
-    queryset = queryset.filter(suspendus = False)
+            queryset = queryset.union(Product.objects.filter(id = int(idd)).filter(suspendus = False))
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
+        queryset = User.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(wilaya = search_wilaya)  
         li.append(search_wilaya)
     if search_type != '0' and search_type != None:
+        queryset = User.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(typeenvoi = search_type) 
         li.append(search_wilaya)
     if search_date != None and search_date != "":
+        queryset = User.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
         li.append(search_wilaya)
+    somme = 0
+    for query in queryset:
+        somme += 1
     context = {
         "object_list": queryset,
-        'list' : li
+        'list' : li,
+        'somme1' : somme
     }
     return render(request,'historique_livreur.html',context)
 
@@ -602,7 +660,7 @@ def historique_admin_view(request):
             date1 = datetime.date(l1[0],l1[1],l1[2]) 
             date2 = datetime.date(l2[0],l2[1],l2[2]) 
             if date >= date1 and date <= date2:
-                new_queryset.union(new_queryset, el)
+                new_queryset = new_queryset.union(el)
         queryset = new_queryset
     if search_price1 != None and search_price2 != 0:
         lii.append(search_price1 + ' :: ' + search_price2)
@@ -610,7 +668,7 @@ def historique_admin_view(request):
         for el in queryset :
             price = el.payés
             if price >= search_price1 and price <= search_price2:
-                new_queryset.union(new_queryset, el)
+                new_queryset = new_queryset.union(el)
         queryset = new_queryset
     somme1 = 0
     for el in queryset:
@@ -720,21 +778,19 @@ def en_livraison_admin_view(request):
 def en_ramassage_admin_view(request):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
-    search_date = request.POST.get('date', None)
+    type_prestation = request.POST.get('type de prestation', None)
     queryset = Product.objects.filter(enramassage = True) 
     li = []
     queryset = queryset.filter(suspendus = False)
-    if search_date != None and search_date != "":
-        l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
         li.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
         li.append(search_type)
-    if search_date != None and search_date != "":
-        queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
-        li.append(search_date)
+    if type_prestation != '0' and type_prestation!= None:
+        queryset = queryset.filter(typeprestation = type_prestation) 
+        li.append(type_prestation)
     context = {
         "object_list": queryset,
         'list' : li
@@ -809,17 +865,20 @@ def livreur_non_payés(request):
     queryset = Product.objects.filter(nometpren = '')
     for idd in l:
         if idd != '':
-            queryset.union(queryset,Product.objects.get(id = int(idd)))
-    queryset = queryset.filter(payés = 0)
+            queryset.union(queryset,Product.objects.get(id = int(idd)).filter(payés = 0))
+    queryset = queryset
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
+        queryset = User.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(wilaya = search_wilaya) 
         li.append(search_wilaya) 
     if search_type != '0' and search_type != None:
+        queryset = User.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(typeenvoi = search_type) 
         li.append(search_type)
     if search_date != None and search_date != "":
+        queryset = User.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
         li.append(search_date)
     context = {
@@ -1064,3 +1123,190 @@ def see_feedbacks(request):
     }
     return render(request, "see_feedbacks.html", context)
 
+@login_required
+@user_passes_test(is_admin)
+
+def signup_livreur(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        fname = request.POST['fname'].lower()
+        lname = request.POST['lname'].lower()
+        num = request.POST['num']
+        wilaya = request.POST['wilaya']
+        email = request.POST['email']
+        pass1 = request.POST['pass1']
+        pass2 = request.POST['pass2']
+        b = False
+        if User.objects.filter(username=username):
+            messages.error(request, "Username already exists! Please try some other username.",extra_tags='username')
+            b = True
+        
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email Already Registered!!",extra_tags='email')
+            b = True
+        
+        if len(str(num)) != 10 or (str(num)[0:2] != '05' and str(num)[0:2] != '06' and str(num)[0:2] != '07' ):
+            messages.error(request, "Veuillez saisir un numéro valide",extra_tags='num')
+            b = True
+        
+        if len(username)>20:
+            messages.error(request, "Username must be under 20 charcters!!",extra_tags='username')
+            b = True
+        
+        if pass1 != pass2:
+            messages.error(request, "Passwords didn't match!!",extra_tags='pass')
+            b = True
+        
+        if not username.isalnum():
+            messages.error(request, "Username must be Alpha-Numeric!!",extra_tags='username')
+            b = True
+        if b :
+            return redirect('signup_livreur.html')
+        
+        myuser = User.objects.create_user(username=username, email=email)
+        myuser.first_name = fname
+        myuser.last_name = lname
+        myuser.num = num
+        myuser.wilaya = wilaya
+        myuser.set_password(pass1)
+        group = Group.objects.get(name='Livreurs')
+        myuser.groups.add(group)
+        print('here')
+        myuser.save()
+        
+        return redirect("administrateur")
+    return render(request, "signup_livreur.html")
+
+@login_required
+@user_passes_test(is_admin)
+
+def signup_client(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        fname = request.POST['fname'].lower()
+        lname = request.POST['lname'].lower()
+        email = request.POST['email']
+        pass1 = request.POST['pass1']
+        pass2 = request.POST['pass2']
+        b = False
+        if User.objects.filter(username=username):
+            messages.error(request, "Username already exists! Please try some other username.",extra_tags='username')
+            b = True
+        
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email Already Registered!!",extra_tags='email')
+            b = True
+        
+        if len(username)>20:
+            messages.error(request, "Username must be under 20 charcters!!",extra_tags='username')
+            b = True
+        
+        if pass1 != pass2:
+            messages.error(request, "Passwords didn't match!!",extra_tags='pass')
+            b = True
+        
+        if not username.isalnum():
+            messages.error(request, "Username must be Alpha-Numeric!!",extra_tags='username')
+            b = True
+        if b :
+            return redirect('signup_client.html')
+        
+        myuser = User.objects.create_user(username=username, email=email)
+        myuser.first_name = fname
+        myuser.last_name = lname
+        myuser.set_password(pass1)
+        myuser.save()
+        
+        return redirect("administrateur")
+    return render(request, "signup_client.html")
+
+
+def en_retard_admin(request):
+    new_users = User.objects.filter(groups__name = 'Livreurs')
+    users = User.objects.filter(username = '')
+    for user in new_users :
+        a = str(user.date).split(' ')
+        a1 = a[0].split('-')
+        a2 = a[1].split(':')
+        date = datetime.datetime(int(a1[0]), int(a1[1]), int(a1[2]), int(a2[0]), int(a2[1]), int(a2[2][:2]))
+        a = str(datetime.datetime.now()).split(' ')
+        a1 = a[0].split('-')
+        a2 = a[1].split(':')
+        date2 = datetime.datetime(int(a1[0]), int(a1[1]), int(a1[2]), int(a2[0]), int(a2[1]), int(a2[2][:2]))
+        li = []
+        if user.date != '0101-01-01 01:01' and user.en_cours_livraison != '' and date2 >= date :
+            users = users.union(User.objects.filter(id = user.id))
+    search_username = request.POST.get('username', None)
+    search_wilaya = request.POST.get('user_wilaya', None)
+    li = []
+    if search_username != None:
+        users = User.objects.filter(id__in=users.values('id'))
+        users = users.filter(username = search_username.lower())
+        li.append(search_username)
+    search_fname = request.POST.get('fname', None)
+    if search_fname != None:
+        users = User.objects.filter(id__in=users.values('id'))
+        users = users.filter(first_name__iexact = search_fname.lower())
+        li.append(search_fname)
+    search_lname = request.POST.get('lname', None)
+    if search_lname != None:
+        users = User.objects.filter(id__in=users.values('id'))
+        users = users.filter(last_name__iexact = search_lname.lower())
+        li.append(search_lname)
+    if search_wilaya != None and search_wilaya != 0:
+        users = User.objects.filter(id__in=users.values('id'))
+        users = users.filter(wilaya = search_wilaya)
+        li.append(search_wilaya)
+    somme = 0
+    if request.POST.get('submit', None) != None:
+        idd = request.POST.get('submit', None)
+        users = User.objects.filter(id=idd)
+        for user in users:
+            email = user.email
+            user.delete()
+        body_text = "Bonjour,\nWorld Express vous informe que vous venez d'être licensié. Nous nous excusons et vous souhaitons plus de réussites personnelles"
+        send_mail(
+            'World Express notifications - Licensiement',
+            body_text,
+            'from@example.com',
+            [email],
+            fail_silently=False,
+        )
+        a = user.en_cours_livraison
+        l = a.split(';')
+        for el in l:
+            if el != '':
+                Product.objects.filter(id = int(el)).filter(enhub = True)
+        return redirect('administrateur')
+    if request.POST.get('submit1', None) != None:
+        idd = request.POST.get('submit1', None)
+        users = User.objects.filter(id=idd)
+        for user in users:
+            email = user.email
+            a = user.en_cours_livraison
+            user.delete()
+        l = a.split(';')
+        for el in l:
+            if el != '':
+                Product.objects.filter(id = int(el)).filter(enhub = True)
+        return redirect('administrateur')
+    if request.POST.get('submit2', None) != None:
+        idd = request.POST.get('submit2', None)
+        users = User.objects.get(id=idd)
+        email = user.email
+        body_text = "Bonjour,\nWorld Express vous informe que vous avez les colis " + user.en_cours_livraison + " non récupérés en retard. La deadline était pour " + str(user.date) + ' .World Express vous prie de bien venir récupérer les colis dans les plus brefs délais.'
+        send_mail(
+            'World Express notifications - Colis en retard',
+            body_text,
+            'from@example.com',
+            [email],
+            fail_silently=False,
+        )
+        return redirect('administrateur')
+    for user in users :
+        somme += 1
+    context = {
+        "users": users,
+        'list' : li
+    }
+    return render(request, 'en_retard_admin.html', context)

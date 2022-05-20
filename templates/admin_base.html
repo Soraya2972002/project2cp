@@ -35,10 +35,10 @@
                     <a href="#" title="Ajouter" class="hidden_ele a_hover"><span class="nav_hover"></span><i class="fa fa-cloud-upload-alt"></i>Cree Compte<i class="fa fa-angle-down "> </i></i></a>
                     <ul class="sub toggle_ele">
                         <li>
-                            <a href="/admin/accounts/customuser/add/" title="Ajouter" class="a_hover"><span class="nav_hover"></span>Clien</a>
+                            <a href="{% url "signup_client" %}" title="Ajouter" class="a_hover"><span class="nav_hover"></span>Clien</a>
                         </li>
                         <li>
-                            <a href="/admin/accounts/customuser/add/" title="AjouterP" class="a_hover"><span class="nav_hover"></span>livreur</a>
+                            <a href="{% url "signup_livreur" %}" title="AjouterP" class="a_hover"><span class="nav_hover"></span>livreur</a>
                         </li>
                     </ul>
                 </li>
@@ -49,7 +49,7 @@
                     <a href="{% url "en_livraison_admin" %} " class="a_hover"><span class="nav_hover"></span> <i class="fa fa-car"> </i> En livraison</a>
                     <a href="{% url "suspendus_admin" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"> </i> Suspendus</a>
                     <a href="{% url "retour_livreur_admin" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"> </i> retour livreur</a>
-                    
+                    <a href="{% url "en_retard" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"> </i> Colis en retard</a>
                 </li>
                 <li class="hide_sub">
                     <a href="#" title="livre" class="hidden_ele a_hover"><span class="nav_hover"></span> <i class="fa fa-angle-down"></i>listes</a>
@@ -67,6 +67,9 @@
                 </li>
                 <li>
                     <a href="{% url "see_feedback" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-car"></i> Feedbacks </a>
+                </li>
+                <li>
+                    <a href="/admin/" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-car"></i> Interface Admin Avancée </a>
                 </li>
                 </ul>
             </div>

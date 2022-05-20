@@ -80,6 +80,9 @@ def signup(request):
     return render(request, "signup.html")
 
 
+        
+
+
 def activate(request, uidb64, token):  
     try:
         id = urlsafe_base64_decode(uidb64).decode()

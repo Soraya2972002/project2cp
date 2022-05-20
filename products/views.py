@@ -8,6 +8,9 @@ from django.contrib.auth.decorators import user_passes_test, login_required
 from newspaper_project.decorators import is_admin, is_adminwilaya, is_client, is_livreur
 import json
 from django.core.mail import send_mail
+from accounts.models import CustomUser
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 file = open('/home/ubuntu/Bureau/news/products/wilayas.json')
 data = json.load(file)
@@ -55,7 +58,7 @@ def product_update_view(request, id):
     context = {
         'form': form
     }
-    return render(request, "products/product_create.html", context)
+    return render(request, "products/new_product_create.html", context)
 
 @login_required
 @user_passes_test(is_client)
@@ -113,31 +116,68 @@ def product_delete_view(request, id):
     return render(request, "products/product_delete.html", context)
 
 @login_required
+@user_passes_test(is_livreur)
 
 def colis_payé(request, id):
-    obj = get_object_or_404(Product, id=id)
+    obj = Product.objects.filter(id = id)
     if request.method == "POST":
         prix = request.POST.get("price")
         obj.update(payé = prix)
         obj.update(enlivraison = False)
-        return redirect("en_livraison_livreur")
+        user = request.user
+        en_cours_livraison = user.en_cours_livraison
+        livres = user.livres
+        livres = livres + en_cours_livraison
+        idd = user.id
+        CustomUser.objects.filter(id = idd).update(en_cours_livraison = '')
+        CustomUser.objects.filter(id = idd).update(livres = livres)
+        obj = Product.objects.get(id = id)
+        email = obj.email
+        body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + str(obj.id) + " à destination vers " + obj.email + ' et envoyé à '+ obj.nometpren + " est bien arrivé.\nWorld Express vous remercie pour votre confiance."
+        send_mail(
+            'World Express notifications - Colis arrivé à destination',
+            body_text,
+            'from@example.com',
+            [email],
+            fail_silently=False,
+        )
+    return redirect("en_livraison_livreur")
 
 @login_required
+@user_passes_test(is_livreur)
 
 def colis_non_payé(request,id):
-    obj = get_object_or_404(Product, id=id)
+    obj = Product.objects.filter(id = id)
     if request.method == "POST":
         obj.update(enlivraison = False)
-        return redirect("en_livraison_livreur")
+        user = request.user
+        en_cours_livraison = user.en_cours_livraison
+        livres = user.livres
+        livres = livres + en_cours_livraison
+        idd = user.id
+        CustomUser.objects.filter(id = idd).update(en_cours_livraison = '')
+        CustomUser.objects.filter(id = idd).update(livres = livres)
+        obj = Product.objects.get(id = id)
+        body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + str(obj.id) + " à destination vers " + obj.email + ' et envoyé à '+ obj.nometpren + " est bien arrivé.\nWorld Express vous remercie pour votre confiance."
+        send_mail(
+            'World Express notifications - Colis arrivé à destination',
+            body_text,
+            'from@example.com',
+            [obj.email],
+            fail_silently=False,
+        )
+    return redirect("en_livraison_livreur")
 
 @login_required
+@user_passes_test(is_livreur)
 
 def retour_chez_livreur(request,id):
-    obj = get_object_or_404(Product, id=id)
+    obj = Product.objects.filter(id = id)
     if request.method == "POST":
         obj.update(enlivraison = False)
         obj.update(retour_chez_livreur = True)
-        email = obj.email
+        for query in obj:
+            email = query.email
         body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + obj.id + " à destination vers " + obj.wilaya + ' et envoyé à '+ obj.nometpren + " a subi un retour avec le livreur.\nWorld Express vous remercie pour votre confiance."
         send_mail(
                 'World Express notifications - Colis suspendu',
@@ -146,31 +186,31 @@ def retour_chez_livreur(request,id):
                 [email],
                 fail_silently=False,
         )
-        return redirect("en_livraison_livreur")
+    return redirect("en_livraison_livreur")
 
 @login_required
 
 def retour_suspendre(request,id):
-    obj = get_object_or_404(Product, id=id)
+    obj = Product.objects.filter(id = id)
     if request.method == "POST":
-        obj.update(suspendu = True)
+        obj.update(suspendus = True)
         obj.update(retour_chez_livreur = False)
-        return redirect("administrateur")
+    return redirect("administrateur")
 
 def all_suspendre(request,id):
-    obj = get_object_or_404(Product, id=id)
+    obj = Product.objects.filter(id = id)
     if request.method == "POST":
-        obj.update(suspendu = True)
-        return redirect("administrateur")
+        obj.update(suspendus = True)
+    return redirect("administrateur")
 
 @login_required
 
 def retour_hub(request,id):
-    obj = get_object_or_404(Product, id=id)
+    obj = Product.objects.filter(id = id)
     if request.method == "POST":
         obj.update(enhub = True)
         obj.update(retour_chez_livreur = False)
-        return redirect("administrateur")
+    return redirect("administrateur")
 
 
 

@@ -27,4 +27,4 @@ class CustomUser(AbstractUser):
     disponible = models.BooleanField(default = True)
     en_cours_livraison = models.CharField(max_length = 8000,default = '',blank = False, null = True)
     livres = models.CharField(max_length = 800000000,default = '',blank = False, null = True)
-    date = models.DateTimeField(blank = False, null = True)
+    date = models.DateTimeField(default = '0101-01-01 01:01',blank = False, null = True)

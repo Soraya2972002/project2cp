@@ -165,7 +165,7 @@ body{
     content: "";
     left: 0;
     top: 0;
-    background-color: var(--third-color-red_clair);
+    background-color: var(--green);
     width: 2px;
     height: 0%;
     position: absolute;
@@ -921,19 +921,67 @@ body{
     margin-top: 5px;
     font-size: 14px;
     border-bottom: 2px rgb(33, 53, 75,.7) solid;
+    display: flex;
+    justify-content: flex-start;
 }
 
-.element_container .element_header .numb_afficher label{
+.element_container .element_header .afficher_mult{
+    display: flex;
+    justify-content: space-between;
+}
+
+.element_container .element_header .afficher_mult div {
+    height: 100%;
+    width: 30%;
+    font-size: 14px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.element_container .element_header .afficher_mult div select{
+    width: 20%;
+    height: 100%;
+}
+
+.element_container .element_header .afficher_mult .select_delivery button{
+    margin-left: 10px;
+    margin-bottom: 5px;
+    padding: 5px;
+    color: var(--second-color-blue);
+}
+
+.element_container .element_header .afficher_mult .select_delivery select{
+    width: 70%;
+}
+/* historique part*/
+.element_container .element_header .afficher_mult .select_hstq{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.element_container .element_header .afficher_mult .select_hstq input{
+    width: 70px;
+    height: 20px;
+    margin: 0px 5px;
+    margin-bottom: 10px;
+}
+
+/* end */
+
+.element_container .element_header .numb_afficher  label{
     margin: 0px 10px;
     font-weight: bold;
     font-family: 'Fredoka', sans-serif;
     font-family: 'Lato', sans-serif;
     font-family: 'Paytone One', sans-serif;
     height: 100%;
-    width: 20%;
 }
 
-.element_container .element_header .numb_afficher select{
+.element_container .element_header .numb_afficher  select{
     border: none;
     background-color: var(--gray-c);
     height: 80%;
@@ -944,7 +992,6 @@ body{
     border-radius: 5px;
     padding: 5px;
     margin-bottom: 5px;
-    
 }
 
 .element_container .hide_title_colis  .form2{
@@ -962,7 +1009,7 @@ body{
 }
 
 .ele_container{
-    height: 25%;
+    height: 30%;
     width: 100%;
     border-top: 2px rgb(33, 53, 75,.7) solid;
     border-bottom: 2px rgb(33, 53, 75,.7) solid;
@@ -974,8 +1021,6 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    display: none;
-    
 }
 
 .ele_container .autre_ele p{
@@ -994,15 +1039,15 @@ body{
 .table_element{
    display: flex;
    align-items: center;
-   justify-content: space-between;
+   
 }
 
 .table_element  .autre_ele{
     height: 100%;
-    width: 82%;
+    width: 75%;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
  } 
 
  .table_element  .autre_ele div{
@@ -1016,19 +1061,18 @@ body{
     border-right: 1px rgb(33, 53, 75,.7) solid;
  }
 
- .table_element .autre_ele .ele{
+.table_element .autre_ele .ele{
      text-align: center;
- }
+}
 
 
 .table_element  .mod_ele{
-    width: 9%;
+    width: 12.5%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
-
 
 .table_element .mod_ele .modifier{
     height: 22px;
@@ -1042,10 +1086,24 @@ body{
     justify-content: space-around;
 }
 
-.table_element .mod_ele2 button{
-    width: 100%;
+.table_element .mod_ele2 .formbtn_chaque_colis{
     height: 25%;
-    border-radius: 2px;
+    width: 100%;
+    text-align: center;
+}
+
+.table_element .mod_ele2 .formbtn_chaque_colis button{
+    height: 100%;
+    width: 80%;
+    border-radius: 5px;
+    color: var(--white);
+}
+
+
+.table_element .mod_ele2 button{
+    width: 80%;
+    height: 25%;
+    border-radius: 5px;
     border: 2px var(--second-color-blue) solid;
 }
 
@@ -1113,6 +1171,85 @@ body{
     background-color: var(--green);
 }
 
+
+/* choose delivery */
+
+.choose_delivery_form{
+    height: 100%;
+    color: var(--second-color-blue);
+}
+
+.time_name{
+    height: 70%;
+    width: 100%;
+    text-align: center;
+}
+
+.time_name label{
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.time_name input{
+    height: 12px;
+    width: 80%;
+    padding: 5px;
+    border: 2px var(--black) solid;
+    outline: none;
+    
+}
+
+.delivery_mod button{
+    width: 98%;
+}
+
+/* new up */
+
+.statics{
+    width: 100%;
+    color: var(--second-color-blue);
+    opacity: .9;
+    margin-left: 5px;
+    text-transform: capitalize;
+    font-family: 'Fredoka', sans-serif;
+    font-family: 'Lato', sans-serif;
+    font-family: 'Paytone One', sans-serif;
+}
+
+.statics h3{
+    margin-bottom: 2px;
+    font-size: 17px;
+}
+
+
+.form_list_livreur{
+    width: 100%;
+}
+
+.form_list_livreur .username {
+    width: 200px;
+    border-radius: 0px;
+    margin: 0px;
+    margin-bottom: 5px;
+}
+
+.form_list_livreur input {
+    width: 70px;
+    border-radius: 0px;
+    margin: 0px 5px;
+    margin-bottom: 5px;
+    border: 1px black solid;
+    color: var(--second-color-blue);
+}
+
+.form_list_livreur button{
+    padding: 5px;
+}
+
+.filtre_noslivreur{
+    width: 30%;
+}
 
 /*  responcive */
 
@@ -1383,3 +1520,4 @@ body{
     }
 
 }
+
