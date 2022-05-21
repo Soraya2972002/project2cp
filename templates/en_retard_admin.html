@@ -185,6 +185,10 @@
                             {% csrf_token %}
                         <button type="submit" class="supprimer_ele" name = 'submit2' value = {{ user.id }}>Envoyer un email de rappel</button>
                         </form>
+                        <form method="POST" action="" class="form_container">
+                            {% csrf_token %}
+                        <button type="submit" class="supprimer_ele" name = 'submit3' value = {{ user.id }}>Renvoyer le colis en hub</button>
+                        </form>
                      </div>
                  </div>
                  {% empty %}

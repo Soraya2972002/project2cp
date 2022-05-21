@@ -33,11 +33,7 @@
                 
                 {% for message in messages %}
                 <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">  
-                   {% if 'username' in message.tags %}
-                    <strong>Message:</strong>{{ message }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
+                   {% if 'username' in message.tags %}{{ message }}
                    {% endif %}
                 </div>
                {% endfor %}
@@ -57,11 +53,7 @@
                 </div>
                 {% for message in messages %}
                     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">  
-                       {% if 'email' in message.tags %}
-                        <strong>Message:</strong>{{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                        </button>
+                       {% if 'email' in message.tags %}{{ message }}
                        {% endif %}
                     </div>
                {% endfor %}
@@ -73,11 +65,7 @@
                 </div>
                 {% for message in messages %}
                     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">  
-                       {% if 'num' in message.tags %}
-                        <strong>Message:</strong>{{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                        </button>
+                       {% if 'num' in message.tags %}{{ message }}
                        {% endif %}
                     </div>
                {% endfor %}
@@ -150,11 +138,7 @@
                 </div>
                 {% for message in messages %}
                     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">  
-                        {% if 'pass' in message.tags %}
-                        <strong>Message:</strong>  {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
+                        {% if 'pass' in message.tags %} {{ message }}
                         {% endif %}
                     </div>
                 {% endfor %}

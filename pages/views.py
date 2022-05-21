@@ -234,7 +234,7 @@ def afficher_livreurs(request):
             user.delete()
         body_text = "Bonjour,\nWorld Express vous informe que vous venez d'être licensié. Nous nous excusons et vous souhaitons plus de réussites personnelles"
         send_mail(
-            'World Express notifications - Licensiement',
+            'World Express notifications - Licenciement',
             body_text,
             'from@example.com',
             [email],
@@ -332,10 +332,11 @@ def selectionner_transit(request):
         id_list = request.POST.getlist('selection')
         for idd in id_list:
             if idd != '':
-                Product.objects.filter(enhub = True)
-                Product.objects.filter(entransit = False)
+                Product.objects.filter(id = idd).update(enhub = True)
+                Product.objects.filter(id = idd).update(entransit = False)
 
-    return redirect('en_transit_admin')
+    return redirect('transit_admin')
+    
 
 @login_required
 @user_passes_test(is_admin)
@@ -369,10 +370,17 @@ def selectionner_livreur_ramassage(request):
                 Product.objects.filter(id=int(idd)).update(enramassage=False)
                 Product.objects.filter(id=int(idd)).update(enlivraison=True)
                 user = request.user
-                id = user.id
-                print(user.date)
-                Product.objects.filter(id=int(idd)).update(date='0101-01-01 01:01')
-                User.objects.filter(id = id).update(date = '')
+                idd = user.id
+                colis = user.en_cours_livraison
+                a = colis.split(";")
+                colis = ''
+                for item in a :
+                    if item != idd:
+                        colis += ';' + item
+                User.objects.filter(id=int(idd)).update(en_cours_livraison = colis)
+                if colis == '':
+                    User.objects.filter(id=int(idd)).update(date='0101-01-01 01:01')
+                
     
     return redirect('a_recuperer_livreur')        
 """@login_required
@@ -430,6 +438,7 @@ def choisir_livreur(request):
         li.append(search_disponible)
     search_wilaya = request.POST.get('user_wilaya', None)
     if search_wilaya != '0' and search_wilaya!= None:
+        print(search_wilaya)
         users = users.filter(wilaya = search_wilaya)
         li.append(search_wilaya)
     context = {
@@ -517,7 +526,7 @@ def a_recuperer_livreur_view(request):
     li = []
     retard = ''
     if user.date != '0101-01-01 01:01' and user.en_cours_livraison != '' and date2 >= date :
-        retard = 'Vous avez dépassé la deadline : ' + str(user.date) + ' pour récuperer vos colis. Veuillez vous rapprocher des bureaux de World Express dans les plus brefs délais'
+        retard = 'Vous avez dépassé la deadline : ' + str(user.date) + ' pour récuperer vos colis. Veuillez vous rapprocher des bureaux de World Express dans les plus brefs délais.'
     queryset = Product.objects.filter(nometpren = '')
     a = user.en_cours_livraison
     l = a.split(';')
@@ -527,15 +536,15 @@ def a_recuperer_livreur_view(request):
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
-        queryset = User.objects.filter(id__in=queryset.values('id'))
+        queryset = Product.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(wilaya = search_wilaya)  
         li.append(search_wilaya)
     if search_type != '0' and search_type != None:
-        queryset = User.objects.filter(id__in=queryset.values('id'))
+        queryset = Product.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(typeenvoi = search_type) 
         li.append(search_type)
     if search_date != None and search_date != "":
-        queryset = User.objects.filter(id__in=queryset.values('id'))
+        queryset = Product.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
         li.append(search_date)
     context = {
@@ -600,15 +609,15 @@ def historique_livreur_view(request):
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
-        queryset = User.objects.filter(id__in=queryset.values('id'))
+        queryset = Product.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(wilaya = search_wilaya)  
         li.append(search_wilaya)
     if search_type != '0' and search_type != None:
-        queryset = User.objects.filter(id__in=queryset.values('id'))
+        queryset = Product.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(typeenvoi = search_type) 
         li.append(search_wilaya)
     if search_date != None and search_date != "":
-        queryset = User.objects.filter(id__in=queryset.values('id'))
+        queryset = Product.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
         li.append(search_wilaya)
     somme = 0
@@ -870,15 +879,15 @@ def livreur_non_payés(request):
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
-        queryset = User.objects.filter(id__in=queryset.values('id'))
+        queryset = Product.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(wilaya = search_wilaya) 
         li.append(search_wilaya) 
     if search_type != '0' and search_type != None:
-        queryset = User.objects.filter(id__in=queryset.values('id'))
+        queryset = Product.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(typeenvoi = search_type) 
         li.append(search_type)
     if search_date != None and search_date != "":
-        queryset = User.objects.filter(id__in=queryset.values('id'))
+        queryset = Product.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
         li.append(search_date)
     context = {
@@ -1266,7 +1275,7 @@ def en_retard_admin(request):
             user.delete()
         body_text = "Bonjour,\nWorld Express vous informe que vous venez d'être licensié. Nous nous excusons et vous souhaitons plus de réussites personnelles"
         send_mail(
-            'World Express notifications - Licensiement',
+            'World Express notifications - Licenciement',
             body_text,
             'from@example.com',
             [email],
@@ -1302,6 +1311,20 @@ def en_retard_admin(request):
             [email],
             fail_silently=False,
         )
+        return redirect('administrateur')
+    if request.POST.get('submit3', None) != None:
+        idd = request.POST.get('submit3', None)
+        user = User.objects.get(id=idd)
+        email = user.email
+        idd = user.id
+        a = user.en_cours_livraison
+        CustomUser.objects.filter(id = idd).update(date = '0101-01-01 01:01')
+        CustomUser.objects.filter(id = idd).update(en_cours_livraison = "")
+        l = a.split(';')
+        for el in l:
+            if el != '':
+                Product.objects.filter(id = int(el)).update(enhub = True)
+                Product.objects.filter(id = int(el)).update(enramassage = False)
         return redirect('administrateur')
     for user in users :
         somme += 1

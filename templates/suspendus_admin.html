@@ -119,7 +119,6 @@
                         <form method="POST" action="{% url 'selectionner_suspendus' %}" >
                             {% csrf_token %}
                         <select name="Choices" id="">
-                            <option value="">Choices</option>
                             <option value="0">Arrêter la suspension des élements sélectionnés</option>
                         </select>
                         <button type = "submit">submit</button>
