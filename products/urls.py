@@ -13,7 +13,8 @@ from .views import (
     retour_chez_livreur,
     retour_hub,
     retour_suspendre,
-    all_suspendre
+    all_suspendre,
+    non_payés
 )
 
 app_name = 'products'
@@ -28,6 +29,7 @@ urlpatterns = [
     path('<int:id>/validate_expedier/', valider_colis_pret_a_expedier, name='validate_expedier'),
     path('<int:id>/payé/', colis_payé, name='colis_payé'),
     path('<int:id>/non_payé/', colis_non_payé, name='colis_non_payé'),
+    path('<int:id>/non_payés/', non_payés, name='non_payés'),
     path('<int:id>/retour_livreur/', retour_chez_livreur, name='retour_chez_livreur'),
     path('<int:id>/retour_hub/', retour_hub, name='retour_hub'),
     path('<int:id>/retour_suspendre/', retour_suspendre, name='retour_suspendre'),

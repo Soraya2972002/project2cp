@@ -1,3 +1,4 @@
+from tkinter import Widget
 from django import forms
 from .models import Product,Feedback
 
@@ -53,4 +54,12 @@ class FeedbackForm(forms.ModelForm):
         fields = [
             'comment'
         ]
+    widgets = {
+        'comment' : forms.Textarea(
+            attrs={
+                "class" : 'field',
+                'placeholder': 'décrivez le produit ici'
+            }
+        )
+    }
 

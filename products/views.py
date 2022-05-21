@@ -122,12 +122,22 @@ def colis_payé(request, id):
     obj = Product.objects.filter(id = id)
     if request.method == "POST":
         prix = request.POST.get("price")
-        obj.update(payé = prix)
+        obj.update(payés = prix)
         obj.update(enlivraison = False)
         user = request.user
         en_cours_livraison = user.en_cours_livraison
+        a = en_cours_livraison.split(';')
+        colis = ""
         livres = user.livres
-        livres = livres + en_cours_livraison
+        for item in a:
+            if item != '' and item != id:
+                colis += ';' + item
+        livres = livres + ';' + str(id)
+        idd = user.id
+        print(colis)
+        print(livres)
+        CustomUser.objects.filter(id = idd).update(en_cours_livraison = colis)
+        CustomUser.objects.filter(id = idd).update(livres = livres)
         idd = user.id
         CustomUser.objects.filter(id = idd).update(en_cours_livraison = '')
         CustomUser.objects.filter(id = idd).update(livres = livres)
@@ -152,13 +162,20 @@ def colis_non_payé(request,id):
         obj.update(enlivraison = False)
         user = request.user
         en_cours_livraison = user.en_cours_livraison
+        a = en_cours_livraison.split(';')
+        colis = ""
         livres = user.livres
-        livres = livres + en_cours_livraison
+        for item in a:
+            if item != '' and item != id:
+                colis += ';' + item
+        livres = livres + ';' + str(id)
         idd = user.id
-        CustomUser.objects.filter(id = idd).update(en_cours_livraison = '')
+        print(colis)
+        print(livres)
+        CustomUser.objects.filter(id = idd).update(en_cours_livraison = colis)
         CustomUser.objects.filter(id = idd).update(livres = livres)
         obj = Product.objects.get(id = id)
-        body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + str(obj.id) + " à destination vers " + obj.email + ' et envoyé à '+ obj.nometpren + " est bien arrivé.\nWorld Express vous remercie pour votre confiance."
+        body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + str(obj.id) + " à destination vers " + obj.email + ' et envoyé à '+ obj.nometpren + " est bien arrivé, merci de nous payer dans les plus brefs délais.\nWorld Express vous remercie pour votre confiance."
         send_mail(
             'World Express notifications - Colis arrivé à destination',
             body_text,
@@ -167,6 +184,17 @@ def colis_non_payé(request,id):
             fail_silently=False,
         )
     return redirect("en_livraison_livreur")
+
+@login_required
+@user_passes_test(is_livreur)
+
+def non_payés(request,id):
+    obj = Product.objects.filter(id = id)
+    if request.method == "POST":
+        prix = request.POST.get("price")
+        obj.update(payés = prix)
+        
+    return redirect("livreur_non_payés")
 
 @login_required
 @user_passes_test(is_livreur)

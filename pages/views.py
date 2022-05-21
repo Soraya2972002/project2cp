@@ -292,16 +292,16 @@ def afficher_clients(request):
 
 def selectionner_hub(request):
     if request.method == 'POST':
-        id_list = request.POST.getlist('selection')
         choice =  request.POST.get('Choices')
+        id_list = request.POST.getlist('selection')
+        print(id_list)
         for idd in id_list:
+            print(idd)
             if idd != '':
                 Product.objects.filter(id=int(idd)).update(checked=True)
                 if choice == '0': #delete
                     if idd != '':
-                        Product.objects.filter(id=int(idd)).delete()
-                if choice == "1": #choose delivery
-                    return redirect('choisir_livreurs')    
+                        Product.objects.filter(id=int(idd)).delete()   
                 if choice == '2': # validate
                     if idd != '':
                         Product.objects.filter(id=int(idd)).update(checked=False)
@@ -321,6 +321,8 @@ def selectionner_hub(request):
                             [email],
                             fail_silently=False,
                         )
+        if choice == "1": #choose delivery                    
+            return redirect('choisir_livreurs') 
 
     return redirect('en_hub_admin')
 
@@ -369,18 +371,6 @@ def selectionner_livreur_ramassage(request):
             if idd != '':
                 Product.objects.filter(id=int(idd)).update(enramassage=False)
                 Product.objects.filter(id=int(idd)).update(enlivraison=True)
-                user = request.user
-                idd = user.id
-                colis = user.en_cours_livraison
-                a = colis.split(";")
-                colis = ''
-                for item in a :
-                    if item != idd:
-                        colis += ';' + item
-                User.objects.filter(id=int(idd)).update(en_cours_livraison = colis)
-                if colis == '':
-                    User.objects.filter(id=int(idd)).update(date='0101-01-01 01:01')
-                
     
     return redirect('a_recuperer_livreur')        
 """@login_required
@@ -450,6 +440,7 @@ def choisir_livreur(request):
         idd = request.POST.get('submit', None)
         search_time = request.POST.get('time', None)
         queryset = Product.objects.filter(checked = True)
+        print(queryset)
         s = ''
         compte = 0
         for product in queryset:
@@ -458,6 +449,7 @@ def choisir_livreur(request):
             Product.objects.filter(id = idi).update(enramassage = True)
             s += ";" + str(product.id)
             compte += 1
+        print(s)
         CustomUser.objects.filter(id=int(idd)).update(en_cours_livraison = s)
         if search_date != '' and search_time != '':
             CustomUser.objects.filter(id=int(idd)).update(date = search_date + " " + search_time)
@@ -560,7 +552,7 @@ def a_recuperer_livreur_view(request):
 def en_livraison_livreur_view(request):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
-    search_date = request.POST.get('date', None)
+    typepresetation = request.POST.get('type de prestation', None)
     user = request.user
     li = []
     queryset = Product.objects.filter(nometpren = '')
@@ -569,20 +561,18 @@ def en_livraison_livreur_view(request):
     for el in l:
         if el != '':
             queryset = queryset.union(Product.objects.filter(id = int(el)).filter(enlivraison = True))
-    if search_date != None and search_date != "":
-        l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
-        queryset = User.objects.filter(id__in=queryset.values('id'))
-        queryset = queryset.filter(wilaya = search_wilaya)  
+        queryset = Product.objects.filter(id__in=queryset.values('id'))
+        queryset = queryset.filter(wilaya = search_wilaya) 
         li.append(search_wilaya)
     if search_type != '0' and search_type != None:
-        queryset = User.objects.filter(id__in=queryset.values('id'))
+        queryset = Product.objects.filter(id__in=queryset.values('id'))
         queryset = queryset.filter(typeenvoi = search_type) 
         li.append(search_type)
-    if search_date != None and search_date != "":
-        queryset = User.objects.filter(id__in=queryset.values('id'))
-        queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
-        li.append(search_date)
+    if typepresetation != None and typepresetation != "0":
+        queryset = Product.objects.filter(id__in=queryset.values('id'))
+        queryset = queryset.filter(typeprestation = typepresetation) 
+        li.append(typepresetation)
     context = {
         "object_list": queryset,
         'list' : li
@@ -874,8 +864,7 @@ def livreur_non_payés(request):
     queryset = Product.objects.filter(nometpren = '')
     for idd in l:
         if idd != '':
-            queryset.union(queryset,Product.objects.get(id = int(idd)).filter(payés = 0))
-    queryset = queryset
+            queryset = queryset.union(Product.objects.filter(id = int(idd)).filter(payés = 0))
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:

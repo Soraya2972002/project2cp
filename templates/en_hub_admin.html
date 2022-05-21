@@ -98,6 +98,9 @@
             <div>
                 <button type="submit" class = "filtrBtn">Filter</button>
             </div>
+            {% for item in list %}
+                {{item}}
+            {% endfor %}
         </form>
         </div>
         <div class="element_container">
@@ -204,6 +207,7 @@
                     <p> sorry, no queries match your search </p>
                 </div>
                 {% endfor %}
+            </form>
                 </div>
             </div>
         </div>
