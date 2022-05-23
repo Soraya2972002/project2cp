@@ -13,10 +13,11 @@ WILAYAS_CHOICES.append((" ",' '))
 
 def clean_number(number):
     number = str(number)
-    if len(number) == 10:
-        print(number[:2])
-        if number[:2] != '05' and  number[:2] != '07' and number[:2] != '06':
+    if len(number) == 9:
+        if number[:1] != '5' and  number[:1] != '7' and number[:1] != '6':
             raise ValidationError('This is not a valid phone number')
+    else:
+        raise ValidationError('This is not a valid phone number')
     return number
 
 class CustomUser(AbstractUser):

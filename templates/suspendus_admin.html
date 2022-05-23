@@ -116,12 +116,18 @@
                         <label for="nmb_afficher">élément</label>
                     </div>
                     <div class="select_delivery">
-                        <form method="POST" action="{% url 'selectionner_suspendus' %}" >
+                        <form method="POST" action="{% url 'selectionner_hub' %}" class = "form_hub">
                             {% csrf_token %}
-                        <select name="Choices" id="">
-                            <option value="0">Arrêter la suspension des élements sélectionnés</option>
-                        </select>
-                        <button type = "submit">submit</button>
+                        <div class = "select_delivery">
+                            <select name="Choices" id="">
+                                <option value="0">Arrêter la suspension des élements sélectionnés</option>
+                            </select>
+                            <button type = "submit">submit</button>
+                    </div>
+                    
+
+
+                        
                     </div>
                 </div>
                 <div class="titles_colis form1">

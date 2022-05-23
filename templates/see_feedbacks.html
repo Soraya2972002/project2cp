@@ -1,62 +1,97 @@
 {% extends 'admin_base_main.html' %}
 {% block content%}
 
-<div class="ajouter_conatainer closeSidebare">
-    
+
+
+
+
+
+
+
+
+
+<div class="ajouter_container closeSidebare">
     <div class="description pret_main">
-        <h3 id="text_font_titles">En Hub</h3>
+        <h3 id="text_font_titles">list Feedbacks</h3>
         <p id="text_font_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae assumenda nostrum quidem atque delectus.</p>
     </div>
     <div class="main_container">
-        <div class="btn btn_pret">
-            <button class="supprimer">suprimer les colis</button>
-            <button class="impremer">impremer les etiquettes</button>
-            <button class="impremer">impremer une decharge</button>
-            <button class="valider">valider l'éxpedition</button>
-        </div>
         <div class="filtre filtre_pret">
-            <form method="POST" action="" class="form_container">
+            <form method="POST" action="" class="form_pret_exp">
                 {% csrf_token %}
+            <div class="filtre_tit">
+                <h3 id="text_font_titles">Filtre:</h3>
+            </div>
+            <div>
                 <select name="user_type" id="">
-                    <option value="not registrated">registrated</option>
-                    <option value="registrated">not registrated</option>
+                    <option value="not_registrated">Not registrated</option>
+                    <option value="client">client</option>
+                    <option value="livreur">Livreur</option>
                 </select>
-                <button type="submit">Filter</button>
-            </form>
+            </div>
+            <div>
+                <button type="submit" class = "filtrBtn">Filter</button>
+            </div>
+        </form>
         </div>
         <div class="element_container">
-            <div class="element_header" >
-                <div class="numb_afficher">
-                    <label for="nmb_afficher">Afficher:</label>
-                    <select name="nmb_afficher" id="nmb_afficher">
+            <div class="element_header hide_title_colis" >
+                <div class="numb_afficher afficher_mult">
+                    <div>
+                        <label for="nmb_afficher">Afficher:</label>
+                        <select name="nmb_afficher" id="nmb_afficher">
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="50">50</option>
                         <option value="100">100</option>
                         <option value="ALL">ALL</option>
-                    </select>
-                    <label for="nmb_afficher">élément</label>
+                        </select>
+                        <label for="nmb_afficher">élément</label>
+                    </div>
+                   
                 </div>
-                <div class="titles_colis">
+                <div class="titles_colis form1">
                     <div>
-                        <h4>username</h4>
+                        <h4>user name</h4>
                     </div>
                     <div>
-                        <h4>feedback</h4>
+                        <h4>Email/Phone</h4>
                     </div>
-
+                    <div>
+                        <h4>Status</h4>
+                    </div>
+                    <div>
+                        <h4>Feedbacks</h4>
+                    </div>
+                </div>
+                <div class="titles_colis form2">
+                    <div>
+                        <h4>user name</h4>
+                    </div>
+                    <div>
+                        <h4>Email/Phone</h4>
+                    </div>
+                    <div>
+                        <h4>Status</h4>
+                    </div>
+                    <div>
+                        <h4>Feedbacks</h4>
+                    </div>
                 </div>
             </div>
             <div class="element_desc">
                 {% for instance in object_list %}
                 <div class="ele_container table_element">
                     <div class="mod_ele">
-                        
-                        <input type = 'checkbox' value = {{ instance.id }} name = 'selection'>
-                        
+
                     </div>        
-                    
-                    <div class="autre_ele">
+                    <div class="autre_ele table_nos_livreur">
+                        <div class="ele">
+                            <p>{{ instance.id_user }}</p>
+                        </div>
+                        <div class="ele">
+                            <p>{{ instance.username }}</p>
+                        </div>
                         <div class="ele">
                             <p>{{ instance.username }}</p>
                         </div>
@@ -70,14 +105,29 @@
                     <p> sorry, no queries match your search </p>
                 </div>
                 {% endfor %}
-                {% if object_list %}
-                    <label>Nombre de feedbacks</label>
-                    {{somme}}
-                {% endif %}
+                
+                <div class="statics">
+                    {% if object_list %}
+                    <label>Nombre de feedbacks: {{somme}}</label>
+                    
+                    {% endif %}
+                </div>
+            
+            </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
-    
 
     {% endblock %}
+
+
+
+
+
+
+
+
+
+

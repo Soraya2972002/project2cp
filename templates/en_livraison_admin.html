@@ -92,6 +92,16 @@
             </div>
         </form>
         </div>
+        <div class="filtre_box_container">
+            <div>
+                <h4 id="text_font_titles">type des filtre:</h3>
+            </div>
+            {%for item in list%}
+            <div>
+                <p>{{item}}</p>
+            </div>   
+            {%endfor%}
+        </div>
         <div class="element_container">
             <div class="element_header hide_title_colis" >
                 <div class="numb_afficher">
@@ -172,9 +182,9 @@
                         
                     </div>
                     <div class="mod_ele mod_ele2">
-                        <form method="POST" action="{{ instance.get_absolute_url }}all_suspendre/">
+                        <form method="POST" action="{{ instance.get_absolute_url }}all_suspendre/" class="formbtn_chaque_colis">
                             {% csrf_token %}
-                        <button type="submit">Suspendre</button>
+                        <button type="submit" class="supprimer_ele">Suspendre</button>
                         </form>
                         <button class="imprimer">Etiquettes</button>
                     </div>

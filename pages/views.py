@@ -693,7 +693,7 @@ def historique_client_view(request):
     Product.objects.all().order_by('date')
     email = request.user.email
     queryset = Product.objects.filter(email = email)
-    queryset = queryset.filter(pretaexpedier = False).filter(enramassage = False).filter(entransit = False).filter(fenhub = False).filter(enlivraison = False).filter(suspendus = False)
+    queryset = queryset.filter(pretaexpedier = False).filter(enramassage = False).filter(entransit = False).filter(enhub = False).filter(enlivraison = False).filter(suspendus = False)
     if search_date != None and search_date != "":
         l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
@@ -1106,10 +1106,34 @@ def see_feedbacks(request):
     user_type = request.POST.get('user_type',None)
     l = []
     if user_type != None:
-        if user_type == 'registrated':
-            queryset = Feedback.objects.exclude(id_user = -1)
-        else:
+        if user_type == 'not_registrated':
             queryset = Feedback.objects.filter(id_user = -1)
+        if user_type == 'client':
+            queryset = Feedback.objects.exclude(id_user = -1)
+            id_list = []
+            for query in queryset:
+                id_list.append(int(query.id_user))
+            queryset = Feedback.objects.filter(id_user = -2)
+            for id in id_list : 
+                try:
+                    obj = User.objects.get(id = id)
+                    if not obj.groups.filter(name = 'Livreurs').exists():
+                        queryset = queryset.union(Feedback.objects.filter(id_user = id))
+                except:
+                    pass
+        if user_type == 'livreur':
+            queryset = Feedback.objects.exclude(id_user = -1)
+            id_list = []
+            for query in queryset:
+                id_list.append(int(query.id_user))
+            queryset = Feedback.objects.filter(id_user = -2)
+            for id in id_list : 
+                try:
+                    obj = User.objects.get(id = id)
+                    if obj.groups.filter(name = 'Livreurs').exists():
+                        queryset = queryset.union(Feedback.objects.filter(id_user = id))
+                except:
+                    pass
         l.append(user_type)
     somme = 0
     for query in queryset :

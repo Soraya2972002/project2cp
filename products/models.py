@@ -17,11 +17,13 @@ for el in data :
     WILAYAS_CHOICES.append((el['name'],el['name']))
 def clean_number(number):
     number = str(number)
-    if len(number) == 10:
+    if len(number) == 9:
         print(number[:2])
-        if number[:2] != '05' and  number[:2] != '07' and number[:2] != '06':
+        if number[:2] != '5' and  number[:2] != '7' and number[:2] != '6':
             raise ValidationError('This is not a valid phone number')
-    return number
+    else:
+        raise ValidationError('This is not a valid phone number')
+    return int(number)
 
 def clean_nompren(n):
         if ' ' not in n:

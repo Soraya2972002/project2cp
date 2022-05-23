@@ -171,15 +171,15 @@
                         </div>
                     </div>
                     <div class="mod_ele mod_ele2">
-                        <form method="POST" action="{{ instance.get_absolute_url }}retour_suspendre/" class="form_container">
-                            {% csrf_token %}
-                        <button type="submit">Suspendre le colis</button>
+                        <form method="POST" action="{{ instance.get_absolute_url }}retour_suspendre/" class="formbtn_chaque_colis">
+                            <!--{% csrf_token %}-->
+                        <button type="submit" class="supprimer_ele">Suspendre</button>
                         </form>
-                        <form method="POST" action="{{ instance.get_absolute_url }}retour_hub/" class="form_container">
-                            {% csrf_token %}
-                        <button type="submit">Mettre le colis en hub</button>
+                        <form method="POST" action="{{ instance.get_absolute_url }}retour_hub/" class="formbtn_chaque_colis">
+                            <!--{% csrf_token %}-->
+                        <button type="submit" class="valider_lexp">Mettre en hub</button>
                         </form>
-                        <button class="imprimer">Etiquettes</button>
+                         <button class="imprimer">Etiquettes</button>
                     </div>
                 </div>
                 {% empty %}

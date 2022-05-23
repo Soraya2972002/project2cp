@@ -116,12 +116,16 @@
                             </select>
                             <label for="nmb_afficher">élément</label>
                         </div>
-                        <form method="POST" action="{% url 'selectionner_livreur_ramassage' %}">
-                            {% csrf_token %}
+                        
                         <div class="select_delivery">
                             
-                            <label for="submit">valider selected products: </label>
-                            <button type = "submit">Valider</button>
+                            <form method="POST" action="{% url 'selectionner_livreur_ramassage' %}" class="form_hub">
+                                {% csrf_token %}
+
+                            {% if object_list %}
+                              <label for="submit">valider selected products: </label>
+                              <button type = "submit">Valider</button>
+                            {% endif %}
                             
                         </div>
                     </div>
@@ -161,7 +165,7 @@
                     </div>
                 </div>
                 <div class="element_desc">
-                    {% for instance in object_list %}
+                    
                     <div class="ele_container table_element">
                         <div class="mod_ele">
                         
@@ -198,11 +202,11 @@
                         </div>
                     </div>
                     
-                    {% empty %}
+                    
                     <div class="ele_container aucune_element">
                         <p> sorry, no queries match your search </p>
                     </div>
-                    {% endfor %}
+                  
                 </form>
                     </div>
                 </div>

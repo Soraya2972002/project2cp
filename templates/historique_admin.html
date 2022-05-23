@@ -1,23 +1,32 @@
 {% extends 'admin_base_main.html' %}
 {% block content%}
 
-<div class="ajouter_conatainer closeSidebare">
-    
+
+
+
+
+
+
+
+
+
+<div class="ajouter_container closeSidebare">
     <div class="description pret_main">
-        <h3 id="text_font_titles">Historique</h3>
+        <h3 id="text_font_titles">Historique des colis</h3>
         <p id="text_font_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae assumenda nostrum quidem atque delectus.</p>
     </div>
     <div class="main_container">
         <div class="btn btn_pret">
-            <button class="supprimer">suprimer les colis</button>
             <button class="impremer">impremer les etiquettes</button>
             <button class="impremer">impremer une decharge</button>
-            <button class="valider">valider l'éxpedition</button>
         </div>
         <div class="filtre filtre_pret">
-            
-            <form method="POST" action="" class="form_container">
+            <form method="POST" action="" class="form_pret_exp">
                 {% csrf_token %}
+            <div class="filtre_tit">
+                <h3 id="text_font_titles">Filtre:</h3>
+            </div>
+            <div>
                 <select name="type" id="">
                     <option value="0">type</option>
                     <option value="livraison">livraison</option>
@@ -25,13 +34,15 @@
                     <option value="pick up">pick up</option>
                     <option value="recouvrement">recouvrement</option>
                 </select>
+            </div>
+            <div>
                 <select name="user_wilaya" id="wilaya_send">
-                    <option value="0">-- Select Wilaya --</option>
-                    <option value="Adrar">Adrar</option>
-                    <option value="Chlef">Chlef</option>
-                    <option value="Laghouat">Laghouat</option>
-                    <option value="Oum el-Bouaghi"> Oum el-Bouaghi</option>
-                    <option value="Batna">Batna</option>
+                    <option value="0">-- Select Willaya --</option>
+                    <option value="1">Adrar</option>
+                    <option value="2">Chlef</option>
+                    <option value="3">Laghouat</option>
+                    <option value="4"> Oum el-Bouaghi</option>
+                    <option value="5">Batna</option>
                     <option value="6">Béjaïa</option>
                     <option value="7">Biskra</option>
                     <option value="8">Béchar</option>
@@ -77,106 +88,151 @@
                     <option value="47">Ghardaïa</option>
                     <option value="48">Relizane</option>
                 </select>
-        
-            
-                <input type="date" id="start" name="date"
-                min="2000-01-01" max="2100-12-31">
-                <button type="submit">Filter</button>
-                </form>
-                </div>
-                <div class="filtre filtre_pret">
-                    <form method="POST" action="" class="form_container">
-                        {% csrf_token %}
-                        <label>start</label>
-                        <input type="date" name="first_date"
-                        min="2000-01-01" max="2100-12-31">
-                        <label>end</label>
-                        <input type="date" name="second_date"
-                        min="2000-01-01" max="2100-12-31">
-                        <button type="submit">Filter</button>
-                    </form>
-                </div>
-                <div class="filtre filtre_pret">
-                    <form method="POST" action="" class="form_container">
-                        {% csrf_token %}
-                        <label>start price</label>
-                        <input type="number" name="first_number" >
-                        <label>end price</label>
-                        <input type="number" name = 'second_number' >
-                        <button type="submit">Filter</button>
-                    </form>
-                </div>
+            </div>
+            <div>
+                <input type="date" id="start" name="date" min="2000-01-01" max="2100-12-31">
+            </div>
+            <div>
+                <button type="submit" class = 'filtrBtn'>filtre</button>
+            </div>
+            </form>
+        </div>
         <div class="element_container">
-            <div class="element_header" >
-                <div class="numb_afficher">
-                    <label for="nmb_afficher">Afficher:</label>
-                    <select name="nmb_afficher" id="nmb_afficher">
+            <div class="element_header hide_title_colis" >
+                <div class="numb_afficher afficher_mult">
+                    <div>
+                        <label for="nmb_afficher">Afficher:</label>
+                        <select name="nmb_afficher" id="nmb_afficher">
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="50">50</option>
                         <option value="100">100</option>
                         <option value="ALL">ALL</option>
-                    </select>
-                    <label for="nmb_afficher">élément</label>
+                        </select>
+                        <label for="nmb_afficher">élément</label>
+                    </div>
+                    <div class="select_hstq">
+                        <form method="POST" action="" class="">
+                            {% csrf_token %}
+                            <label>Start :</label>
+                            <input type="date" name="first_date" min="2000-01-01" max="2100-12-31">
+                            <label>End :</label>
+                            <input type="date" name="second_date" min="2000-01-01" max="2100-12-31">
+                            <button type="submit" class="filtrBtn">Filter</button>
+                        </form>
+                    </div>
+                    <div class="select_hstq">
+                        <form method="POST" action="" class="">
+                            {% csrf_token %}
+                            <label>Start Price:</label>
+                            <input type="number" name="first_number" placeholder=" $$">
+                            <label>End Price:</label>
+                            <input type="number" name = 'second_number' placeholder=" $$">
+                            <button type="submit">Filter</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="titles_colis">
+                <div class="titles_colis form1">
                     <div>
-                        <h4>informtion colis</h4>
+                        <h4>info colis</h4>
                     </div>
                     <div>
-                        <h4>adresse destinataire</h4>
+                        <h4>ADR destinataire</h4>
                     </div>
                     <div>
-                        <h4>information destinataire</h4>
+                        <h4>info destinataire</h4>
                     </div>
                     <div>
-                        <h4>remarque et produit</h4>
+                        <h4>RQ et produit</h4>
                     </div>
                     <div>
                         <h4>Montant</h4>
                     </div>
-
+                </div>
+                <div class="titles_colis form2">
+                    <div>
+                        <h4>info colis</h4>
+                    </div>
+                    <div>
+                        <h4>Adr Des</h4>
+                    </div>
+                    <div>
+                        <h4>info DES</h4>
+                    </div>
+                    <div>
+                        <h4>RQ & PR</h4>
+                    </div>
+                    <div>
+                        <h4>Montant</h4>
+                    </div>
                 </div>
             </div>
             <div class="element_desc">
                 {% for instance in object_list %}
-                <div class="ele_container table_element">
-                    
-        
-                    
-                    <div class="autre_ele">
-                        <div class="ele">
-                            <p>{{ instance.id }}</p>
-                        </div>
-                        <div>
-                            <p>{{ instance.nometpren }}</p>
-                        </div>
-                        <div>
-                            <p>{{ instance.wilaya }}</p>
-                        </div>
-                        <div>
-                            <p>{{ instance.prix }}</p>
-                        </div>
-                        <div class="ele">
-                            <p></p>
-                        </div>
-                    </div>
+                 <div class="ele_container table_element">
+                     <div class="mod_ele">
+                         
+                     </div>
+                     <div class="autre_ele">
+                         <div class="ele">
+                             <p><i class="fa fa-id-badge" aria-hidden="true"></i> num colis</p>
+                             <p><i class="fa fa-archive" aria-hidden="true"></i>  Nmb commande</p>
+                             <p><i class="fa fa-truck" aria-hidden="true"></i> type</p>
+                             <p><i class="fa fa-calendar" ></i> temps</p>
+                         </div>
+                         <div>
+                             <p><i class="fa fa-map" aria-hidden="true"></i> wilaya</p>
+                             <p><i class="fa fa-location-arrow" aria-hidden="true"></i> commune</p>
+                             <p><i class="fa fa-map-marker" aria-hidden="true"></i> adresse</p>
+                         </div>
+                         <div>
+                             <p><i class="fa fa-id-card" aria-hidden="true"></i> Nom</p>
+                             <p><i class="fa fa-mobile" aria-hidden="true"></i> num tel</p>
+                         </div>
+                         <div>
+                             <p><i class="fa fa-comment" aria-hidden="true"></i> RQ</p>
+                             <p><i class="fa fa-box"></i> produit</p>
+                             <p><i class="fa fa-cubes" aria-hidden="true"></i> pois</p>
+                         </div>
+                         <div class="ele">
+                             <p><i class="fa fa-dollar-sign" aria-hidden="true"></i> prix</p>
+                         </div>
+                     </div>
+                     <div class="mod_ele mod_ele2">
+                         <button class="imprimer">Etiquettes</button>
+                     </div>
+                 </div>
+                 {% empty %}
+                 <div class="ele_container aucune_element">
+                     <p> sorry, no queries match your search </p>
+                 </div>
+                 {% endfor %}
+                 <div class="statics">
+                    {% if object_list %}
+                        <h3> Total des payements : {{somme}}</h3>
+                        
+                        <h3> Total des colis : {{somme1}} </h3>
+                        
+                    {% endif %}
                 </div>
-                {% empty %}
-                <div class="ele_container aucune_element">
-                    <p> sorry, no queries match your search </p>
                 </div>
-                {% endfor %}
-                {% if object_list %}
-                    <label> Total des payements : </label>
-                    {{somme}}
-                    <label> Total des colis : </label>
-                    {{somme1}}
-                {% endif %}
-            </div>
-        </div>
-    </div>
-</div>
+                
+         </div>
+     </div>
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 
     {% endblock %}

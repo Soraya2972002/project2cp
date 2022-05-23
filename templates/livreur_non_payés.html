@@ -170,13 +170,12 @@
                         </div>
                     </div>
                     <div class="mod_ele mod_ele2">
-                        <form method="POST" action="{{ instance.get_absolute_url }}non_payés/" class="form_container">
-                            {% csrf_token %}
-                        <label>entrez le prix versé</label>
-                        <input type = "number" name = 'price' >
-                        <button type="submit">Valider le payement du colis</button>
+                        <form method="POST" action="" class="form_prix_livreur">
+                            <!--{% csrf_token %}-->
+                            <input type = "number" name = 'price' placeholder=" Le Prix Versé">
+                            <button type="submit" class="">Valider</button>
                         </form>
-                        <button class="imprimer">Etiquettes</button>
+                        <button class="imprimer">Etiquettes</button>  
                     </div>
                 </div>
                  {% empty %}

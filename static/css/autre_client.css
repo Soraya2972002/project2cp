@@ -25,6 +25,9 @@
     --green : #007f66;
 }
 
+.red{
+    color: var(--third-color-red_clair);
+}
 
 #second_red {
     color: var(--third-color-red_clair);
@@ -51,6 +54,14 @@ body{
     height: 100vh;
 }
 
+.red{
+    color: var(--main-color-red);
+}
+
+body select{
+    border: 1px var(--second-color-blue) solid;
+}
+
 .menu{
     background-color: var(--gray);
     width: calc(20% - 2px);
@@ -67,11 +78,19 @@ body{
 
 .menu .logo h3 {
     text-align:center;
-    width: 100%;
-    color: var(--second-color-blue);
+    width: auto;
     font-weight: bold;
     text-transform: capitalize;
-    font-size: 25px;
+    font-size: 22px;
+    color: var(--second-color-blue);
+    letter-spacing: .05rem;
+    margin-left: 10px;
+}
+
+.menu .logo img{
+    height: 60px;
+    width: 60px;
+    display: none;
 }
 
 .menu .logo{
@@ -80,6 +99,12 @@ body{
     justify-content: center;
     height: 10%;
     width: 100%;
+}
+
+.menu .logo a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .menu .close img{
@@ -165,7 +190,7 @@ body{
     content: "";
     left: 0;
     top: 0;
-    background-color: var(--green);
+    background-color: var(--third-color-red_clair);
     width: 2px;
     height: 0%;
     position: absolute;
@@ -477,6 +502,7 @@ body{
 
 .ajouter_colis input{
     background-color: var(--gray-c);
+    
 }
 
 .destinataire .destitel{
@@ -509,8 +535,7 @@ body{
 .destinataire .desform .name_container input{
     height: 30px;
     width: 42%;
-    border: none;
-    border-bottom: 2px var(--second-color-blue) solid;
+    border: 1px var(--second-color-blue) solid;
     outline: none;
 }
 
@@ -529,8 +554,7 @@ body{
 .destinataire .desform .phone_container div input{
     height: 30px;
     width: 100%;
-    border: none;
-    border-bottom: 2px var(--second-color-blue) solid;
+    border: 1px var(--second-color-blue) solid;
     outline: none;
 }
 
@@ -563,7 +587,6 @@ body{
 }
 
 .select_wilaya select {
-    border: none;
     background-color: var(--gray-c);
     height: auto;
     margin: 0;
@@ -644,8 +667,7 @@ body{
 .commande_info .cmdinfo_input .cdm_ele input{
     height: 30px;
     width: 40%;
-    border: none;
-    border-bottom: 2px var(--second-color-blue) solid;
+    border: 1px var(--second-color-blue) solid;
     outline: none;
 }
 
@@ -700,7 +722,6 @@ body{
 }
 
 .type_delivery .type_input select {
-    border: none;
     background-color: var(--gray-c);
     height: auto;
     margin: 0;
@@ -814,7 +835,7 @@ body{
     padding: 7px;
     border-radius: 5px;
     background-color: var(--gray-c);
-    border: none;
+    border: 1px var(--second-color-blue) solid;
     margin-bottom: 5px;
 }
 
@@ -824,7 +845,7 @@ body{
     background-color: var(--gray-c);
     color: var(--second-color-blue);
     border-radius: 5px;
-    border-color: var(--second-color-blue);
+    border: 1px var(--second-color-blue) solid;
     margin-bottom: 5px;
 }
 
@@ -854,6 +875,20 @@ body{
     justify-content: center;
 }
 
+
+.table_element .mod_ele2 .formbtn_chaque_colis{
+    height: 25%;
+    width: 100%;
+    text-align: center;
+}
+
+.table_element .mod_ele2 .formbtn_chaque_colis button{
+    height: 100%;
+    width: 80%;
+    border-radius: 5px;
+    color: var(--white);
+}
+
 .filtre .filtre_tit{
     display: flex;
     align-items: center;
@@ -864,7 +899,6 @@ body{
 }
 
 .filtre  select {
-    border: none;
     background-color: var(--gray-c);
     height: auto;
     margin: 0;
@@ -921,68 +955,19 @@ body{
     margin-top: 5px;
     font-size: 14px;
     border-bottom: 2px rgb(33, 53, 75,.7) solid;
-    display: flex;
-    justify-content: flex-start;
 }
 
-.element_container .element_header .afficher_mult{
-    display: flex;
-    justify-content: space-between;
-}
-
-.element_container .element_header .afficher_mult div {
-    height: 100%;
-    width: 30%;
-    font-size: 14px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.element_container .element_header .afficher_mult div select{
-    width: 20%;
-    height: 100%;
-}
-
-.element_container .element_header .afficher_mult .select_delivery button{
-    margin-left: 10px;
-    margin-bottom: 5px;
-    padding: 5px;
-    color: var(--second-color-blue);
-}
-
-.element_container .element_header .afficher_mult .select_delivery select{
-    width: 70%;
-}
-/* historique part*/
-.element_container .element_header .afficher_mult .select_hstq{
-    width: 50%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.element_container .element_header .afficher_mult .select_hstq input{
-    width: 70px;
-    height: 20px;
-    margin: 0px 5px;
-    margin-bottom: 10px;
-}
-
-/* end */
-
-.element_container .element_header .numb_afficher  label{
+.element_container .element_header .numb_afficher label{
     margin: 0px 10px;
     font-weight: bold;
     font-family: 'Fredoka', sans-serif;
     font-family: 'Lato', sans-serif;
     font-family: 'Paytone One', sans-serif;
     height: 100%;
+    width: 20%;
 }
 
-.element_container .element_header .numb_afficher  select{
-    border: none;
+.element_container .element_header .numb_afficher select{
     background-color: var(--gray-c);
     height: 80%;
     margin: 0;
@@ -992,6 +977,7 @@ body{
     border-radius: 5px;
     padding: 5px;
     margin-bottom: 5px;
+    
 }
 
 .element_container .hide_title_colis  .form2{
@@ -1009,7 +995,7 @@ body{
 }
 
 .ele_container{
-    height: 30%;
+    height: 25%;
     width: 100%;
     border-top: 2px rgb(33, 53, 75,.7) solid;
     border-bottom: 2px rgb(33, 53, 75,.7) solid;
@@ -1021,6 +1007,8 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    display: none;
+    
 }
 
 .ele_container .autre_ele p{
@@ -1039,15 +1027,15 @@ body{
 .table_element{
    display: flex;
    align-items: center;
-   
+   justify-content: space-between;
 }
 
 .table_element  .autre_ele{
     height: 100%;
-    width: 75%;
+    width: 82%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
  } 
 
  .table_element  .autre_ele div{
@@ -1061,18 +1049,19 @@ body{
     border-right: 1px rgb(33, 53, 75,.7) solid;
  }
 
-.table_element .autre_ele .ele{
+ .table_element .autre_ele .ele{
      text-align: center;
-}
+ }
 
 
 .table_element  .mod_ele{
-    width: 12.5%;
+    width: 9%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
+
 
 .table_element .mod_ele .modifier{
     height: 22px;
@@ -1171,41 +1160,6 @@ body{
     background-color: var(--green);
 }
 
-
-/* choose delivery */
-
-.choose_delivery_form{
-    height: 100%;
-    color: var(--second-color-blue);
-}
-
-.time_name{
-    height: 70%;
-    width: 100%;
-    text-align: center;
-}
-
-.time_name label{
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-}
-
-.time_name input{
-    height: 12px;
-    width: 80%;
-    padding: 5px;
-    border: 2px var(--black) solid;
-    outline: none;
-    
-}
-
-.delivery_mod button{
-    width: 98%;
-}
-
-/* new up */
-
 .statics{
     width: 100%;
     color: var(--second-color-blue);
@@ -1222,34 +1176,6 @@ body{
     font-size: 17px;
 }
 
-
-.form_list_livreur{
-    width: 100%;
-}
-
-.form_list_livreur .username {
-    width: 200px;
-    border-radius: 0px;
-    margin: 0px;
-    margin-bottom: 5px;
-}
-
-.form_list_livreur input {
-    width: 70px;
-    border-radius: 0px;
-    margin: 0px 5px;
-    margin-bottom: 5px;
-    border: 1px black solid;
-    color: var(--second-color-blue);
-}
-
-.form_list_livreur button{
-    padding: 5px;
-}
-
-.filtre_noslivreur{
-    width: 30%;
-}
 
 /*  responcive */
 
@@ -1521,3 +1447,28 @@ body{
 
 }
 
+
+.filtre_box_container{
+    height: auto;
+    width: 100%;
+    color: var(--second-color-blue);
+    display: flex;
+    align-content: center;
+    justify-content: flex-start;
+}
+
+.filtre_box_container p{
+    background-color: var(--gray-c);
+    padding: 10px;
+    border: 1px var(--second-color-blue) solid;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.filtre_box_container div{
+    margin: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

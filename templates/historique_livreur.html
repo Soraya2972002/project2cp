@@ -171,10 +171,6 @@
                         </div>
                     </div>
                     <div class="mod_ele mod_ele2">
-                        <form method="POST" action="{{ instance.get_absolute_url }}retour_suspendre/">
-                            {% csrf_token %}
-                        <button type="submit">Suspendre</button>
-                        </form>
                         <button class="imprimer">Etiquettes</button>
                     </div>
                 </div>
@@ -183,10 +179,13 @@
                     <p> sorry, no queries match your search </p>
                 </div>
                 {% endfor %}
-                {% if object_list %}
-                    <label> Total des colis : </label>
-                    {{somme1}}
-                {% endif %}
+                <div class="statics">
+                    {% if object_list %}
+                    <label> Total des colis : {{somme1}}</label>
+                    
+                    {% endif %}
+                </div>
+                
             </div>
         </div>
     </div>

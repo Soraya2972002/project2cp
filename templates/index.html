@@ -1,4 +1,12 @@
 {% load static %}
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,14 +22,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
     <title>World Express</title>
 </head>
 <body>
     <header>
         <div class="head_container hidde_nav">
             <div class="logo_container">
-                <a href="./index.html"><img src="{% static 'image/world_express_logo.png' %}" alt="logo"></a>
+                <a href="{% url 'home' %}"><img src="{% static 'image/world_express_logo.png' %}" alt="logo"></a>
             </div>
             <a href="#" class="toggle-button" id="toggle">
                 <span class="bar"></span>
@@ -39,8 +47,8 @@
             <div class="contact_container">
                 <form method = "post" action='' class="form_contact">
                     {% csrf_token %}
-                      <button type = "submit" class="btn_log"><a href = "{% url 'signup' %}" id= "text_font_new" class="sign_class">Signup</a></button>
-                      <button type = "submit" class="btn_log"><a href = "{% url "signin" %}" id= "text_font_new" class="log_class">SignIn</a></button>
+                      <button type = "submit" class="sign_class"><a href = "{% url 'signup' %}" id= "text_font_new" class="sign_class">Signup</a></button>
+                      <button type = "submit" class="log_class"><a href = "{% url "signin" %}" id= "text_font_new" class="log_class">SignIn</a></button>
                 </form>
             </div>
         </div>
@@ -49,13 +57,12 @@
         <div class="main_section_container"> 
             <div class="text_container">
                 <div class="paragraphe_titel_container" id="text_font_titles">
-
-{% for message in messages %}
-                    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
-                    {% endfor %}
                     <h1><span id="second_red">World Express</span><br>The Quickest <br><span id="second_red">delivery</span> in <br><span id="second_red">Algeria</span></h1>
                 </div>
                 <div class="paragraphe_container">
+                    {% for message in messages %}
+                        <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+                    {% endfor %}
                     <p>Order your products at any time and we will <br> deliver them directly to your home.</p>
                 </div>
                 <div class="main_order_button">
@@ -99,7 +106,7 @@
             <div class="sending_steps_container">
                 <div class="steps_container hover">
                     <div class="steps_img hover_items">
-                    <img src="{% static 'image/locked_password_icon.png' %}" alt="login" class="hover_items"></div>
+                        <img src="{% static 'image/locked_password_icon.png' %}" alt="login" class="hover_items"></div>
                     <h3 class="hover_items">login</h3>
                     <p class="hover_items">Creat your acount and <br>login</p>
                 </div>
@@ -126,7 +133,7 @@
             </div>
             <div class="picture_our_container">
                 <div class="picture_container_2">
-                    <img src="{% static 'image/In no time-amico.svg' %}" alt="picture">
+                    <img src="{% static 'image/In no time-amico.svg' %}">
                 </div>
             </div>
         </div>
@@ -162,18 +169,8 @@
                         <option value="relizane">Relizane</option>
                     </select>
                 </div>
-                <div>
-                <form action='' method='POST' >
-                    {% csrf_token %}
-                {{ form.comment.errors }}
-                    <label for="{{ form.comment.id_for_label }}">Your Feedback:</label>
-                {{ form.comment }}
-                {{form.errors}}
-                <input type = "submit" value = 'save' />
-                </form>
             </div>
-            </div>
-            <div id="localisation">
+            <div id="localisation_container">
                 <iframe id="place" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3196.821835086569!2d5.061867514778112!3d36.75084737817693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12f2cddf0e04825f%3A0x3a201bbb1afef761!2sWorld%20Express!5e0!3m2!1sen!2sdz!4v1648845814979!5m2!1sen!2sdz" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
@@ -217,12 +214,6 @@
     <script src="{% static 'javascript/main.js' %}"></script>
 </body>
 </html>
-
-
-
-
-
-
 
 
 

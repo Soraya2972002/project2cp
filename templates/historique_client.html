@@ -177,10 +177,12 @@
                         <p> sorry, no queries match your search </p>
                     </div>
                     {% endfor %}
-                    {% if object_list %}
-                        <label> Total des colis : </label>
-                        {{somme1}}
-                    {% endif %}
+                   
+                    <div class="statics">
+                        {% if object_list %}
+                        <label> Total des colis : {{somme1}}</label>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

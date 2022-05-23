@@ -172,11 +172,11 @@
                         </div>
                     </div>
                     <div class="mod_ele mod_ele2">
-                        <form method="POST" action="{{ instance.get_absolute_url }}delete/" class="form_container">
+                        <form method="POST" action="{{ instance.get_absolute_url }}delete/" class="formbtn_chaque_colis">
                             {% csrf_token %}
                         <button type="submit" class="supprimer_ele">DELETE</button>
                         </form>
-                        <form method="POST" action="{{ instance.get_absolute_url }}validate_expedier/" class="form_container">
+                        <form method="POST" action="{{ instance.get_absolute_url }}validate_expedier/" class="formbtn_chaque_colis">
                             {% csrf_token %}
                         <button type="submit" class="valider_lexp">VALIDATE</button>
                         </form>

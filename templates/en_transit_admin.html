@@ -114,11 +114,11 @@
                         </select>
                         <label for="nmb_afficher">élément</label>
                     </div>
-                    <form method="POST" action="{% url 'selectionner_transit' %}">
+                    <form method="POST" action="{% url 'selectionner_transit' %}" class = "form_valider">
                         {% csrf_token %}
                     <div class="select_delivery">
                         
-                        <button type = "submit" class = "filtrBtn">Valider les colis sélectionnés</button>
+                        <button type = "submit" class = "filtrBtn">Valider </button>
                         
                     </div>
                 </div>
@@ -199,6 +199,7 @@
                     <p> sorry, no queries match your search </p>
                 </div>
                 {% endfor %}
+            </form>
                 </div>
             </div>
         </div>

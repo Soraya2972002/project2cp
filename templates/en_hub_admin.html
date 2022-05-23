@@ -32,7 +32,7 @@
                 <select name="type" id="">
                     <option value="0">Type De Livraison</option>
                     <option value="livraison">livraison</option>
-                    <option value="echange">échange</option>
+                    background-color: #007f66;<option value="echange">échange</option>
                     <option value="pick up">pick up</option>
                     <option value="recouvrement">recouvrement</option>
                 </select>
@@ -117,17 +117,17 @@
                         </select>
                         <label for="nmb_afficher">élément</label>
                     </div>
-                    <form method="POST" action="{% url 'selectionner_hub' %}">
-                        {% csrf_token %}
                     <div class="select_delivery">
-                        
+                        <form method="POST" action="{% url 'selectionner_hub' %}" class = "form_hub">
+                            {% csrf_token %}
+                        <div class = "select_delivery">
                         <select name="Choices" id="">
                             <option value="1">Choose a delivery man</option>
                             <option value="3">Suspendre les colis sélectionnés</option>
                             <option value="0">Delete selected entries</option>
                         </select>
                         <button type = "submit">submit</button>
-                        
+                    </div>
                     </div>
                 </div>
                 <div class="titles_colis form1">

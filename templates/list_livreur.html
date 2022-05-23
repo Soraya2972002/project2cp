@@ -1,26 +1,27 @@
 {% extends 'admin_base_main.html' %}
 {% block content%}
 
-
-
-
-
-
-
-
-
 <div class="ajouter_container closeSidebare">
     <div class="description pret_main">
-        <h3 id="text_font_titles">Nos livreur</h3>
+        <h3 id="text_font_titles">Nos livreurs</h3>
         <p id="text_font_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae assumenda nostrum quidem atque delectus.</p>
     </div>
     <div class="main_container">
         <div class="filtre filtre_pret">
+            <form method="POST" action="" class="form_pret_exp">
+                {% csrf_token %}
             <div class="filtre_tit">
                 <h3 id="text_font_titles">Filtre:</h3>
             </div>
-            <form method="POST" action="" class="form_list_livreur">
-                {% csrf_token %}
+            <div>
+                <select name="type" id="">
+                    <option value="0">type</option>
+                    <option value="livraison">livraison</option>
+                    <option value="echange">échange</option>
+                    <option value="pick up">pick up</option>
+                    <option value="recouvrement">recouvrement</option>
+                </select>
+            </div>
             <div>
                 <select name="user_wilaya" id="wilaya_send">
                     <option value="0">-- Select Willaya --</option>
@@ -74,14 +75,16 @@
                     <option value="47">Ghardaïa</option>
                     <option value="48">Relizane</option>
                 </select>
-                <button type="submit" class = "filtrBtn">Filter</button>
-            </form> 
             </div>
+            <div>
+                <button type="submit" class="filtrBtn">Filter</button>
+            </div>
+            </form> 
             <div class="filtre_noslivreur">
                 <form method="POST" action="" class="form_list_livreur">
                     {% csrf_token %}
                     <input type = "texte" name = 'username' value = '' placeholder="Username" class="username">
-                <button type="submit" class = "filtrBtn">Search</button>
+                <button type="submit">Search</button>
                 </form>
             </div>
             <div class="filtre_noslivreur">
@@ -89,9 +92,10 @@
                     {% csrf_token %}
                     <input type = "texte" name = 'fname' placeholder="First name">
                     <input type = "texte" name = 'lname' placeholder="Last name">
-                    <button type="submit" class = "filtrBtn">Search</button>
+                    <button type="submit">Search</button>
                 </form>
             </div>
+
         </div>
         <div class="element_container">
             <div class="element_header hide_title_colis" >
@@ -107,37 +111,33 @@
                     <label for="nmb_afficher">élément</label>
                 </div>
                 <div class="titles_colis form1">
+                    
                     <div>
-                        <h4>Username</h4>
-                    </div>
-                    <div>
-                        <h4>Nom</h4>
-                    </div>
-                    <div>
-                        <h4>Prenom</h4>
+                        <h4>Full name</h4>
                     </div>
                     <div>
                         <h4>Email</h4>
                     </div>
                     <div>
-                        <h4>Montant</h4>
+                        <h4>phone</h4>
                     </div>
+                    <div>
+                        <h4>Wilaya</h4>
+                    </div>
+                    
                 </div>
                 <div class="titles_colis form2">
                     <div>
-                        <h4>info colis</h4>
+                        <h4>Nome</h4>
                     </div>
                     <div>
-                        <h4>Adr Des</h4>
+                        <h4>Email</h4>
                     </div>
                     <div>
-                        <h4>info DES</h4>
+                        <h4>Phone</h4>
                     </div>
                     <div>
-                        <h4>RQ & PR</h4>
-                    </div>
-                    <div>
-                        <h4>Montant</h4>
+                        <h4>Wilaya</h4>
                     </div>
                 </div>
             </div>
@@ -147,39 +147,28 @@
                      <div class="mod_ele">
                          
                      </div>
-                     <div class="autre_ele">
+                     <div class="autre_ele table_nos_livreur">
                          <div class="ele">
-                             <p><i class="fa fa-id-badge" aria-hidden="true"></i> {{user.username}}</p>
-                             <p><i class="fa fa-archive" aria-hidden="true"></i>  Nmb commande</p>
-                             <p><i class="fa fa-truck" aria-hidden="true"></i> type</p>
-                             <p><i class="fa fa-calendar" ></i> temps</p>
-                         </div>
-                         <div>
-                             <p><i class="fa fa-map" aria-hidden="true"></i> wilaya</p>
-                             <p><i class="fa fa-location-arrow" aria-hidden="true"></i> commune</p>
-                             <p><i class="fa fa-map-marker" aria-hidden="true"></i> adresse</p>
-                         </div>
-                         <div>
                              <p><i class="fa fa-id-card" aria-hidden="true"></i> Nom</p>
+                         </div>
+                         <div>
+                             <p><i class="fa fa-envelope" aria-hidden="true"></i> wilaya</p>
+                         </div>
+                         <div>
                              <p><i class="fa fa-mobile" aria-hidden="true"></i> num tel</p>
                          </div>
                          <div>
-                             <p><i class="fa fa-comment" aria-hidden="true"></i> RQ</p>
-                             <p><i class="fa fa-box"></i> produit</p>
-                             <p><i class="fa fa-cubes" aria-hidden="true"></i> pois</p>
-                         </div>
-                         <div class="ele">
-                             <p><i class="fa fa-dollar-sign" aria-hidden="true"></i> prix</p>
+                             <p><i class="fa fa-map" aria-hidden="true"></i> Wilaya</p>
                          </div>
                      </div>
                      <div class="mod_ele mod_ele2">
-                        <form method="POST" action="" class="form_container">
+                        <form method="POST" action="" class="formbtn_chaque_colis">
                             {% csrf_token %}
-                        <button type="submit" class="supprimer_ele" name = 'submit' value = {{ user.id }}>Licensier ce livreur + envoyer un email</button>
+                        <button type="submit" class="valider_lexp" name = 'submit' value = {{ user.id }}>Licensier & Send Email</button>
                         </form>
-                        <form method="POST" action="" class="form_container">
+                        <form method="POST" action="" class="formbtn_chaque_colis">
                             {% csrf_token %}
-                        <button type="submit" class="supprimer_ele" name = 'submit1' value = {{ user.id }}>Licensier ce livreur</button>
+                        <button type="submit" class="valider_lexp" name = 'submit1' value = {{ user.id }}>Licensier livreur</button>
                         </form>
                      </div>
                  </div>
@@ -187,17 +176,23 @@
                  <div class="ele_container aucune_element">
                      <p> sorry, no queries match your search </p>
                  </div>
-                {% endfor %}
+                 {% endfor %}
                  <div class="statics">
-                    {% if object_list %}
+                    {% if users %}
                         <h3> Total des {{userr}}: </h3>
-                       {{somme}}
+                        {{somme}}
                     {% endif %}
                 </div>
              </div>
          </div>
      </div>
  </div>
+
+
+
+
+
+
 
 
 
