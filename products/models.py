@@ -19,7 +19,7 @@ def clean_number(number):
     number = str(number)
     if len(number) == 9:
         print(number[:2])
-        if number[:2] != '5' and  number[:2] != '7' and number[:2] != '6':
+        if number[:1] != '5' and  number[:1] != '7' and number[:1] != '6':
             raise ValidationError('This is not a valid phone number')
     else:
         raise ValidationError('This is not a valid phone number')

@@ -33,5 +33,5 @@ urlpatterns = [
     path('<int:id>/retour_livreur/', retour_chez_livreur, name='retour_chez_livreur'),
     path('<int:id>/retour_hub/', retour_hub, name='retour_hub'),
     path('<int:id>/retour_suspendre/', retour_suspendre, name='retour_suspendre'),
-    path('<int:id>/retour_suspendre/', all_suspendre, name='all_suspendre'),
+    path('<int:id>/all_suspendre/', all_suspendre, name='all_suspendre'),
 ]

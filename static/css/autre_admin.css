@@ -488,12 +488,26 @@ body{
     justify-content: space-around;
 }
 
+.form_enretard{
+    justify-content: start;
+    margin-left: 10px;
+}
+
+.form_enretard div select{
+    margin:0px 15px;
+}
+
 .filtre .form_pret_exp div{
     height: 100%;
-    width: 25%;
+    width: 40%;
     display: flex;
     align-items: center;
     justify-content: center;
+
+}
+
+.filtre .form_pret_exp div .filtrBtn{
+    margin: 0;
 }
 
 .filtre .filtre_tit h3{
@@ -514,6 +528,8 @@ body{
     width: 10%;
     height: 100%;
 }
+
+
 
 .filtre  select {
     border: 1px var(--second-color-blue) solid;
@@ -751,6 +767,10 @@ body{
     text-align: center;
 }
 
+.table_element .mod_ele2 .formbtn_en_retard{
+    height: 15%;
+}
+
 .table_element .mod_ele2 .formbtn_chaque_colis button{
     height: 100%;
     width: 80%;
@@ -896,10 +916,15 @@ body{
 
 .form_list_livreur{
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+
+
 .form_list_livreur .username {
-    width: 200px;
+    width: 170px;
     border-radius: 0px;
     margin: 0px;
     margin-bottom: 5px;
@@ -958,6 +983,14 @@ body{
     border-color: var(--second-color-blue);
     cursor: pointer;
 }
+
+.element_container .element_header .numb_afficher .numb_container select{
+    height: 30px;
+    margin-bottom: 15px;
+}
+
+
+
 
 .numb_afficher .form_valider{
     width: 20%;

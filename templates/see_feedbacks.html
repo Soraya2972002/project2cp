@@ -34,10 +34,20 @@
             </div>
         </form>
         </div>
+        <div class="filtre_box_container">
+            <div>
+                <h4 id="text_font_titles"></h3>
+            </div>
+            {%for item in list%}
+            <div>
+                <p>{{item}}</p>
+            </div>   
+            {%endfor%}
+        </div>
         <div class="element_container">
             <div class="element_header hide_title_colis" >
                 <div class="numb_afficher afficher_mult">
-                    <div>
+                    <div class="numb_container">
                         <label for="nmb_afficher">Afficher:</label>
                         <select name="nmb_afficher" id="nmb_afficher">
                         <option value="10">10</option>

@@ -19,7 +19,7 @@
                     <select name="type" id="">
                         <option value="0">Type De Livraison</option>
                         <option value="livraison">livraison</option>
-                        <option value="echange">échange</option>
+                        <option value="échange">échange</option>
                         <option value="pick up">pick up</option>
                         <option value="recouvrement">recouvrement</option>
                     </select>
@@ -32,50 +32,49 @@
                         <option value="Laghouat">Laghouat</option>
                         <option value="Oum el-Bouaghi"> Oum el-Bouaghi</option>
                         <option value="Batna">Batna</option>
-                        <option value="6">Béjaïa</option>
-                        <option value="7">Biskra</option>
-                        <option value="8">Béchar</option>
-                        <option value="9">Blida</option>
-                        <option value="10">Bouira</option>
-                        <option value="11">Tamanghasset</option>
-                        <option value="12">Tébessa</option>
-                        <option value="13">Tlemcen</option>
-                        <option value="14">Tiaret</option>
-                        <option value=" 15">Tizi Ouzou</option>
-                        <option value="16">Algiers</option>
-                        <option value="17">Djelfa</option>
-                        <option value="18">Jijel</option>
-                        <option value="19">Sétif</option>
-                        <option value="20">Saïda</option>
-                        <option value="21">Skikda</option>
-                        <option value="22">Sidi Bel Abbes</option>
-                        <option value="23">Annaba</option>
-                        <option value="24">Guelma</option>
-                        <option value="25">Constantine</option>
-                        <option value="26">Médéa</option>
-                        <option value="27">Mostaganem</option>
-                        <option value="28">M'Sila</option>
-                        <option value="29">Mascara</option>
-                        <option value="30">Ouargla</option>
-                        <option value="30">Oran</option>
-                        <option value="32">El Bayadh</option>
-                        <option value="33">Illizi</option>
-                        <option value="34">Bordj Bou Arréridj</option>
-                        <option value="35">Boumerdès</option>
-                        <option value="36">El Taref</option>
-                        <option value="37">Tindouf</option>
-                        <option value="38">Tissemsilt</option>
-                        <option value="39">El Oued</option>
-                        <option value="40">Khenchela</option>
-                        <option value="40">Souk Ahras</option>
-                        <option value="41">Souk Ahras</option>
-                        <option value="42">Tipasa</option>
-                        <option value="43">Mila</option>
-                        <option value="44">Aïn Defla</option>
-                        <option value="45">Naama</option>
-                        <option value="46">Aïn Témouchent</option>
-                        <option value="47">Ghardaïa</option>
-                        <option value="48">Relizane</option>
+                        <option value="Béjaïa">Béjaïa</option>
+                        <option value="Biskra">Biskra</option>
+                        <option value="Béchar">Béchar</option>
+                        <option value="Blida">Blida</option>
+                        <option value="Bouira">Bouira</option>
+                        <option value="Tamanghasset">Tamanghasset</option>
+                        <option value="Tébessa">Tébessa</option>
+                        <option value="Tlemcen">Tlemcen</option>
+                        <option value="Tiaret">Tiaret</option>
+                        <option value="Tizi Ouzou">Tizi Ouzou</option>
+                        <option value="Algiers">Algiers</option>
+                        <option value="Djelfa">Djelfa</option>
+                        <option value="Jijel">Jijel</option>
+                        <option value="Sétif">Sétif</option>
+                        <option value="Saïda">Saïda</option>
+                        <option value="Skikda">Skikda</option>
+                        <option value="Sidi Bel Abbes">Sidi Bel Abbes</option>
+                        <option value="Annaba">Annaba</option>
+                        <option value="Guelma">Guelma</option>
+                        <option value="Constantine">Constantine</option>
+                        <option value="Médéa">Médéa</option>
+                        <option value="Mostaganem">Mostaganem</option>
+                        <option value="M'Sila">M'Sila</option>
+                        <option value="Mascara">Mascara</option>
+                        <option value="Ouargla">Ouargla</option>
+                        <option value="Oran">Oran</option>
+                        <option value="El Bayadh">El Bayadh</option>
+                        <option value="Illizi">Illizi</option>
+                        <option value="Bordj Bou Arréridj">Bordj Bou Arréridj</option>
+                        <option value="Boumerdès">Boumerdès</option>
+                        <option value="El Taref">El Taref</option>
+                        <option value="Tindouf">Tindouf</option>
+                        <option value="Tissemsilt">Tissemsilt</option>
+                        <option value="El Oued">El Oued</option>
+                        <option value="Khenchela">Khenchela</option>
+                        <option value="Souk Ahras">Souk Ahras</option>
+                        <option value="Tipasa">Tipasa</option>
+                        <option value="Mila">Mila</option>
+                        <option value="Aïn Defla">Aïn Defla</option>
+                        <option value="Naama">Naama</option>
+                        <option value="Aïn Témouchent">Aïn Témouchent</option>
+                        <option value="Ghardaïa">Ghardaïa</option>
+                        <option value="Relizane">Relizane</option>
                     </select>
                 </div>
                 <div>
@@ -89,6 +88,16 @@
                     <button type="submit" class = "filtrBtn">Filter</button>
                 </div>
             </form>
+            </div>
+            <div class="filtre_box_container">
+                <div>
+                    <h4 id="text_font_titles"></h3>
+                </div>
+                {%for item in list%}
+                <div>
+                    <p>{{item}}</p>
+                </div>   
+                {%endfor%}
             </div>
             <div class="element_container">
                 <div class="element_header hide_title_colis" >

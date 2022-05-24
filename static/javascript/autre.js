@@ -1,14 +1,55 @@
 const selector = document.querySelectorAll(".hidden_ele")
 const a_hover = document.querySelectorAll(".a_hover")
+const notifContent = document.querySelector(".ajouter_notif")
+const navContainer = document.querySelector(".nav_menu_container")
+const toggleBtn = document.getElementById("toggle")
+const closeBtn = document.querySelector(".close")
+const closesideClick = document.querySelector(".closeSidebare")
+const tableColisPretexp = document.querySelectorAll(".table_element")
+const printAllEttiquet = document.getElementById("print_all")
+const printOneEttiquet = document.querySelectorAll(".print_one_element")
+const printBtnOne = document.querySelectorAll(".impBtn_one")
+let notfNumber = 0;
+
+/* print*/
+
+  printBtnOne.forEach(function(onelement,i){
+    onelement.addEventListener('click',(eprint)=>{
+      const target  = printOneEttiquet[i]
+      html2pdf(target)
+    })
+  })
+
+
+
+function printettquet(){
+  html2pdf(printAllEttiquet)
+  console.log(002)
+}
+
+//printettquet()
+
+/*==============*/
+
+toggleBtn.addEventListener("click",()=>{
+  navContainer.classList.toggle("hide_sidebar")
+})
+
+closeBtn.addEventListener("click",()=>{
+  navContainer.classList.toggle("hide_sidebar")
+})
+ closesideClick.addEventListener("click",()=>{
+   navContainer.classList.remove("hide_sidebar")
+})
 
 
 
 selector.forEach(function(element){
     element.addEventListener("click",(e)=>{
-      const li_hide =  e.currentTarget.parentElement
-      const rotate = e.currentTarget.querySelector(".fa-angle-down")
-      li_hide.classList.toggle("hide_sub")
-      rotate.classList.toggle("fa-rotate-180")
+       const li_hide =  e.currentTarget.parentElement
+       const rotate = e.currentTarget.querySelector(".fa-angle-down")
+       li_hide.classList.toggle("hide_sub")
+       rotate.classList.toggle("fa-rotate-180")
     })
 })
 
@@ -25,22 +66,23 @@ a_hover.forEach((element)=>{
       }
   })
 })
-/*document.getElementById('id_for_wilaya').addEventListener('change', function(){
-  document.getElementById('id_for_commune').innerHTML = "";
-  $.ajax({
-    type : 'POST',
-    url : "products/get_commune",
-    data : {
-      wilaya : $("#d_for_wilaya").val(),
-    },
-    dataType : 'json',
-    success:function(response){
-      var select = document.getElementById(id_for_commune);
-      for(var i = 0; i < response.communes.length ; i++){
-        var option = document.createElement("option");
-        option.value = response.courses[i]["Commune_Name"];
-        select.appendChild(option)
-      }
-    }
-  }) 
-});*/
+
+function PretNotification(){
+  let NmbDiv = tableColisPretexp.length 
+  if (NmbDiv!== 0) notifContent.classList.remove("hide_notif")
+  notifContent.innerHTML = NmbDiv
+}
+
+
+/*
+preNotification.addEventListener("submit",e =>{
+  e.preventDefault()
+
+  if (notifContent.classList.contains("hide_notif")){
+    notifContent.classList.remove("hide_notif")
+  }
+  notfNumber++
+  notifContent.innerHTML = notfNumber
+})
+
+*/

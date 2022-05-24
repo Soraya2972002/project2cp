@@ -45,11 +45,21 @@
                 </ul>
             </div>
             <div class="contact_container">
+                {% if user.is_authenticated %}
+                    {% if user.groups.all.0.name == "Livreurs" %}
+                        <button type = "submit" class="sign_class"><a href = "{% url 'livreur' %}" id= "text_font_new" class="sign_class">Go to menu</a></button>
+                    {% elif user.is_superuser %}
+                        <button type = "submit" class="sign_class"><a href = "{% url 'administrateur' %}" id= "text_font_new" class="sign_class">Go to menu</a></button>
+                    {% else %}
+                        <button type = "submit" class="sign_class"><a href = "{% url 'client' %}" id= "text_font_new" class="sign_class">Go to menu</a></button>
+                    {% endif %}
+                {% else %}
                 <form method = "post" action='' class="form_contact">
                     {% csrf_token %}
                       <button type = "submit" class="sign_class"><a href = "{% url 'signup' %}" id= "text_font_new" class="sign_class">Signup</a></button>
                       <button type = "submit" class="log_class"><a href = "{% url "signin" %}" id= "text_font_new" class="log_class">SignIn</a></button>
                 </form>
+                {% endif %}
             </div>
         </div>
     </header>
@@ -87,8 +97,8 @@
         <div class="description_container" id="about">
             <div class="text_desc_container">
                 <div class="about_container border_decoration" >
-                    <h1 id="text_font_new">About Us:</h1>
-                    <p id="text_font_new">World Express est une Société de Livraison, dont le bureau principal est situé dans le centre de Béjaïa World Express n’a pas de secteur d’activité particulier, ils livrent autant pour les particuliers que des livraisons en gros.</p>
+                    <h1 id="text_font_new">Qui sommes nous ?</h1>
+                    <p id="text_font_new">World express est une entreprise algérienne de livraison à domicile crée par des nationaux pour satisafire aux exigences toujours plus grandes des entreprises algériennes en matiere de transport de courrier express. ces exigences, qui requièrent une gestion rigoureuse à tous les niveaux des processus de livraison et d'acheminement, se declinent à travers les slogans que nous avons adopté, a savoir, rapidité, qualité et securité.</p>
                 </div>
             </div>
             <div class="picture_desc_container">
@@ -100,25 +110,25 @@
     <section>
         <div class="sending_container" id="text_font_new"> 
             <div class="sending_text_container">
-                <h1>How you can send a package ?</h1>
-                <p>By following this three easy steps you can send a package</p>
+                <h1>Comment pouvez-vous envoyer un colis ?</h1>
+                <p>Le processus d'envoie de colis est simple, vous n'avez qu'à suivre les 3 étapes suivantes:</p>
             </div>
             <div class="sending_steps_container">
                 <div class="steps_container hover">
                     <div class="steps_img hover_items">
                         <img src="{% static 'image/locked_password_icon.png' %}" alt="login" class="hover_items"></div>
-                    <h3 class="hover_items">login</h3>
-                    <p class="hover_items">Creat your acount and <br>login</p>
+                    <h3 class="hover_items">Login</h3>
+                    <p class="hover_items">Veuillez créer votre compte personnel<br>puis appuyer sur login</p>
                 </div>
                 <div class="steps_container ">
                     <div class="steps_img hover_items"><img src="{% static 'image/guide_list_icon.png' %}" alt="form"></div>
                     <h3 class="hover_items">Destination</h3>
-                    <p class="hover_items">Fill Up the form</p>
+                    <p class="hover_items">Veuillez remplir un formulaire mentionnant tous les détails de la destination.</p>
                 </div>
                 <div class="steps_container">
                     <div class="steps_img hover_items"><img src="{% static 'image/delivery_truck_shippingicon.png' %}" alt="login"></div>
-                    <h3 class="hover_items">Recieve</h3>
-                    <p class="hover_items">Recieve your package</p>
+                    <h3 class="hover_items">Reception</h3>
+                    <p class="hover_items">Veuillez recevoir votre colis en toute sécurité et bon état.</p>
                 </div>
             </div>
         </div>
@@ -127,8 +137,8 @@
         <div class="our_services_container">
             <div class="our_services_text text_desc_container">
                 <div class="about_container our_services_border_decoration " id="text_font_new">
-                    <h1>Our Services:</h1>
-                    <p id="text_font_paragraph">World Express est une Société de Livraison, dont le bureau principal est situé dans le centre de Béjaïa World Express n’a pas de secteur d’activité particulier, ils livrent autant pour les particuliers que des livraisons en gros.</p>
+                    <h1>Nos services :</h1>
+                    <p id="text_font_paragraph">L'entreprise WORLD EXPRESS vous permet d'envoyer vos colis à vos destinations choisies dans le territoire algérien. <br>- Notre disponiblité à la hauteur de votre confiance. <br>- Votre document est important pour vous, nous l'acheminons en toute sécurité.<br> - Ensemble nous defiérant l'espace et le temps. </p>
                 </div>
             </div>
             <div class="picture_our_container">
@@ -142,10 +152,10 @@
         <div class="location_container">
             <div class="location_text_container">
                 <div>
-                    <h1 id="text_font_new">Our Location:</h1>
+                    <h1 id="text_font_new">Notre location:</h1>
                 </div>
                 <div class="select_wilaya">
-                    <label for="willaya" id="text_font_new">your willaya:</label>
+                    <label for="willaya" id="text_font_new">Votre wilaya:</label>
                     <select name="user_wilaya" id="wilaya_location" onChange="location_we()">
                         <option value="0">-- Select Willaya --</option>
                         <option value="chlef">Chlef</option>
@@ -182,22 +192,22 @@
                     <div class="items">
                         <h3>Services</h3>
                         <ul>
-                            <li><a href="#">Delivery</a></li>
+                            <li><a href="#">Livraison</a></li>
                             <li><a href="#">Livreur</a></li>
-                            <li><a href="#">Our Offices</a></li>
+                            <li><a href="#">Nos bureaux</a></li>
                         </ul>
                     </div>
                     <div class="items">
                         <h3>About</h3>
                         <ul>
-                            <li><a href="#">Company</a></li>
-                            <li><a href="#">Team</a></li>
-                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Entreprise</a></li>
+                            <li><a href="#">Equipe</a></li>
+                            <li><a href="#">Carrières</a></li>
                         </ul>
                     </div>
                     <div class="company_text">
                         <h3>World Express</h3>
-                        <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
+                        <p>Entreprise possédant un bureau principal et d'autres secondaires en Algérie vous offre le service express de livraison de colis. <br> Tél : +213 (0) 0770603104<br> Gmail : worldexpress@gmail.com </p>
                     </div>
                 </div>
                 <div class="social_media_container">

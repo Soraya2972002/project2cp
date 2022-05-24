@@ -18,15 +18,24 @@ from django.contrib.auth.models import Group
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
+    user = ''
+    if request.user.is_authenticated:
+        if request.user.groups.filter(name='Livreurs').exists():
+            user = "livreur"
+        elif request.user.is_superuser:
+            user = "administrateur"
+        else:
+            user = "client"
     form = FeedbackForm(request.POST or None)
     if form.is_valid():
         obj = form.save(commit=False)
         obj.id_user = -1
-        obj.save()
-        return redirect('home')
+        obj.save()    
     context = {
-        'form': form
+        "form": form,
+        "userr":user
     }
+
     return render(request,'index.html',context)
 def contact_view(request, *args, **kwargs):
     my_context = {
@@ -35,7 +44,6 @@ def contact_view(request, *args, **kwargs):
         'my_number' : 123,
         'my_list' : [45,56,89]
     }
-    print(request.user)
     return render(request,'contact.html',my_context)
 
 @login_required
@@ -294,23 +302,16 @@ def selectionner_hub(request):
     if request.method == 'POST':
         choice =  request.POST.get('Choices')
         id_list = request.POST.getlist('selection')
-        print(id_list)
         for idd in id_list:
-            print(idd)
+            Product.objects.filter(id=int(idd)).update(checked=True) 
             if idd != '':
-                Product.objects.filter(id=int(idd)).update(checked=True)
                 if choice == '0': #delete
                     if idd != '':
                         Product.objects.filter(id=int(idd)).delete()   
-                if choice == '2': # validate
-                    if idd != '':
-                        Product.objects.filter(id=int(idd)).update(checked=False)
-                        Product.objects.filter(id=int(idd)).update(entransit=False)
-                        Product.objects.filter(id=int(idd)).update(enhub=True)
                 if choice == '3': # suspendre
                     if idd != '':
+                        Product.objects.filter(id=int(idd)).update(checked=False) 
                         Product.objects.filter(id=int(idd)).update(suspendus=True)
-                        Product.objects.filter(id=int(idd)).update(enlivraison=False)
                         query = Product.objects.get(id=int(idd))
                         email = query.email
                         body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + str(query.id) + " à destination vers " + query.wilaya + ' et envoyé à '+ query.nometpren + " a été suspendu, soit à votre demande, soit à cause d'un problème interne. Vous serez tenu au courant.\nWorld Express vous remercie pour votre confiance."
@@ -321,7 +322,7 @@ def selectionner_hub(request):
                             [email],
                             fail_silently=False,
                         )
-        if choice == "1": #choose delivery                    
+        if choice == "1": #choose delivery                   
             return redirect('choisir_livreurs') 
 
     return redirect('en_hub_admin')
@@ -345,6 +346,7 @@ def selectionner_transit(request):
 
 def selectionner_suspendus(request):
     if request.method == 'POST':
+        print('here')
         id_list = request.POST.getlist('selection')
         for idd in id_list:
             if idd != '':
@@ -487,6 +489,9 @@ def transit_admin_view(request):
         queryset = queryset.filter(wilaya = search_wilaya)  
         li.append(search_wilaya)
     if search_type != '0' and search_type != None:
+        print('aaa',search_type)
+        for query in queryset :
+            print(query.typeenvoi)
         queryset = queryset.filter(typeenvoi = search_type) 
         li.append(search_type)
     if search_date != None and search_date != "":
@@ -517,6 +522,10 @@ def a_recuperer_livreur_view(request):
     date2 = datetime.datetime(int(a1[0]), int(a1[1]), int(a1[2]), int(a2[0]), int(a2[1]), int(a2[2][:2]))
     li = []
     retard = ''
+    print(user.date)
+    print(user.en_cours_livraison)
+    print(date2)
+    print(date)
     if user.date != '0101-01-01 01:01' and user.en_cours_livraison != '' and date2 >= date :
         retard = 'Vous avez dépassé la deadline : ' + str(user.date) + ' pour récuperer vos colis. Veuillez vous rapprocher des bureaux de World Express dans les plus brefs délais.'
     queryset = Product.objects.filter(nometpren = '')
@@ -828,21 +837,19 @@ def suspendus_admin_view(request):
 def suspendus_client_view(request):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
-    search_date = request.POST.get('date', None)
+    search_prestation = request.POST.get('type de prestation', None)
     li = []
     queryset = Product.objects.filter(email = request.user.email) 
     queryset = queryset.filter(suspendus = True) 
-    if search_date != None and search_date != "":
-        l = search_date.split('-')
     if search_wilaya != "0" and search_wilaya!= None:
         queryset = queryset.filter(wilaya = search_wilaya)  
         li.append(search_wilaya)
     if search_type != '0' and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
         li.append(search_type)
-    if search_date != None and search_date != "":
-        queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
-        li.append(search_date)
+    if search_prestation != None and search_prestation != "0":
+        queryset = queryset.filter(typeprestation = search_prestation) 
+        li.append(search_prestation)
     context = {
         "object_list": queryset,
         'list' : li

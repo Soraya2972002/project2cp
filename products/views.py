@@ -43,6 +43,7 @@ def product_create_view(request):
         product.pretaexpedier = True
         product.save()
         form = ProductForm()
+        return redirect('pret_a_expedier')
     context = {
         'form': form
     }
@@ -53,8 +54,10 @@ def product_update_view(request, id):
     obj = get_object_or_404(Product, id=id)
     form = ProductForm(request.POST or None, instance=obj)
     if form.is_valid():
-        form.save()
-        return redirect('expedier')
+        product = form.save(commit=False)
+        product.pretaexpedier = True
+        product.save()
+        return redirect('pret_a_expedier')
     context = {
         'form': form
     }
@@ -108,6 +111,16 @@ def product_detail_view(request, id):
 def product_delete_view(request, id):
     obj = get_object_or_404(Product, id=id)
     if request.method == "POST":
+        users = User.objects.filter(groups__name = 'Livreurs')
+        for user in users :
+            colis = user.en_cours_livraison
+            a = colis.split(';')
+            colis = ''
+            for element in a:
+                if element != str(id):
+                    colis += ';' + element
+            idd = user.id
+            user.objects.update(id = idd)
         obj.delete()
         return redirect('pret_a_expedier')
     context = {
@@ -226,9 +239,21 @@ def retour_suspendre(request,id):
     return redirect("administrateur")
 
 def all_suspendre(request,id):
-    obj = Product.objects.filter(id = id)
+    obj = Product.objects.get(id = id)
     if request.method == "POST":
-        obj.update(suspendus = True)
+        print('here')
+        idd = obj.id
+        Product.objects.filter(id=int(idd)).update(suspendus=False)
+        query = Product.objects.get(id=int(idd))
+        email = query.email
+        body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + str(query.id) + " à destination vers " + query.wilaya + ' et envoyé à '+ query.nometpren + " a été suspendu, soit à votre demande, soit à cause d'un problème interne.\nWorld Express vous remercie pour votre confiance et s'excuse pour les désagréments."
+        send_mail(
+            'World Express notifications - suspension',
+            body_text,
+            'from@example.com',
+            [email],
+            fail_silently=False,
+        )
     return redirect("administrateur")
 
 @login_required
