@@ -9,7 +9,53 @@ const tableColisPretexp = document.querySelectorAll(".table_element")
 const printAllEttiquet = document.getElementById("print_all")
 const printOneEttiquet = document.querySelectorAll(".print_one_element")
 const printBtnOne = document.querySelectorAll(".impBtn_one")
+const profilCnt = document.querySelector('.btn_log')
+const formProfil = document.querySelector(".form_change_username")
+const popupcontainer = document.querySelectorAll(".confirm_contaner")
+const deletBtn = document.querySelectorAll(".DeletBtn")
+const closePopUp = document.querySelectorAll(".close_popup")
+
+
 let notfNumber = 0;
+
+
+/* popup profil*/
+
+
+
+/* profile hide*/
+function hideProfil(){
+  profilCnt.classList.add("profil_hide")
+  formProfil.classList.remove("hide_form")
+}
+
+/* pup up supprimer start*/
+
+deletBtn.forEach(function(deletElement,i){
+  deletElement.addEventListener("click",delet =>{
+    const targetToDelet = popupcontainer[i]
+    targetToDelet.classList.toggle("hide_delete")
+  })
+})
+
+closePopUp.forEach(function(closeElement,i){
+  closeElement.addEventListener("click", Cls=>{
+    const targetToclose = popupcontainer[i]
+    targetToclose.classList.toggle("hide_delete")
+
+  })
+})
+
+
+/* =========*/
+
+
+/* profile hide*/
+function hideProfil(){
+  profilCnt.classList.add("profil_hide")
+  formProfil.classList.remove("hide_form")
+}
+
 
 /* print*/
 
@@ -21,16 +67,12 @@ let notfNumber = 0;
   })
 
 
-
 function printettquet(){
   html2pdf(printAllEttiquet)
-  console.log(002)
 }
 
-//printettquet()
-
 /*==============*/
-
+/*
 toggleBtn.addEventListener("click",()=>{
   navContainer.classList.toggle("hide_sidebar")
 })
@@ -42,7 +84,7 @@ closeBtn.addEventListener("click",()=>{
    navContainer.classList.remove("hide_sidebar")
 })
 
-
+*/
 
 selector.forEach(function(element){
     element.addEventListener("click",(e)=>{

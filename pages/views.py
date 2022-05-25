@@ -346,7 +346,6 @@ def selectionner_transit(request):
 
 def selectionner_suspendus(request):
     if request.method == 'POST':
-        print('here')
         id_list = request.POST.getlist('selection')
         for idd in id_list:
             if idd != '':
@@ -657,26 +656,26 @@ def historique_admin_view(request):
         lii.append(search_date)
     if search_date1 != None and search_date2 != None :
         lii.append(search_date1 + ' :: ' + search_date2)
-        new_queryset = queryset
+        new_queryset = Product.objects.filter(nometpren = '')
         for el in queryset:
             date = el.date
-            l = date.split(' ')
+            l = str(date).split(' ')
             li = l[0].split('-')
-            l1 = search_date.split("-")
-            l2 = search_date.split('-') 
-            date = datetime.date(l[0],l[1],l[2]) 
-            date1 = datetime.date(l1[0],l1[1],l1[2]) 
-            date2 = datetime.date(l2[0],l2[1],l2[2]) 
+            l1 = search_date1.split("-")
+            l2 = search_date2.split('-') 
+            date = datetime.date(int(li[0]),int(li[1]),int(li[2])) 
+            date1 = datetime.date(int(l1[0]),int(l1[1]),int(l1[2])) 
+            date2 = datetime.date(int(l2[0]),int(l2[1]),int(l2[2])) 
             if date >= date1 and date <= date2:
-                new_queryset = new_queryset.union(el)
+                new_queryset = new_queryset.union(Product.objects.filter(id = el.id))
         queryset = new_queryset
-    if search_price1 != None and search_price2 != 0:
+    if search_price1 != None and search_price2 != None and search_price1 != "" and search_price2 != "":
         lii.append(search_price1 + ' :: ' + search_price2)
-        new_queryset = queryset
+        new_queryset = Product.objects.filter(nometpren = '')
         for el in queryset :
-            price = el.payés
-            if price >= search_price1 and price <= search_price2:
-                new_queryset = new_queryset.union(el)
+            price = int(el.payés)
+            if price >= int(search_price1) and price <= int(search_price2):
+                new_queryset = new_queryset.union(Product.objects.filter(id = el.id))
         queryset = new_queryset
     somme1 = 0
     for el in queryset:
@@ -759,24 +758,24 @@ def en_hub_admin_view(request):
 def en_livraison_admin_view(request):
     search_wilaya = request.POST.get('user_wilaya', None)
     search_type = request.POST.get('type', None)
-    search_date = request.POST.get('date', None)
-    queryset = Product.objects.filter(enlivraison = True) 
-    li = []
-    queryset = queryset.filter(suspendus = False)
-    if search_date != None and search_date != "":
-        l = search_date.split('-')
-    if search_wilaya != "0" and search_wilaya!= None:
-        queryset = queryset.filter(wilaya = search_wilaya)  
-        li.append(search_wilaya)
-    if search_type != '0' and search_type != None:
+    search_prestation = request.POST.get('type de prestation', None)
+    user = request.user
+    l = []
+    email = user.email 
+    queryset = Product.objects.filter(suspendus = False)
+    queryset = queryset.filter(enlivraison = True)
+    if search_wilaya != "0" and search_wilaya != None:
+        queryset = queryset.filter(wilaya = search_wilaya) 
+        l.append(search_wilaya)
+    if search_prestation != "0" and search_prestation != None:
+        queryset = queryset.filter(typeprestation = search_prestation) 
+        l.append(search_prestation)
+    if search_type != "0" and search_type != None:
         queryset = queryset.filter(typeenvoi = search_type) 
-        li.append(search_type)
-    if search_date != None and search_date != "":
-        queryset = queryset.filter(date__contains = datetime.date(int(l[0]),int(l[1]),int(l[2])))
-        li.append(search_date)
+        l.append(search_type)
     context = {
         "object_list": queryset,
-        'list' : li
+        'list' : l
     }
     return render(request,'en_livraison_admin.html',context)
 
@@ -1040,6 +1039,7 @@ def profile_livreur(request):
     if new_username != None:
         CustomUser.objects.filter(id = idd).update(username = new_username)
         messages.success(request, 'Your username has been changed successfully')
+        return redirect('livreur')
     context = {
         user : user
     }
@@ -1055,6 +1055,7 @@ def profile_admin(request):
     if new_username != None:
         CustomUser.objects.filter(id = idd).update(username = new_username)
         messages.success(request, 'Your username has been changed successfully')
+        return redirect('administrateur')
     context = {
         user : user
     }
@@ -1068,8 +1069,9 @@ def profile_client(request):
     idd = user.id
     new_username = request.POST.get('usernamee',None)
     if new_username != None:
-        CustomUser.objects.filter(id = idd).update(username = new_username)
+        User.objects.filter(id = idd).update(username = new_username)
         messages.success(request, 'Your username has been changed successfully')
+        return redirect('client')
     context = {
         user : user
     }
@@ -1353,3 +1355,5 @@ def en_retard_admin(request):
         'list' : li
     }
     return render(request, 'en_retard_admin.html', context)
+
+    #EEEND

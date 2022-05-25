@@ -137,7 +137,7 @@
                             <input type="number" name="first_number" placeholder=" $$">
                             <label>End Price:</label>
                             <input type="number" name = 'second_number' placeholder=" $$">
-                            <button type="submit">Filter</button>
+                            <button type="submit" class = 'filtrBtn'>Filter</button>
                         </form>
                     </div>
                 </div>
@@ -183,30 +183,30 @@
                          
                      </div>
                      <div class="autre_ele">
-                         <div class="ele">
-                             <p><i class="fa fa-id-badge" aria-hidden="true"></i> num colis</p>
-                             <p><i class="fa fa-archive" aria-hidden="true"></i>  Nmb commande</p>
-                             <p><i class="fa fa-truck" aria-hidden="true"></i> type</p>
-                             <p><i class="fa fa-calendar" ></i> temps</p>
-                         </div>
-                         <div>
-                             <p><i class="fa fa-map" aria-hidden="true"></i> wilaya</p>
-                             <p><i class="fa fa-location-arrow" aria-hidden="true"></i> commune</p>
-                             <p><i class="fa fa-map-marker" aria-hidden="true"></i> adresse</p>
-                         </div>
-                         <div>
-                             <p><i class="fa fa-id-card" aria-hidden="true"></i> Nom</p>
-                             <p><i class="fa fa-mobile" aria-hidden="true"></i> num tel</p>
-                         </div>
-                         <div>
-                             <p><i class="fa fa-comment" aria-hidden="true"></i> RQ</p>
-                             <p><i class="fa fa-box"></i> produit</p>
-                             <p><i class="fa fa-cubes" aria-hidden="true"></i> pois</p>
-                         </div>
-                         <div class="ele">
-                             <p><i class="fa fa-dollar-sign" aria-hidden="true"></i> prix</p>
-                         </div>
-                     </div>
+                        <div class="ele">
+                            <p><i class="fa fa-id-badge" aria-hidden="true"></i>  {{instance.id}}</p>
+                            <p><i class="fa fa-archive" aria-hidden="true"></i> {{instance.numerocommande}} </p>
+                            <p><i class="fa fa-truck" aria-hidden="true"></i> {{instance.typeenvoi}} {{instance.typeprestation}}</p>
+                            <p><i class="fa fa-calendar" ></i> {{instance.date}}</p>
+                        </div>
+                        <div>
+                            <p><i class="fa fa-map" aria-hidden="true"></i> {{instance.wilaya}} </p>
+                            <p><i class="fa fa-location-arrow" aria-hidden="true"></i>{{instance.commune}}</p>
+                            <p><i class="fa fa-map-marker" aria-hidden="true"></i>{{instance.adresse}}</p>
+                        </div>
+                        <div>
+                            <p><i class="fa fa-id-card" aria-hidden="true"></i> {{instance.nometpren}} </p>
+                            <p><i class="fa fa-mobile" aria-hidden="true"></i>{{instance.telephone1}} / {{instance.telephone2}}</p>
+                        </div>
+                        <div>
+                            <p><i class="fa fa-comment" aria-hidden="true"></i> {{instance.remarque}}</p>
+                            <p><i class="fa fa-box"></i> </p>
+                            <p><i class="fa fa-cubes" aria-hidden="true"></i> {{instance.poids}}</p>
+                        </div>
+                        <div class="ele">
+                            <p><i class="fa fa-dollar-sign" aria-hidden="true"></i> {{instance.payés}}</p>
+                        </div>
+                    </div>
                      <div class="mod_ele mod_ele2">
                          <button class="imprimer">Etiquettes</button>
                      </div>

@@ -119,3 +119,24 @@ textarea{
 		height: 200px;
 	}
 }
+.btn1{
+	width: 100%;
+	padding: 0.5rem 1rem;
+	background-color: #27ae60;
+	color: #fff;
+	font-size: 1.1rem;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	transition: .5s;
+}
+.btn1 a{
+	text-decoration: none;
+}
+
+.btn1:hover{
+    background-color: #21354B;
+}
+.btn1:hover a{
+    color : white;
+}

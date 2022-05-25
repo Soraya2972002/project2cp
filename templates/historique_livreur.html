@@ -8,7 +8,7 @@
     </div>
     <div class="main_container">
         <div class="btn btn_pret">
-            <button class="impremer"><i class="fa fa-print" aria-hidden="true"></i>impremer les etiquettes</button>
+            <button class="impremer" onclick="printettquet()"><i class="fa fa-print" aria-hidden="true"></i>impremer les etiquettes</button>
             <button class="impremer"><i class="fa fa-print" aria-hidden="true"></i>impremer une decharge</button>
         </div>
         <div class="filtre filtre_pret">
@@ -176,11 +176,11 @@
                             <p><i class="fa fa-cubes" aria-hidden="true"></i> {{instance.poids}}</p>
                         </div>
                         <div class="ele">
-                            <p><i class="fa fa-dollar-sign" aria-hidden="true"></i> {{instance.montant}}</p>
+                            <p><i class="fa fa-dollar-sign" aria-hidden="true"></i> {{instance.payés}}</p>
                         </div>
                     </div>
                     <div class="mod_ele mod_ele2">
-                        <button class="imprimer">Etiquettes</button>
+                        <button class="imprimer impBtn_one">Etiquettes</button>
                     </div>
                 </div>
                 {% empty %}
@@ -190,8 +190,7 @@
                 {% endfor %}
                 <div class="statics">
                     {% if object_list %}
-                    <label> Total des colis : {{somme1}}</label>
-                    
+                    <label> Total des colis : {{somme1}}</label>                   
                     {% endif %}
                 </div>
                 

@@ -13,19 +13,14 @@
     <div class="ajouter_container closeSidebare">
         <div class="description pret_main">
             <h3 id="text_font_titles">à récupérer</h3>
-            <br>
-            <p id="text_font_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae assumenda nostrum quidem atque delectus.</p>
-            <br>
-            <p id="text_font_paragraph">
-                {% if object_list %}
-                {{retard}}
-                {% endif %}
-            </p>
-            <br>
+            <p id="text_font_paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus itaque consequuntur pariatur. Quibusdam harum ducimus nesciunt deserunt beatae eum quasi quis fugiat dolorum, modi, autem totam? Animi amet facere dignissimos odio quia cupiditate eum, ut corporis praesentium minus sint dicta?</p>
+            <div class="text_alert">
+                <p id="text_font_paragraph">{{retard}}</p>
+            </div>
         </div>
         <div class="main_container">
             <div class="btn btn_pret">
-                <button class="impremer"><i class="fa fa-print" aria-hidden="true"></i>impremer les etiquettes</button>
+                <button class="impremer" onclick="printettquet()"><i class="fa fa-print" aria-hidden="true"></i>impremer les etiquettes</button>
                 <button class="impremer"><i class="fa fa-print" aria-hidden="true"></i>impremer une decharge</button>
             </div>
             <div class="filtre filtre_pret">
@@ -211,7 +206,7 @@
                             </div>
                         </div>
                         <div class="mod_ele mod_ele2">
-                            <button class="imprimer">Etiquettes</button>
+                            <button class="imprimer impBtn_one">Etiquettes</button>
                         </div>
                     </div>
                     {% empty %}

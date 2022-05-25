@@ -3,12 +3,12 @@
     <div class="ajouter_container closeSidebare">
         <div class="description pret_main">
             <h3 id="text_font_titles">En Hub</h3>
-            <p id="text_font_paragraph">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae assumenda nostrum quidem atque delectus.</p>
-        </div>
+            <p id="text_font_paragraph">Votre colis est au bureau de l'entreprise, veuillez patienter pour qu'il vous soit transporter à votre domicile.</p>
+        </div>  
         <div class="main_container">
             <div class="btn btn_pret">
-                <button class="impremer"><i class="fa fa-print" aria-hidden="true"></i>impremer les etiquettes</button>
-                <button class="impremer"><i class="fa fa-print" aria-hidden="true"></i>impremer une decharge</button>
+                <button class="impremer" onclick="printettquet()"><i class="fa fa-print" aria-hidden="true"></i>imprimer les étiquettes</button>
+                <button class="impremer"><i class="fa fa-print" aria-hidden="true"></i>imprimer une décharge</button>
             </div>
             <div class="filtre filtre_pret">
                 <form method="POST" action="" class="form_pret_exp">
@@ -179,7 +179,7 @@
                             </div>
                         </div>
                         <div class="mod_ele mod_ele2">
-                            <button class="imprimer">Etiquettes</button>
+                            <button class="imprimer impBtn_one">Etiquettes</button>
                         </div>
                     </div>
                     {% empty %}

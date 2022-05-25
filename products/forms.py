@@ -28,14 +28,27 @@ class ProductForm(forms.ModelForm):
                 "retour_chez_livreur",
                 "email",
                 'date',
-                'checked'
+                'checked',
         ]
         widgets = {
-            'adresse': forms.TextInput(attrs={'placeholder': 'entrez votre adresse'}),
+            'adresse': forms.TextInput(attrs={'placeholder': ' entrez votre adresse'}),
+            'nometpren': forms.TextInput(attrs={'placeholder': ' entrez votre nom et prénom'}),
             'remarque': forms.TextInput(
-                attrs={"placeholder": "ecrivez vos remarque a propos de l'envoi ici",}),
+                attrs={"placeholder": " ecrivez vos remarque a propos de l'envoi ici",}),
             'produit': forms.TextInput(
-                attrs={'placeholder': 'décrivez le produit ici'}),
+                attrs={'placeholder': ' décrivez le produit ici'}),
+            'poids': forms.TextInput(
+                attrs={'placeholder': ' entrez le poids'}),
+            'numerocommande': forms.TextInput(
+                attrs={'placeholder': ' entrez le numéro de commande'}),
+            'montant': forms.TextInput(
+                attrs={'placeholder': ' entrez le montant'}),
+            'telephone': forms.TextInput(
+                attrs={'placeholder': ' entrez le numéro de telephone'}),
+            'telephone1': forms.TextInput(
+                attrs={'placeholder': ' entrez le numéro de telephone (optionel) '}),
+            'commune': forms.TextInput(
+                attrs={'placeholder': ' entrez la commune '}),
             #'wilaya' : forms.TextInput(attrs={'id': 'wilaya_id'}),
         }
     def __init__(self, *args, **kwargs):

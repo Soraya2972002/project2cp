@@ -1,45 +1,43 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content%}   
-    <div class="pret_container_profil">
-        <div class="profil_container">
-            <div class="profil_header">
-                <h1 id="text_font_titles">Your Profil</h1>
-                {% for message in messages %}
-                    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
-                    {% endfor %}
-                <div>
-                    <img src="{% static 'image/profile_pic.png' %}" alt="profil">
-                </div>
-            </div>
-            <div class="prof_body" id="text_font_paragraph">
-                <div>
-                    <h3>Nom: </h3>
-                    <p>{{user.first_name}}</p>
-                </div>
-                <div>
-                    <h3>Prenom: </h3>
-                    <p>{{user.last_name}}</p>
-                </div>
-                <div>
-                    <h3>E-mail: </h3>
-                    <p>{{user.email}}</p>
-                </div>
-                <div>
-                    <h3>Phone num:</h3>
-                    <p>{{user.telephone}}</p>
-                </div>
-                <div class="btn_log">
-                    <button class="logout" ><img src="{% static 'image/logout_icon.png' %}" alt="logout"><a href="{% url 'logout' %}">Log Out</a></button>
-                    <a href="{% url 'password_change' %}"><i>Change Password?</i></a>
-                    <label>Change Username?</label>
-                    <form method="POST" action="" class="form_container">
-                        {% csrf_token %}
-                        <input type = 'texte' name = 'usernamee'>
-                    <button type="submit" class="supprimer_ele">Change username</button>
-                    </form>
-                </div>
+<div class="pret_container_profil">
+    <div class="profil_container">
+        <div class="profil_header">
+            <h1 id="text_font_titles">Your Profil</h1>
+            <div>
+                <img src="{% static 'image/profile_pic.png' %}" alt="profil">
             </div>
         </div>
+        <div class="prof_body" id="text_font_paragraph">
+            <div>
+                <h3>username: </h3>
+                <p>{{user.username}}</p>
+            </div>
+            <div>
+                <h3>Nom/Prenom: </h3>
+                <p>{{user.last_name}}/{{user.first_name}}</p>
+            </div>
+            <div>
+                <h3>E-mail: </h3>
+                <p>{{user.email}}</p>
+            </div>
+            <div>
+                <h3>Phone num:</h3>
+                <p>{{user.telephone}}</p>
+            </div>
+            <div class="btn_log ">
+                <button class="logout" ><i class="fa fa-sign-in" aria-hidden="true"></i><a href="{% url 'logout' %}">Log Out</a></button>
+                <a href="#">Change Password?</a>
+                <a href="#" onclick="hideProfil()" class="change_btn">change username ?</a>
+                <form method="POST" action="" class="form_change_username hide_form">
+                    {% csrf_token %}
+                <input type = 'texte' name = 'usernamee' placeholder=" Change Username" class="field">
+                <button type="submit">Change</button>
+                </form>
+            </div>
+        </div>
+
     </div>
-    {% endblock %}       
+</div>
+{% endblock %}   

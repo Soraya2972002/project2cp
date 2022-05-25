@@ -99,6 +99,20 @@
             </div>
         </div>
     </div>
+<!--
+    {% for message in messages %}
+    <div class="confirm_contaner2">
+    <div class="container2">
+        <div class="contact-box2">
+            <div class="right2">
+                
+                <h2  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </h2>
+                <button class="btn2" onclick="popupProfile()">click to close</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    {% endfor %}-->
     <script src="https://unpkg.com/jspdf-invoice-template@1.4.0/dist/index.js"></script>
     <script src="{% static 'javascript/ecotrack.js' %}"></script>
 </body>

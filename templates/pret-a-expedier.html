@@ -8,10 +8,10 @@
     </div>
     <div class="main_container">
         <div class="btn btn_pret">
-            <button class="supprimer">suprimer les colis</button>
-            <button class="impremer" onclick="printettquet()">impremer les etiquettes</button>
-            <button class="impremer">impremer une decharge</button>
-            <button class="valider"><i class="fa fa-check" aria-hidden="true"></i>valider l'éxpedition</button>
+            <button class="supprimer">supprimer les colis</button>
+            <button class="impremer" onclick="printettquet()">imprimer les étiquettes</button>
+            <button class="impremer">imprimer une décharge</button>
+            <button class="valider"><i class="fa fa-check" aria-hidden="true"></i>valider l'expédition</button>
         </div>
         <div class="filtre filtre_pret">
             <form method="POST" action="" class="form_pret_exp">
@@ -181,10 +181,10 @@
                         </div>
                     </div>
                     <div class="mod_ele mod_ele2">
-                        <form method="POST" action="{{ instance.get_absolute_url }}delete/" class="formbtn_chaque_colis">
-                            {% csrf_token %}
-                        <button type="submit" class="supprimer_ele">DELETE</button>
-                        </form>
+                        
+                            
+                        <button type="button" class="supprimer_ele DeletBtn">DELETE</button>
+                        
                         <form method="POST" action="{{ instance.get_absolute_url }}validate_expedier/" class="formbtn_chaque_colis">
                             {% csrf_token %}
                         <button type="submit" class="valider_lexp">VALIDATE</button>
@@ -201,6 +201,23 @@
         </div>
     </div>
 </div> 
+{% for instance in object_list %}
+ <div class="confirm_contaner hide_delete">
+    <div class="container ">
+        <div class="contact-box">
+            <div class="right">
+                <h2>Do you really want to delete the package ?</h2>
+                <form method="POST" action="{{ instance.get_absolute_url }}delete/" class="form_container">
+                {% csrf_token %}
+                <button type="submit" class="btn_delete">DELETE</button>
+               
+                <button type="button" class="btn_delete close_popup">Close</button>
+            </form>
+        </div>
+    </div>
+</div>  
+</div>
+{% endfor %}
 
 {% endblock %}
 

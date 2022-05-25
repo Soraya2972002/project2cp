@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
     <link rel="stylesheet" href="{% static "css/autre_livreur.css" %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/>  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script> 
 
 </head>
 <body>
@@ -37,7 +38,7 @@
                         <a href="{% url "en_livraison_livreur" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-car"></i>colis en cours</a>
                         <a href="{% url "livreur_non_payés" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-exchange-alt"></i>non payés </a>
                         <a href="{% url "historique_livreur" %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"></i>Historique</a>
-                        <a href="{% url 'livreur_feedback' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa "></i>Feedback</a>
+                        <a href="{% url 'livreur_feedback' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-paper-plane"> </i>Feedback</a>
                     </li>
                 
                 </ul>
@@ -49,7 +50,77 @@
     </div>
 
     {% block content %} 
+
     {% endblock %} 
+         <!-- impprimer container -->
+<div class="body_container">
+    <div class="imprimer_container" id="print_all" >
+        {% for instance in object_list %}
+        <div class="print_one_element one">
+            <div class="logo_info">
+                <div class="logo">
+                    <img src="{% static 'image/world_express_logo.png' %}" alt="logo">
+                </div>
+                <div class="contanct">
+                    <p>World Express - Société de livraison</p>
+                    <p>Tel:</p>
+                    <p>Website: <a href="{% url 'home' %}" target="_blank">worldexpress.com</a></p>
+                </div>
+                <div class="info_wilaya">
+                    <h3>{{instance.wilaya}}</h3>
+                </div>
+            </div>
+            <div  class="info_colis">
+                <div class="description_colis">
+                    <p>desdinatiare: <span class="imp_colis">{{instance.nometpren}}</span></p>
+                    <p>telephone: <span class="imp_colis">{{instance.telephone1}} / {{instance.telephone2}}</span></p>
+                    <p>montant: <span class="imp_colis">{{instance.montant}}</span></p>
+                    <p>adress: <span class="imp_colis">{{instance.adresse}}</span></p>
+                    <p>commune: <span class="imp_colis">{{instance.commune}}</span></p>
+                    <p>wilaya: <span class="imp_colis">{{instance.wilaya}}</span></p>
+                    <p>remarque: <span class="imp_colis">{{instance.remarque}}</span></p>
+                    <p>produit: </p>
+                    <p>colis crée le: <span class="imp_colis">{{instance.date}}</span></p>
+                    <p>id de produit: <span class="imp_colis">{{instance.id}}</span></p>
+                </div>
+                <div class="pois_type_container">
+                    <div class="qr_code">
+                        <img src="#" alt="id">
+                    </div>
+                    <div class="type">
+                        <h3>{{instance.poids}} kg</h3>
+                    </div>
+                    <div class="type">
+                        <h3>{{instance.typeenvoi}}</h3>
+                    </div>
+                    <div class="type">
+                        <h3>{{instance.typeprestation}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="info_expediteur">
+                <div>
+                    <p>expéditeur: ESTM</p>
+                    <p>Adresse: bejaia - bejaia</p>
+                    <p>service client: 0783008683</p>
+                </div>
+                <div>
+                    <h3>réference:</h3>
+                </div>
+            </div>
+            <div class="footer_imprimer">
+                <h2>CONDITIONS GENERALES DE TRANSPORT DES MARCHANDISES ET COLIS</h2>
+                <p>Je certifie que les détails déclarés sur ce bordereau sont correct et que le colis ne contient aucun produit
+                    dangereux ou interdit par la loi</p>
+            </div>
+        </div>
+        <!--============================-->
+        <div class="html2pdf__page-break"></div>
+        {% endfor %}
+        
+    </div>
+        
+</div>
 
 <script src="https://unpkg.com/jspdf-invoice-template@1.4.0/dist/index.js"></script>
 <script src="{% static "javascript/autre_livreur.js" %}"></script>

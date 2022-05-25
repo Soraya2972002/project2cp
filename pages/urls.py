@@ -21,7 +21,7 @@ urlpatterns = [
     path("administrateur/en_ramassage", views.en_ramassage_admin_view, name = 'en_ramassage_admin'),
     path("administrateur/suspendus", views.suspendus_admin_view, name = 'suspendus_admin'),
     path("admin_wilaya", views.admin_wilaya_view, name = 'admin_wilaya'),
-    path("retour_livreur_admin", views.retour_livreur_admin, name = 'retour_livreur_admin'),
+    path("administrateur/retour_livreur", views.retour_livreur_admin, name = 'retour_livreur_admin'),
     path('administrateur/profile',views.profile_admin,name = 'admin_profile'),
     path('administrateur/feedback',views.see_feedbacks,name = 'see_feedback'),
     path('administrateur/add_livreur',views.signup_livreur,name = 'signup_livreur'),
@@ -56,6 +56,8 @@ urlpatterns = [
     path("client/historique_payements_client", views.historique_payements_client, name = 'historique_payements_client'),
     path('client/profile',views.profile_client,name = 'client_profile'),
     path('client/feedback',views.add_feedback_client,name = 'client_feedback'),
+
+    path('qr_code/', include('qr_code.urls', namespace="qr_code"))
 ]
 
 

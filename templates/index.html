@@ -38,10 +38,10 @@
             </a>
             <div class="navbar_container">
                 <ul>
-                    <li class="nav_items"><a href="#" class="a_hover"><span class="nav_hover"></span>about</a></li>
-                    <li class="nav_items"><a href="#" class="a_hover"><span class="nav_hover"></span>Services</a></li>
-                    <li class="nav_items"><a href="#" class="a_hover"><span class="nav_hover"></span>Location</a></li>
-                    <li class="nav_items"><a href="#" class="a_hover"><span class="nav_hover"></span>contacts</a></li>
+                    <li class="nav_items"><a href="#about" class="a_hover"><span class="nav_hover"></span>about</a></li>
+                    <li class="nav_items"><a href="#comment" class="a_hover"><span class="nav_hover"></span>Services</a></li>
+                    <li class="nav_items"><a href="#location" class="a_hover"><span class="nav_hover"></span>Location</a></li>
+                    <li class="nav_items"><a href="#contact" class="a_hover"><span class="nav_hover"></span>contacts</a></li>
                 </ul>
             </div>
             <div class="contact_container">
@@ -70,9 +70,6 @@
                     <h1><span id="second_red">World Express</span><br>The Quickest <br><span id="second_red">delivery</span> in <br><span id="second_red">Algeria</span></h1>
                 </div>
                 <div class="paragraphe_container">
-                    {% for message in messages %}
-                        <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
-                    {% endfor %}
                     <p>Order your products at any time and we will <br> deliver them directly to your home.</p>
                 </div>
                 <div class="main_order_button">
@@ -98,7 +95,7 @@
             <div class="text_desc_container">
                 <div class="about_container border_decoration" >
                     <h1 id="text_font_new">Qui sommes nous ?</h1>
-                    <p id="text_font_new">World express est une entreprise algérienne de livraison à domicile crée par des nationaux pour satisafire aux exigences toujours plus grandes des entreprises algériennes en matiere de transport de courrier express. ces exigences, qui requièrent une gestion rigoureuse à tous les niveaux des processus de livraison et d'acheminement, se declinent à travers les slogans que nous avons adopté, a savoir, rapidité, qualité et securité.</p>
+                    <p id="text_font_new">World express est une entreprise algérienne de livraison à domicile crée par des nationaux pour satisafire aux exigences toujours plus grandes des entreprises algériennes en matiere de transport de courrier express.</p>
                 </div>
             </div>
             <div class="picture_desc_container">
@@ -134,11 +131,11 @@
         </div>
     </section>
     <section>
-        <div class="our_services_container">
+        <div class="our_services_container" id="comment">
             <div class="our_services_text text_desc_container">
                 <div class="about_container our_services_border_decoration " id="text_font_new">
                     <h1>Nos services :</h1>
-                    <p id="text_font_paragraph">L'entreprise WORLD EXPRESS vous permet d'envoyer vos colis à vos destinations choisies dans le territoire algérien. <br>- Notre disponiblité à la hauteur de votre confiance. <br>- Votre document est important pour vous, nous l'acheminons en toute sécurité.<br> - Ensemble nous defiérant l'espace et le temps. </p>
+                    <p id="text_font_paragraph">L'entreprise WORLD EXPRESS vous permet d'envoyer vos colis à vos destinations choisies dans le territoire algérien. <br>- Notre disponiblité à la hauteur de votre confiance. <br>- Votre document est important pour vous, nous l'acheminons en toute sécurité.
                 </div>
             </div>
             <div class="picture_our_container">
@@ -149,7 +146,7 @@
         </div>
     </section>
     <section>
-        <div class="location_container">
+        <div class="location_container" id="location">
             <div class="location_text_container">
                 <div>
                     <h1 id="text_font_new">Notre location:</h1>
@@ -186,7 +183,7 @@
         </div>
     </section>
     <div class="footer-dark">
-        <footer>
+        <footer id="contact">
             <div class="footer_container">
                 <div class="items_container">
                     <div class="items">
@@ -221,6 +218,18 @@
             </div>
         </footer>
     </div> 
+    {% for message in messages %}
+    <div class="confirm_contaner">
+        <div class="container">
+            <div class="contact-box">
+                <div class="right">
+                    <h2  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </h2>
+                    <button class="btn" onclick="popup()">click to close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
     <script src="{% static 'javascript/main.js' %}"></script>
 </body>
 </html>

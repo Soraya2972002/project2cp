@@ -8,7 +8,7 @@
     </div>
     <div class="main_container">
         <div class="btn btn_pret">
-            <button class="impremer"><i class="fa fa-print" aria-hidden="true"></i>impremer les etiquettes</button>
+            <button class="impremer" onclick="printettquet()"><i class="fa fa-print" aria-hidden="true"></i>impremer les etiquettes</button>
             <button class="impremer"><i class="fa fa-print" aria-hidden="true"></i>impremer une decharge</button>
         </div>
         <div class="filtre filtre_pret">
@@ -150,7 +150,7 @@
                 </div>
             </div>
             <div class="element_desc">
-                {% for instance in object_list %}
+               {% for instance in object_list %}
                 <div class="ele_container table_element">
                     <div class="mod_ele">
                     </div>
@@ -180,21 +180,20 @@
                         </div>
                     </div>
                     <div class="mod_ele mod_ele2">
-                        <form method="POST" action="{{ instance.get_absolute_url }}payé/" class="form_container">
+                        <form method="POST" action="{{ instance.get_absolute_url }}payé/" class="form_prix_livreur">
                             {% csrf_token %}
-                        <label>entrez le prix versé</label>
-                        <input type = "number" name = 'price' >
-                        <button type="submit">Valider l'arrivée et le payement du colis</button>
+                        <input type = "number" name = 'price' placeholder="entrez le prix versé">
+                        <button type="submit">Valider</button>
                         </form>
-                        <form method="POST" action="{{ instance.get_absolute_url }}non_payé/" class="form_container">
+                        <form method="POST" action="{{ instance.get_absolute_url }}non_payé/" class="form_prix_livreur">
                             {% csrf_token %}
-                        <button type="submit">Valider l'arrivée du colis sans payement</button>
+                        <button type="submit">sans payement</button>
                         </form>
-                        <form method="POST" action="{{ instance.get_absolute_url }}retour_chez_livreur/" class="form_container">
+                        <form method="POST" action="{{ instance.get_absolute_url }}retour_livreur/" class="form_prix_livreur">
                             {% csrf_token %}
-                        <button type="submit">Retour avec livreur</button>
+                        <button type="submit" class="supprimer_ele ">Retour</button>
                         </form>
-                        <button class="imprimer">Etiquettes</button>
+                        <button class="imprimer impBtn_one">Etiquettes</button>
                     </div>
                 </div>
                 {% empty %}

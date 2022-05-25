@@ -6,10 +6,35 @@ const toggleBtn = document.getElementById("toggle")
 const closeBtn = document.querySelector(".close")
 const closesideClick = document.querySelector(".closeSidebare")
 const tableColisPretexp = document.querySelectorAll(".table_element")
-
+const printAllEttiquet = document.getElementById("print_all")
+const printOneEttiquet = document.querySelectorAll(".print_one_element")
+const printBtnOne = document.querySelectorAll(".impBtn_one")
+const profilCnt = document.querySelector('.btn_log')
+const formProfil = document.querySelector(".form_change_username")
 let notfNumber = 0;
 
 
+/* profile hide*/
+function hideProfil(){
+  profilCnt.classList.add("profil_hide")
+  formProfil.classList.remove("hide_form")
+}
+
+/* print*/
+
+printBtnOne.forEach(function(onelement,i){
+  onelement.addEventListener('click',(eprint)=>{
+    const target  = printOneEttiquet[i]
+    html2pdf(target)
+  })
+})
+
+
+function printettquet(){
+html2pdf(printAllEttiquet)
+}
+
+/*==============*/
 
 toggleBtn.addEventListener("click",()=>{
   navContainer.classList.toggle("hide_sidebar")

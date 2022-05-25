@@ -116,21 +116,20 @@
                     <label for="nmb_afficher">élément</label>
                 </div>
                 <div class="titles_colis form1">
+                    
                     <div>
                         <h4>Username</h4>
                     </div>
                     <div>
-                        <h4>Nom</h4>
+                        <h4>Full name</h4>
                     </div>
                     <div>
-                        <h4>Prenom</h4>
+                        <h4>telephone</h4>
                     </div>
                     <div>
-                        <h4>Email</h4>
+                        <h4>email</h4>
                     </div>
-                    <div>
-                        <h4>Montant</h4>
-                    </div>
+                    
                 </div>
                 <div class="titles_colis form2">
                     <div>
@@ -156,31 +155,20 @@
                      <div class="mod_ele">
                          
                      </div>
-                     <div class="autre_ele">
-                         <div class="ele">
-                             <p><i class="fa fa-id-badge" aria-hidden="true"></i> num colis</p>
-                             <p><i class="fa fa-archive" aria-hidden="true"></i>  Nmb commande</p>
-                             <p><i class="fa fa-truck" aria-hidden="true"></i> type</p>
-                             <p><i class="fa fa-calendar" ></i> temps</p>
-                         </div>
-                         <div>
-                             <p><i class="fa fa-map" aria-hidden="true"></i> wilaya</p>
-                             <p><i class="fa fa-location-arrow" aria-hidden="true"></i> commune</p>
-                             <p><i class="fa fa-map-marker" aria-hidden="true"></i> adresse</p>
-                         </div>
-                         <div>
-                             <p><i class="fa fa-id-card" aria-hidden="true"></i> Nom</p>
-                             <p><i class="fa fa-mobile" aria-hidden="true"></i> num tel</p>
-                         </div>
-                         <div>
-                             <p><i class="fa fa-comment" aria-hidden="true"></i> RQ</p>
-                             <p><i class="fa fa-box"></i> produit</p>
-                             <p><i class="fa fa-cubes" aria-hidden="true"></i> pois</p>
-                         </div>
-                         <div class="ele">
-                             <p><i class="fa fa-dollar-sign" aria-hidden="true"></i> prix</p>
-                         </div>
-                     </div>
+                     <div class="autre_ele table_nos_livreur">
+                        <div class="ele">
+                            <p><i class="fa fa-id-card" aria-hidden="true"></i> {{user.username}}</p>
+                        </div>
+                        <div>
+                            <p><i class="fa fa-envelope" aria-hidden="true"></i> {{user.first_name}} // {{user.last_name}}</p>
+                        </div>
+                        <div>
+                            <p><i class="fa fa-mobile" aria-hidden="true"></i> {{user.telephone}} // {{user.telephone1}} </p>
+                        </div>
+                        <div>
+                            <p><i class="fa fa-map" aria-hidden="true"></i> {{user.email}}</p>
+                        </div>
+                    </div>
                      <div class="mod_ele mod_ele2">
                         
                      </div>

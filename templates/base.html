@@ -1,4 +1,5 @@
 {% load static %}
+{% load qr_code %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,7 +75,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{% url 'client_feedback' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-ban"> </i> Feedback</a>
+                    <a href="{% url 'client_feedback' %}" class="a_hover"><span class="nav_hover"></span> <i class="fa fa-paper-plane"> </i> Feedback</a>
                     </ul>
                 </li>
             </div>
@@ -119,7 +120,7 @@
                 </div>
                 <div class="pois_type_container">
                     <div class="qr_code">
-                        <img src="{% static 'image/test.png' %}" alt="">
+                        <img src="{% qr_url_from_data instance.id %}" alt="id">
                     </div>
                     <div class="type">
                         <h3>{{instance.poids}} kg</h3>

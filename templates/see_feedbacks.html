@@ -1,15 +1,6 @@
 {% extends 'admin_base_main.html' %}
 {% block content%}
 
-
-
-
-
-
-
-
-
-
 <div class="ajouter_container closeSidebare">
     <div class="description pret_main">
         <h3 id="text_font_titles">list Feedbacks</h3>
@@ -60,52 +51,31 @@
                     </div>
                    
                 </div>
-                <div class="titles_colis form1">
-                    <div>
-                        <h4>user name</h4>
+                <div class="titles_colis seefeedback form1">
+                    <div class="seediv">
+                        <h4>ID</h4>
                     </div>
-                    <div>
-                        <h4>Email/Phone</h4>
-                    </div>
-                    <div>
-                        <h4>Status</h4>
-                    </div>
-                    <div>
+                    <div class="seediv">
                         <h4>Feedbacks</h4>
                     </div>
                 </div>
-                <div class="titles_colis form2">
-                    <div>
+                <div class="titles_colis seefeedback form2">
+                    <div class="seediv">
                         <h4>user name</h4>
                     </div>
-                    <div>
-                        <h4>Email/Phone</h4>
-                    </div>
-                    <div>
-                        <h4>Status</h4>
-                    </div>
-                    <div>
+                    <div class="seediv">
                         <h4>Feedbacks</h4>
                     </div>
                 </div>
             </div>
             <div class="element_desc">
                 {% for instance in object_list %}
-                <div class="ele_container table_element">
-                    <div class="mod_ele">
-
-                    </div>        
-                    <div class="autre_ele table_nos_livreur">
-                        <div class="ele">
+                <div class="ele_container table_element"> 
+                    <div class="autre_ele seefeedbacktable table_nos_livreur">
+                        <div class="feedbacksdiv">
                             <p>{{ instance.id_user }}</p>
                         </div>
-                        <div class="ele">
-                            <p>{{ instance.username }}</p>
-                        </div>
-                        <div class="ele">
-                            <p>{{ instance.username }}</p>
-                        </div>
-                        <div>
+                        <div class="feedbacksdiv">
                             <p>{{ instance.comment }}</p>
                         </div>
                     </div>

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "products",
     "pages",
     'accounts',
+    'qr_code'
 ]
 
 MIDDLEWARE = [

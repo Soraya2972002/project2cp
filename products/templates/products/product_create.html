@@ -4,27 +4,27 @@
 <form action='' method='POST'class="test_container">{% csrf_token %}
 <div class="fieldWrapper">
     {{ form.nometpren.errors }}
-    <label for="{{ form.nometpren.id_for_label }}">Your nometpren:</label>
+    <label for="{{ form.nometpren.id_for_label }}">Votre nom et prénom :</label>
     {{ form.nometpren }}
 </div>
 <div class="fieldWrapper">
     {{ form.telephone.errors }}
-    <label for="{{ form.telephone.id_for_label }}">Your phone number:</label>
+    <label for="{{ form.telephone.id_for_label }}">Votre numéro de télephone :</label>
     {{ form.telephone }}
 </div>
 <div class="fieldWrapper">
     {{ form.telephone1.errors }}
-    <label for="{{ form.telephone1.id_for_label }}">2nd phone number</label>
+    <label for="{{ form.telephone1.id_for_label }}">votre second numéro</label>
     {{ form.telephone1 }}
 </div>
 <div class="fieldWrapper">
     {{ form.wilaya.errors }}
-    <label for="{{ form.wilaya.id_for_label }}" >Your wilaya</label>
+    <label for="{{ form.wilaya.id_for_label }}" >Votre wilaya</label>
     {{ form.wilaya }}
 </div>
 <div class="fieldWrapper">
     {{ form.commune.errors }}
-    <label for="{{ form.commune.id_for_label }}">Your commune</label>
+    <label for="{{ form.commune.id_for_label }}"></label>
     {{ form.commune }}
 </div>
 <div class="fieldWrapper">

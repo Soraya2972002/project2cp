@@ -4,6 +4,14 @@ const navContainer = document.querySelector(".nav_menu_container")
 const toggleBtn = document.getElementById("toggle")
 const landingCnt = document.querySelector(".container")
 const closeBtn = document.querySelector(".close")
+const popupcontainerProfil = document.querySelector(".confirm_contaner2")
+
+
+/* profil */
+function popupProfile(){
+  popupcontainerProfil.style.display = 'none'
+  console.log(5)
+}
 
 
 toggleBtn.addEventListener("click",()=>{

@@ -122,13 +122,13 @@
                 <div class="titles_colis form1">
                     
                     <div>
+                        <h4>Username</h4>
+                    </div>
+                    <div>
                         <h4>Full name</h4>
                     </div>
                     <div>
-                        <h4>Email</h4>
-                    </div>
-                    <div>
-                        <h4>phone</h4>
+                        <h4>Contact</h4>
                     </div>
                     <div>
                         <h4>Wilaya</h4>
@@ -158,16 +158,16 @@
                      </div>
                      <div class="autre_ele table_nos_livreur">
                          <div class="ele">
-                             <p><i class="fa fa-id-card" aria-hidden="true"></i> Nom</p>
+                             <p><i class="fa fa-id-card" aria-hidden="true"></i> {{user.username}}</p>
                          </div>
                          <div>
-                             <p><i class="fa fa-envelope" aria-hidden="true"></i> wilaya</p>
+                             <p><i class="fa fa-envelope" aria-hidden="true"></i> {{user.first_name}} // {{user.last_name}}</p>
                          </div>
                          <div>
-                             <p><i class="fa fa-mobile" aria-hidden="true"></i> num tel</p>
+                             <p><i class="fa fa-mobile" aria-hidden="true"></i> {{user.telephone}} // {{user.telephone1}} // {{user.email}}</p>
                          </div>
                          <div>
-                             <p><i class="fa fa-map" aria-hidden="true"></i> Wilaya</p>
+                             <p><i class="fa fa-map" aria-hidden="true"></i> {{user.wilaya}}</p>
                          </div>
                      </div>
                      <div class="mod_ele mod_ele2">

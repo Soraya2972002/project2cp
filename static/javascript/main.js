@@ -359,19 +359,21 @@ const a_hover = document.querySelectorAll(".a_hover")
 const wilayaLoc = document.getElementById("wilaya_location")
 const locationNew = document.getElementById("place")
 const droneCntainer =  document.querySelector(".main_section_container")
+const  popupcontainer = document.querySelector(".confirm_contaner")
 /*
 const pois = document.getElementById("pois_KG")
 const pricePR = document.getElementById("price_text")
 const wilaya = document.getElementById("wilaya_rcv")
 */
 
-function location_we(){
-    let nmbWilaya = wilayaLoc.options[wilayaLoc.selectedIndex].value
-    if (nmbWilaya !== 0){
-        locationNew.src = locationBureau[nmbWilaya].localisation
-    }
-    
+/* pop up start*/
+
+function popup(){
+    popupcontainer.style.display = 'none'
 }
+
+
+
 
 navBtn.addEventListener("click",()=>{
     nav_barr_container.classList.toggle("hidde_nav")

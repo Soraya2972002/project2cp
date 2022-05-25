@@ -112,7 +112,7 @@ def product_delete_view(request, id):
     obj = get_object_or_404(Product, id=id)
     if request.method == "POST":
         users = User.objects.filter(groups__name = 'Livreurs')
-        for user in users :
+        """for user in users :
             colis = user.en_cours_livraison
             a = colis.split(';')
             colis = ''
@@ -120,7 +120,7 @@ def product_delete_view(request, id):
                 if element != str(id):
                     colis += ';' + element
             idd = user.id
-            user.objects.update(id = idd)
+            user.objects.update(id = idd)"""
         obj.delete()
         return redirect('pret_a_expedier')
     context = {
@@ -152,8 +152,6 @@ def colis_payé(request, id):
         CustomUser.objects.filter(id = idd).update(en_cours_livraison = colis)
         CustomUser.objects.filter(id = idd).update(livres = livres)
         idd = user.id
-        CustomUser.objects.filter(id = idd).update(en_cours_livraison = '')
-        CustomUser.objects.filter(id = idd).update(livres = livres)
         obj = Product.objects.get(id = id)
         email = obj.email
         body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + str(obj.id) + " à destination vers " + obj.email + ' et envoyé à '+ obj.nometpren + " est bien arrivé.\nWorld Express vous remercie pour votre confiance."
@@ -209,6 +207,7 @@ def non_payés(request,id):
         
     return redirect("livreur_non_payés")
 
+
 @login_required
 @user_passes_test(is_livreur)
 
@@ -219,14 +218,14 @@ def retour_chez_livreur(request,id):
         obj.update(retour_chez_livreur = True)
         for query in obj:
             email = query.email
-        body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + obj.id + " à destination vers " + obj.wilaya + ' et envoyé à '+ obj.nometpren + " a subi un retour avec le livreur.\nWorld Express vous remercie pour votre confiance."
-        send_mail(
-                'World Express notifications - Colis suspendu',
-                body_text,
-                'from@example.com',
-                [email],
-                fail_silently=False,
-        )
+            body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + query.id + " à destination vers " + query.wilaya + ' et envoyé à '+ query.nometpren + " a subi un retour avec le livreur.\nWorld Express vous remercie pour votre confiance."
+            send_mail(
+                    'World Express notifications - Colis suspendu',
+                    body_text,
+                    'from@example.com',
+                    [email],
+                    fail_silently=False,
+            )
     return redirect("en_livraison_livreur")
 
 @login_required
@@ -235,7 +234,6 @@ def retour_suspendre(request,id):
     obj = Product.objects.filter(id = id)
     if request.method == "POST":
         obj.update(suspendus = True)
-        obj.update(retour_chez_livreur = False)
     return redirect("administrateur")
 
 def all_suspendre(request,id):
@@ -243,7 +241,7 @@ def all_suspendre(request,id):
     if request.method == "POST":
         print('here')
         idd = obj.id
-        Product.objects.filter(id=int(idd)).update(suspendus=False)
+        Product.objects.filter(id=int(idd)).update(suspendus=True)
         query = Product.objects.get(id=int(idd))
         email = query.email
         body_text = 'Bonjour,\nWorld Express vous informe que votre colis numéro ' + str(query.id) + " à destination vers " + query.wilaya + ' et envoyé à '+ query.nometpren + " a été suspendu, soit à votre demande, soit à cause d'un problème interne.\nWorld Express vous remercie pour votre confiance et s'excuse pour les désagréments."

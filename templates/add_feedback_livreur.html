@@ -16,14 +16,16 @@
                 <input type="text" class="field" placeholder="Your Name">
                 <input type="text" class="field" placeholder="Your Email">
                 <input type="text" class="field" placeholder="Phone">
-				<form action='' method='POST'>
+				<form action='' method='POST' >
                     {% csrf_token %}
                 {{ form.comment.errors }}
                     <label for="{{ form.comment.id_for_label }}"></label>
                 {{ form.comment }}
                 {{form.errors}}
-                <input type = "submit" value = 'save'  class="btn"/>
+                <input type = "submit" value = 'Save'  class="btn"/>
                 </form>
+				<h3>Or</h3>
+				<button class="btn1"/><a href = {% url 'livreur' %}>Go back</a></button>
 			</div>
 		</div>
 	</div>
